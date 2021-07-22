@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 16:48:15 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/22 22:37:42 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/22 22:45:53 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ int	ft_checklayout(int fd)
 		if (!lay.ncol)
 			lay.ncol = ft_strlen(row);
 		else if (lay.ncol != (int)ft_strlen(row))
+		{
+			free(row);
 			return (error_msg("Rows aren't the same length!'", RED));
+		}
 		free(row);
 	}
 	if (lay.nexits != 1 || lay.nplayers != 1)

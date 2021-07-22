@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/07/22 22:40:32 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/07/22 22:46:51 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ UNAME = $(shell uname -s)
 ECHO = echo
 ifeq ($(UNAME), Linux)
 	ECHO = echo -e
+	LEAKS = valgrind --leak-check=full --show-leak-kinds=all -s
 endif
 
 CFLAGS = -Wall -Wextra -Werror
@@ -85,9 +86,9 @@ $(LIBFT): libft/
 
 test: all
 	@$(ECHO)
-	@$(ECHO) "Command: $(GRAY)./$(NAME) $(MAP)$(DEFAULT)"
+	@$(ECHO) "Command: $(GRAY) $(LEAKS) ./$(NAME) $(MAP)$(DEFAULT)"
 	@$(ECHO)
-	@./$(NAME) $(MAP)
+	@$(LEAKS) ./$(NAME) $(MAP)
 
 clean:
 	@$(ECHO) "$(BLUE)Cleaning up object files in so_long...$(DEFAULT)"
