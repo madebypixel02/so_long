@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/07/22 18:34:54 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/07/22 20:59:19 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,12 +79,13 @@ $(OBJ_B): $(SRC_B)
 	@$(CC) $(CFLAGS) -c $^
 	@mv -f $(SOURCE_B:.c=.o) $(DIR_OBJ)
 
-$(LIBFT):
-	@make all -C libft
+$(LIBFT): libft/
+	@make -C libft/
 	@cp libft/$(LIBFT) $(LIBFT)
 
 test: all
 	@$(ECHO) "Command: ./$(NAME) $(MAP)"
+	@$(ECHO)
 	@./$(NAME) $(MAP)
 
 clean:
@@ -112,4 +113,4 @@ git:
 	git commit
 	git push
 
-.PHONY: all clean fclean bonus norminette re
+.PHONY: all clean fclean bonus norminette test re
