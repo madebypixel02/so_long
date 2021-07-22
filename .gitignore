@@ -1,0 +1,16 @@
+libft-unit-test/
+libft/
+libftTester/
+printfTester/
+pft_2019/
+pft/
+42TESTERS-PRINTF/
+gnlTester/
+a.out
+*.o
+*.so
+*.a
+.DS_Store
+tempCodeRunnerFile.c
+*.swp
+get_next_line/
