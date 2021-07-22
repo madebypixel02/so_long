@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/22 16:51:31 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/22 20:12:12 by aperez-b         ###   ########.fr       */
+/*   Created: 2021/07/22 19:36:06 by aperez-b          #+#    #+#             */
+/*   Updated: 2021/07/22 19:51:44 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
+#ifdef MAP_H
 
-# define SO_LONG_H
+# define MAP_H
 
-# include "../get_next_line/get_next_line.h"
-# include "../libft/lib/libft.h"
-# include "../lib/colors.h"
-# include "../lib/errors.h"
-# include <stdio.h>
-# include <fcntl.h>
+
 
 #endif
