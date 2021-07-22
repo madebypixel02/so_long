@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/07/22 20:59:19 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/07/22 22:40:32 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ DIR_OBJ = lib
 LIBFT = libft.a
 NAME = so_long
 
-SOURCE_M = errors.c #map.c
+SOURCE_M = errors.c map.c
 
 SOURCE_GNL = get_next_line.c get_next_line_utils.c
 
@@ -84,7 +84,8 @@ $(LIBFT): libft/
 	@cp libft/$(LIBFT) $(LIBFT)
 
 test: all
-	@$(ECHO) "Command: ./$(NAME) $(MAP)"
+	@$(ECHO)
+	@$(ECHO) "Command: $(GRAY)./$(NAME) $(MAP)$(DEFAULT)"
 	@$(ECHO)
 	@./$(NAME) $(MAP)
 
@@ -101,8 +102,10 @@ fclean: clean
 	@$(ECHO) "$(CYAN)Removed $(LIBFT)$(DEFAULT)"
 
 norminette:
-	@$(ECHO) "$(CYAN)\nChecking norm for ft_printf...$(DEFAULT)"
-	@norminette -R CheckForbiddenSourceHeader $(SRC_M) $(SRC_B) $(SRC_GNL) lib/
+	@$(ECHO) "$(CYAN)\nChecking norm for so_long...$(DEFAULT)"
+	@norminette -R CheckForbiddenSourceHeader $(SRC_M) $(SRC_B) lib/
+	@$(ECHO) "$(CYAN)\nChecking norm for get_next_line...$(DEFAULT)"
+	@norminette -R CheckForbiddenSourceHeader $(SRC_GNL) $(DIR_GNL)/get_next_line.h
 	@make norminette -C libft/
 
 re: fclean all
