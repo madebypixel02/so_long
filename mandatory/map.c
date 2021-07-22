@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 16:48:15 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/22 22:45:53 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/22 22:58:14 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	ft_checklayout(int fd)
 		else if (lay.ncol != (int)ft_strlen(row))
 		{
 			free(row);
-			return (error_msg("Rows aren't the same length!'", RED));
+			return (error_msg("Rows aren't the same length!", RED));
 		}
 		free(row);
 	}
