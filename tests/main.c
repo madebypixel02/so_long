@@ -6,16 +6,23 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 16:49:08 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/22 16:51:10 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/22 18:41:51 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../lib/so_long.h"
+#include <fcntl.h>
+#include <stdio.h>
 
 int	main(int argc, char **argv)
 {
+	int	fd;
+
 	if (argc != 2)
-	{
-		
-	}
+		return (error_msg("Invalid number of arguments!", RED));
+	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+		return (error_msg("File not found!", RED));
+	printf("Line: %s\n", get_next_line(fd));
+	return (0);
 }
