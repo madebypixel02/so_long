@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 19:36:06 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/22 22:37:10 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/23 09:44:33 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_layout
 }				t_layout;
 
 void	ft_newlayout(t_layout *lay);
-int		ft_checklayout(int fd);
+char	**ft_readlayout(int fd);
+int		ft_checklayout(char **layout);
 
 #endif

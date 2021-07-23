@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 16:48:15 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/22 22:58:14 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/23 09:50:02 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,33 @@ void	ft_newlayout(t_layout *lay)
 	lay->nplayers = 0;
 }
 
-int	ft_checklayout(int fd)
+char	**ft_readlayout(int fd)
 {
-	char		*row;
+	char	**layout;
+
+	layout = NULL;
+	while (1)
+	{
+		layout = malloc(sizeof(char *));
+		*layout = get_next_line(fd);
+		if (!*layout)
+		{
+			layout = NULL;
+			break ;
+		
+		}
+		layout++;
+	}
+	return (layout);
+}
+
+int	ft_checklayout(char **layout)
+{
+	int			i;
+	int			j;
 	t_layout	lay;
 
-	ft_newlayout(&lay);
+	i = 0;
 	while (1)
 	{
 		row = get_next_line(fd);
