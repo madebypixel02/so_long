@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/07/23 09:27:55 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/07/23 20:03:51 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,10 +25,11 @@ UNAME = $(shell uname -s)
 ECHO = echo
 ifeq ($(UNAME), Linux)
 	ECHO = echo -e
-	LEAKS = "valgrind --leak-check=full --show-leak-kinds=all -s "
+	LEAKS = valgrind --leak-check=full --show-leak-kinds=all -s
 endif
 
 CFLAGS = -Wall -Wextra -Werror
+CDEBUG = -g3 -fsanitize=address
 RM = rm -f
 CC = gcc
 DIR_M = mandatory
@@ -59,17 +60,17 @@ OBJ_B = $(addprefix $(DIR_OBJ)/, $(SOURCE_B:.c=.o))
 all: $(NAME)
 
 $(NAME): $(OBJ_M) $(OBJ_GNL) $(LIBFT)
-	@$(CC) $(CFLAGS) $^ -o $@
+	@$(CC) $(CFLAGS) $(CDEBUG) $^ -o $@
 	@$(ECHO) "$(GREEN)$(NAME) Compilation Complete!$(DEFAULT)"
 
 $(OBJ_M): $(SRC_M)
 	@$(ECHO) "$(RED)Mandatory objects outdated in so_long! Compiling again...$(DEFAULT)"
-	@$(CC) $(CFLAGS) -c $^
+	@$(CC) $(CFLAGS) $(CDEBUG) -c $^
 	@mv -f $(SOURCE_M:.c=.o) main.o $(DIR_OBJ)
 
 $(OBJ_GNL): $(SRC_GNL)
 	@$(ECHO) "$(RED)Objects outdated in get_next_line! Compiling again...$(DEFAULT)"
-	@$(CC) $(CFLAGS) -c $^
+	@$(CC) $(CFLAGS) $(CDEBUG) -c $^
 	@mv -f $(SOURCE_GNL:.c=.o) $(DIR_OBJ)
 
 bonus: $(OBJ_B) $(LIBFT) $(OBJ_GNL)
@@ -77,7 +78,7 @@ bonus: $(OBJ_B) $(LIBFT) $(OBJ_GNL)
 
 $(OBJ_B): $(SRC_B)
 	@$(ECHO) "$(RED)Bonus objects outdated in so_long! Compiling again...$(DEFAULT)"
-	@$(CC) $(CFLAGS) -c $^
+	@$(CC) $(CFLAGS) $(CDEBUG) -c $^
 	@mv -f $(SOURCE_B:.c=.o) $(DIR_OBJ)
 
 $(LIBFT): libft/
@@ -86,7 +87,7 @@ $(LIBFT): libft/
 
 test: all
 	@$(ECHO)
-	@$(ECHO) "Command: $(GRAY)$(LEAKS)./$(NAME) $(MAP)$(DEFAULT)"
+	@$(ECHO) "Command: $(GRAY)$(LEAKS) ./$(NAME) $(MAP)$(DEFAULT)"
 	@$(ECHO)
 	@$(LEAKS) ./$(NAME) $(MAP)
 
