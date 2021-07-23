@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 16:48:15 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/23 09:50:02 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/23 19:59:53 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,50 +20,52 @@ void	ft_newlayout(t_layout *lay)
 	lay->nplayers = 0;
 }
 
-char	**ft_readlayout(int fd)
+void	ft_newmap_error(t_map_error *map_error)
 {
-	char	**layout;
-
-	layout = NULL;
-	while (1)
-	{
-		layout = malloc(sizeof(char *));
-		*layout = get_next_line(fd);
-		if (!*layout)
-		{
-			layout = NULL;
-			break ;
-		
-		}
-		layout++;
-	}
-	return (layout);
+	map_error->inv_borders = 0;
+	map_error->inv_char = 0;
+	map_error->inv_nexits = 0;
+	map_error->inv_rowlen = 0;
+	map_error->inv_nplayers = 0;
 }
 
-int	ft_checklayout(char **layout)
+int	ft_readlayout(int fd, t_map_error *map_error)
 {
-	int			i;
-	int			j;
-	t_layout	lay;
+	char	*line;
+	int		line_len;
+	int		i;
 
+	line = NULL;
+	line_len = 0;
 	i = 0;
 	while (1)
 	{
-		row = get_next_line(fd);
-		if (!row)
+		line = get_next_line(fd);
+		if (!line)
 			break ;
-		lay.nrow++;
-		if (!lay.ncol)
-			lay.ncol = ft_strlen(row);
-		else if (lay.ncol != (int)ft_strlen(row))
-		{
-			free(row);
-			return (error_msg("Rows aren't the same length!", RED));
-		}
-		free(row);
+		if (line_len && line_len != (int)ft_strlen(line))
+			map_error->inv_rowlen = 1;
+		line_len = ft_strlen(line);
+		if ((!i && ft_countchar(line, '1') != line_len - 1) \
+			|| line[0] != '1' || line[line_len - 2] != '1')
+			map_error->inv_borders = 1;
+		free(line);
+		i++;
 	}
-	if (lay.nexits != 1 || lay.nplayers != 1)
-		return (error_msg("Map doesn't follow requirements! \
-								(exits: 1, players: 1)", RED));
+	return (ft_print_map_error(map_error));
+}
+
+int	ft_print_map_error(t_map_error *map_error)
+{
+	if (map_error->inv_borders)
+		error_msg("Map must be surrounded by borders!", RED, NULL);
+	if (map_error->inv_rowlen)
+		error_msg("Inconsistent number of columns per row!", RED, NULL);
+	if (map_error->inv_char)
+		error_msg("Unexpected char(s) in map!", RED, NULL);
+	if (map_error->inv_nexits)
+		error_msg("Invalid number of exits!", RED, NULL);
+	if (map_error->inv_nplayers)
+		error_msg("Only one player is allowed!", RED, NULL);
 	return (0);
 }
