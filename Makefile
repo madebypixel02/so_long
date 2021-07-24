@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/07/23 21:02:40 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/07/24 14:32:51 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ ECHO = echo
 CDEBUG = -g3 -fsanitize=address
 ifeq ($(UNAME), Linux)
 	ECHO = echo -e
-	LEAKS = valgrind --leak-check=full --show-leak-kinds=all -s
+	LEAKS = valgrind --leak-check=full --show-leak-kinds=all -s -q
 	CDEBUG =
 endif
 
@@ -37,7 +37,7 @@ DIR_M = mandatory
 DIR_GNL = get_next_line
 DIR_B = bonus
 DIR_OBJ = lib
-LIBFT = libft.a
+LIBFT = libft/libft.a
 NAME = so_long
 
 SOURCE_M = errors.c map.c
@@ -61,6 +61,7 @@ OBJ_B = $(addprefix $(DIR_OBJ)/, $(SOURCE_B:.c=.o))
 all: $(NAME)
 
 $(NAME): $(OBJ_M) $(OBJ_GNL) $(LIBFT)
+	make all -C libft/
 	@$(CC) $(CFLAGS) $(CDEBUG) $^ -o $@
 	@$(ECHO) "$(GREEN)$(NAME) Compilation Complete!$(DEFAULT)"
 
@@ -82,9 +83,8 @@ $(OBJ_B): $(SRC_B)
 	@$(CC) $(CFLAGS) $(CDEBUG) -c $^
 	@mv -f $(SOURCE_B:.c=.o) $(DIR_OBJ)
 
-$(LIBFT): libft/
-	@make -C libft/
-	@cp libft/$(LIBFT) $(LIBFT)
+$(LIBFT):
+	@make all -C libft/
 
 test: all
 	@$(ECHO)
