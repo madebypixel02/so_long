@@ -6,11 +6,21 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 18:28:25 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/23 20:10:54 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/24 21:09:12 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/so_long.h"
+
+void	ft_newmap_error(t_map_err *map_err)
+{
+	map_err->inv_borders = 0;
+	map_err->inv_char = 0;
+	map_err->inv_nexits = 0;
+	map_err->inv_ncollect = 0;
+	map_err->inv_rowlen = 0;
+	map_err->inv_nplayers = 0;
+}
 
 int	error_msg(char *msg, char *color, char **to_free)
 {

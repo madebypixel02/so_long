@@ -6,88 +6,87 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 16:48:15 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/24 14:31:55 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/24 21:15:43 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/so_long.h"
 
-void	ft_newlayout(t_layout *lay)
+void	ft_newlayout(t_lay *lay)
 {
 	lay->nrow = 0;
 	lay->ncol = 0;
 	lay->nexits = 0;
 	lay->nplayers = 0;
-	lay->ncollectibles = 0;
+	lay->ncollect = 0;
 }
 
-void	ft_newmap_error(t_map_error *map_error)
-{
-	map_error->inv_borders = 0;
-	map_error->inv_char = 0;
-	map_error->inv_nexits = 0;
-	map_error->inv_ncollectibles = 0;
-	map_error->inv_rowlen = 0;
-	map_error->inv_nplayers = 0;
-}
-
-int	ft_readlayout(int fd, t_map_error *map_error, t_layout *layout)
+int	ft_readlayout(int fd, t_map_err *map_err, t_lay *lay)
 {
 	char		*line;
-	int			line_len;
-	int			i;
+	char		*last_line;
+	int			old_len;
 
 	line = NULL;
-	line_len = 0;
-	i = 0;
+	last_line = NULL;
+	old_len = 0;
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
+		{
+			if (ft_countchar(last_line, '1') != (int)ft_strlen(last_line) - 1)
+				map_err->inv_borders = 1;
+			if (last_line)
+				free(last_line);
+			if (!old_len)
+				return (error_msg("Map is empty!", RED, NULL));
 			break ;
-		if (line_len && line_len != (int)ft_strlen(line))
-			map_error->inv_rowlen = 1;
-		line_len = ft_strlen(line);
-		if ((!i && ft_countchar(line, '1') != line_len - 1) \
-			|| line[0] != '1' || line[line_len - 2] != '1')
-			map_error->inv_borders = 1;
-		ft_check_layout(line, map_error, layout);
+		}
+		free(last_line);
+		ft_checklayout(line, map_err, lay, old_len);
+		old_len = ft_strlen(line);
+		last_line = ft_substr(line, 0, ft_strlen(line));
 		free(line);
-		i++;
 	}
-	return (ft_print_map_error(map_error));
+	return (ft_print_map_error(map_err));
 }
 
-void	ft_check_layout(char *line, t_map_error *map_error, t_layout *layout)
+void	ft_checklayout(char *line, t_map_err *map_err, t_lay *lay, int old_len)
 {
-	layout->nexits += ft_countchar(line, 'E');
-	layout->nplayers += ft_countchar(line, 'P');
-	layout->ncollectibles += ft_countchar(line, 'C');
-	if (!layout->ncol)
-		layout->ncol = ft_strlen(line) - 1;
-	layout->nrow++;
-	map_error->inv_nexits = layout->nexits != 1;
-	map_error->inv_nplayers = layout->nplayers != 1;
-	map_error->inv_ncollectibles = layout->ncollectibles < 1;
+	if (old_len && old_len != (int)ft_strlen(line))
+		map_err->inv_rowlen = 1;
+	if ((!old_len && ft_countchar(line, '1') != (int)ft_strlen(line) - 1) \
+		|| line[0] != '1' || line[ft_strlen(line) - 2] != '1')
+		map_err->inv_borders = 1;
+	lay->nexits += ft_countchar(line, 'E');
+	lay->nplayers += ft_countchar(line, 'P');
+	lay->ncollect += ft_countchar(line, 'C');
+	if (!lay->ncol)
+		lay->ncol = ft_strlen(line) - 1;
+	lay->nrow++;
+	map_err->inv_nexits = lay->nexits != 1;
+	map_err->inv_nplayers = lay->nplayers != 1;
+	map_err->inv_ncollect = lay->ncollect < 1;
 	if (ft_countchar(line, '0') + ft_countchar(line, '1') + \
 		ft_countchar(line, 'C') + ft_countchar(line, 'E') + \
 		ft_countchar(line, 'P') != ((int)ft_strlen(line) - 1))
-		map_error->inv_char = 1;
+		map_err->inv_char = 1;
 }
 
-int	ft_print_map_error(t_map_error *map_error)
+int	ft_print_map_error(t_map_err *map_err)
 {
-	if (map_error->inv_borders)
+	if (map_err->inv_borders)
 		error_msg("Map must be surrounded by borders!", RED, NULL);
-	if (map_error->inv_rowlen)
+	if (map_err->inv_rowlen)
 		error_msg("Map must be rectangular!", RED, NULL);
-	if (map_error->inv_char)
+	if (map_err->inv_char)
 		error_msg("Unexpected char(s) in map!", RED, NULL);
-	if (map_error->inv_nexits)
+	if (map_err->inv_nexits)
 		error_msg("Invalid number of exits!", RED, NULL);
-	if (map_error->inv_nplayers)
+	if (map_err->inv_nplayers)
 		error_msg("Invalid number of players!", RED, NULL);
-	if (map_error->inv_ncollectibles)
+	if (map_err->inv_ncollect)
 		error_msg("There should be at least one collectible!", RED, NULL);
 	return (0);
 }
