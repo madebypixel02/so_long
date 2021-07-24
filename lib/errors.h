@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 18:26:18 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/23 19:14:49 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/24 13:31:05 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_map_error
 	int	inv_rowlen;
 	int	inv_char;
 	int	inv_nplayers;
+	int	inv_ncollectibles;
 	int	inv_nexits;
 	int	inv_borders;
 }				t_map_error;
