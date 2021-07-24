@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 16:48:15 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/24 21:33:48 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/24 22:25:13 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	ft_checklayout(char *line, t_map_err *map_err, t_lay *lay, int old_len)
 int	ft_print_map_error(t_map_err *map_err)
 {
 	if (map_err->inv_borders)
-		error_msg("Map must be surrounded by borders!", RED, NULL);
+		error_msg("Map must be surrounded by walls!", RED, NULL);
 	if (map_err->inv_rowlen)
 		error_msg("Map must be rectangular!", RED, NULL);
 	if (map_err->inv_char)
