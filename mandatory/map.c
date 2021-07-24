@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 16:48:15 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/24 21:15:43 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/24 21:33:48 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,8 @@ int	ft_readlayout(int fd, t_map_err *map_err, t_lay *lay)
 		line = get_next_line(fd);
 		if (!line)
 		{
-			if (ft_countchar(last_line, '1') != (int)ft_strlen(last_line) - 1)
-				map_err->inv_borders = 1;
-			if (last_line)
-				free(last_line);
+			ft_checklayout(last_line, map_err, lay, 0);
+			free(last_line);
 			if (!old_len)
 				return (error_msg("Map is empty!", RED, NULL));
 			break ;
