@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 16:48:15 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/24 22:25:13 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/25 19:46:45 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	ft_checklayout(char *line, t_map_err *map_err, t_lay *lay, int old_len)
 {
 	if (old_len && old_len != (int)ft_strlen(line))
 		map_err->inv_rowlen = 1;
-	if ((!old_len && ft_countchar(line, '1') != (int)ft_strlen(line) - 1) \
-		|| line[0] != '1' || line[ft_strlen(line) - 2] != '1')
+	if (line && ((!old_len && ft_countchar(line, '1') != (int)ft_strlen(line) - 1) \
+		|| line[0] != '1' || line[ft_strlen(line) - 2] != '1'))
 		map_err->inv_borders = 1;
 	lay->nexits += ft_countchar(line, 'E');
 	lay->nplayers += ft_countchar(line, 'P');
