@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 16:51:31 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/22 22:05:33 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/26 18:58:15 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include "../lib/colors.h"
 # include "../lib/errors.h"
 # include "../lib/map.h"
+# include "../lib/tile.h"
+# include "../lib/vector.h"
 # include <stdio.h>
 # include <fcntl.h>
 
