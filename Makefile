@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/07/26 17:22:45 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/07/26 17:55:50 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ ifeq ($(UNAME), Linux)
 	CDEBUG =
 endif
 
-#CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 CC = gcc
 DIR_M = mandatory
