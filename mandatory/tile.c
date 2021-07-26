@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 19:34:55 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/26 19:53:50 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/26 20:05:46 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,26 @@ t_tile	**ft_tilemap(char **map, t_lay lay)
 	}
 	tilemap[y] = NULL;
 	return (tilemap);
+}
+
+void	free_tilemap(t_tile ***tilemap, int print)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (tilemap[0][i])
+	{
+		j = 0;
+		while (print && tilemap[0][i][j].content)
+		{
+			printf("%c", tilemap[0][i][j].content);
+			j++;
+		}
+		if (print)
+			printf("\n");
+		free(tilemap[0][i]);
+		i++;
+	}
+	free(tilemap[0]);
 }

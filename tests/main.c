@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 16:49:08 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/26 19:32:30 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/26 20:06:12 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ int	main(int argc, char **argv)
 	map = ft_split(map_str, '\n');
 	free(map_str);
 	tilemap = ft_tilemap(map, lay);
-	printf("%c\n", tilemap[2][1].content);
-	free(tilemap);
+	free_tilemap(&tilemap, 1);
 	free_matrix(&map, 0);
 	return (0);
 }
