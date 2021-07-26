@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 19:34:55 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/26 19:42:38 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/26 19:53:50 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_tile	**ft_tilemap(char **map, t_lay lay)
 	while (map[y])
 	{
 		x = 0;
-		tilemap[y] = malloc(sizeof(t_tile) * lay.nCol + 1);
+		tilemap[y] = malloc(sizeof(t_tile) * (lay.nCol + 1));
 		if (!tilemap[y])
 			error_msg("Memory Allocation Error!", RED, NULL);
 		while (map[y][x])
