@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/07/25 19:34:21 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/07/26 13:15:24 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ ECHO = echo
 CDEBUG = -g3 -fsanitize=address
 ifeq ($(UNAME), Linux)
 	ECHO = echo -e
-	LEAKS = valgrind --leak-check=full --show-leak-kinds=all -s -q
+	LEAKS = 'valgrind --leak-check=full --show-leak-kinds=all -s -q '
 	CDEBUG =
 endif
 
@@ -61,7 +61,7 @@ OBJ_B = $(addprefix $(DIR_OBJ)/, $(SOURCE_B:.c=.o))
 all: $(NAME)
 
 $(NAME): $(OBJ_M) $(OBJ_GNL) $(LIBFT)
-	make all -C libft/
+	@make all -C libft/
 	@$(CC) $(CFLAGS) $(CDEBUG) $^ -o $@
 	@$(ECHO) "$(GREEN)$(NAME) Compilation Complete!$(DEFAULT)"
 
@@ -88,9 +88,9 @@ $(LIBFT):
 
 test: all
 	@$(ECHO)
-	@$(ECHO) "Command: $(GRAY)$(LEAKS) ./$(NAME) $(MAP)$(DEFAULT)"
+	@$(ECHO) "Command: $(GRAY)$(LEAKS)./$(NAME) $(MAP)$(DEFAULT)"
 	@$(ECHO)
-	@$(LEAKS) ./$(NAME) $(MAP)
+	@$(LEAKS)./$(NAME) $(MAP)
 
 clean:
 	@$(ECHO) "$(BLUE)Cleaning up object files in so_long...$(DEFAULT)"
