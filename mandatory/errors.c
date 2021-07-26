@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 18:28:25 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/26 17:47:31 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/26 18:00:10 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,15 @@ void	error_msg(char *msg, char *color, char **to_free)
 	exit(0);
 }
 
-void	free_matrix(char ***to_free)
+void	free_matrix(char ***to_free, int print)
 {
 	int	i;
 
 	i = 0;
 	while (to_free[0][i])
 	{
+		if (print)
+			printf("%s\n", to_free[0][i]);
 		free(to_free[0][i]);
 		i++;
 	}

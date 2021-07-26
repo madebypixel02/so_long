@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 18:26:18 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/26 17:48:25 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/26 17:59:17 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ typedef struct s_map_err
 }				t_map_err;
 
 void	error_msg(char *msg, char *color, char **to_free);
-void	free_matrix(char ***to_free);
+void	free_matrix(char ***to_free, int print);
 
 #endif

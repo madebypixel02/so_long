@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 16:49:08 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/26 17:38:27 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/26 18:00:19 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ int	main(int argc, char **argv)
 	ft_print_map_error(&map_err, &map_str);
 	map = ft_split(map_str, '\n');
 	free(map_str);
-	free_matrix(&map);
+	free_matrix(&map, 1);
 	return (0);
 }
