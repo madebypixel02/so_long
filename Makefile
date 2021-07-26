@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/07/26 13:15:24 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/07/26 17:22:45 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,11 +26,11 @@ ECHO = echo
 CDEBUG = -g3 -fsanitize=address
 ifeq ($(UNAME), Linux)
 	ECHO = echo -e
-	LEAKS = 'valgrind --leak-check=full --show-leak-kinds=all -s -q '
+	LEAKS = valgrind --leak-check=full --show-leak-kinds=all -s -q 
 	CDEBUG =
 endif
 
-CFLAGS = -Wall -Wextra -Werror
+#CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 CC = gcc
 DIR_M = mandatory
