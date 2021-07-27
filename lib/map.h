@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 19:36:06 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/26 14:07:48 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/26 17:50:54 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 
 typedef struct s_lay
 {
-	int	nrow;
-	int	ncol;
-	int	nexits;
-	int	nplayers;
-	int	ncollect;
+	int	nRow;
+	int	nCol;
+	int	nExits;
+	int	nPlayers;
+	int	nCollect;
 }				t_lay;
 
 void	ft_newlayout(t_lay *lay);

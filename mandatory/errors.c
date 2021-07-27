@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 18:28:25 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/26 14:15:20 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/26 18:00:10 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,32 +16,33 @@ void	ft_newmap_error(t_map_err *map_err)
 {
 	map_err->inv_borders = 0;
 	map_err->inv_char = 0;
-	map_err->inv_nexits = 0;
-	map_err->inv_ncollect = 0;
+	map_err->inv_nExits = 0;
+	map_err->inv_nCollect = 0;
 	map_err->inv_rowlen = 0;
-	map_err->inv_nplayers = 0;
+	map_err->inv_nPlayers = 0;
 }
 
 void	error_msg(char *msg, char *color, char **to_free)
 {
 	if (!color)
 		color = DEFAULT;
-	free(*to_free);
+	if (to_free)
+		free(*to_free);
 	printf("Error\n%s%s%s\n", color, msg, DEFAULT);
 	exit(0);
 }
 
-void	free_matrix(char **to_free)
+void	free_matrix(char ***to_free, int print)
 {
 	int	i;
 
 	i = 0;
-	while (to_free[i])
+	while (to_free[0][i])
 	{
-		free(to_free[i]);
-		to_free[i] = NULL;
+		if (print)
+			printf("%s\n", to_free[0][i]);
+		free(to_free[0][i]);
 		i++;
 	}
-	free(to_free);
-	to_free = NULL;
+	free(to_free[0]);
 }

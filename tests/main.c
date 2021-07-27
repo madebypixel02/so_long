@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 16:49:08 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/26 14:15:36 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/26 21:13:00 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ int	main(int argc, char **argv)
 	t_lay		lay;
 	char		*map_str;
 	char		**map;
+	t_tile		**tilemap;
 
+	map = NULL;
+	map_str = NULL;
 	ft_newlayout(&lay);
 	ft_newmap_error(&map_err);
 	if (argc != 2)
@@ -34,6 +37,9 @@ int	main(int argc, char **argv)
 	ft_readlayout(fd, &map_err, &lay, &map_str);
 	ft_print_map_error(&map_err, &map_str);
 	map = ft_split(map_str, '\n');
-	free_matrix(map);
+	free(map_str);
+	tilemap = ft_tilemap(map, lay);
+	free_matrix(&map, 0);
+	free_tilemap(&tilemap, 1);
 	return (0);
 }
