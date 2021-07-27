@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 16:48:15 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/26 17:51:27 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/27 15:31:03 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	ft_readlayout(int fd, t_map_err *map_err, t_lay *lay, char **map_str)
 		old_len = ft_strlen(line);
 		last_line = ft_substr(line, 0, ft_strlen(line));
 		*map_str = ft_strenlarge(*map_str, line);
+		lay->nRow++;
 	}
 }
 
@@ -61,7 +62,6 @@ void	ft_checklayout(char *line, t_map_err *map_err, t_lay *lay, int old_len)
 	lay->nCollect += ft_countchar(line, 'C');
 	if (!lay->nCol)
 		lay->nCol = ft_strlen(line) - 1;
-	lay->nRow++;
 	map_err->inv_nExits = lay->nExits != 1;
 	map_err->inv_nPlayers = lay->nPlayers != 1;
 	map_err->inv_nCollect = lay->nCollect < 1;

@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/07/27 10:26:07 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/07/27 14:36:20 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ DIR_OBJ = lib
 LIBFT = libft/libft.a
 NAME = so_long
 
-SOURCE_M = errors.c map.c tile.c player.c
+SOURCE_M = errors.c map.c tile.c player.c vector.c
 
 SOURCE_GNL = get_next_line.c get_next_line_utils.c
 

@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tile.h                                             :+:      :+:    :+:   */
+/*   vector.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/25 19:32:49 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/27 14:58:45 by aperez-b         ###   ########.fr       */
+/*   Created: 2021/07/27 10:58:54 by aperez-b          #+#    #+#             */
+/*   Updated: 2021/07/27 14:54:52 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TILE_H
+#include "../lib/so_long.h"
 
-# define TILE_H
-
-# include "map.h"
-# include "vector.h"
-
-typedef struct s_tile
+t_vector	ft_newvector(int x, int y)
 {
-	t_vector	position;
-	char		content;
-}				t_tile;
+	t_vector vect;
 
-t_tile	ft_newtile(t_vector position, char content);
-t_tile	**ft_tilemap(char **map, t_lay lay);
-void	free_tilemap(t_tile ***tilemap, int print);
-
-#endif
+	vect.x = x;
+	vect.y  = y;
+	return (vect);
+}
