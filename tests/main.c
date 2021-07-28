@@ -6,11 +6,12 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 16:49:08 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/28 13:40:54 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/28 14:25:02 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/so_long.h"
+#include <mlx.h>
 #include <fcntl.h>
 #include <stdio.h>
 

@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/07/28 13:26:29 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/07/28 16:16:03 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,9 +24,14 @@ WHITE = \033[0;97m
 UNAME = $(shell uname -s)
 ECHO = echo
 CDEBUG = -g3 -fsanitize=address
+LMLX = -lmlx -framework OpenGL -framework AppKit
+LMLX_PATH=/usr/lib/
+IMLX_PATH=/usr/include/
 ifeq ($(UNAME), Linux)
 	ECHO = echo -e
 	LEAKS = valgrind --leak-check=full --show-leak-kinds=all -s -q 
+	LMLX = -L$(LMLX_PATH) -lmlx -lXext -lX11
+	IMLX = -I$(IMLX_PATH)
 	CDEBUG =
 endif
 
@@ -38,7 +43,6 @@ DIR_GNL = get_next_line
 DIR_B = bonus
 DIR_OBJ = lib
 LIBFT = libft/libft.a
-MLX = -lmlx -framework OpenGL -framework AppKit
 NAME = so_long
 
 SOURCE_M = errors.c map.c tile.c player.c vector.c
@@ -62,11 +66,11 @@ OBJ_B = $(addprefix $(DIR_OBJ)/, $(SOURCE_B:.c=.o))
 all: $(NAME)
 
 $(NAME): $(OBJ_M) $(OBJ_GNL) compile_libft
-	@$(CC) $(CFLAGS) $(CDEBUG) $(MLX) $(OBJ_M) $(OBJ_GNL) $(LIBFT) -o $@
+	$(CC) $(CFLAGS) $(CDEBUG) $(OBJ_M) $(OBJ_GNL) $(LIBFT) $(IMLX) $(LMLX) -o $@
 
 $(OBJ_M): $(SRC_M)
 	@$(ECHO) "$(RED)Mandatory objects outdated in so_long! Compiling again...$(DEFAULT)"
-	@$(CC) $(CFLAGS) $(CDEBUG) -c $^
+	$(CC) $(CFLAGS) $(CDEBUG) -c $^
 	@mv -f $(SOURCE_M:.c=.o) main.o $(DIR_OBJ)
 	@$(ECHO) "$(GREEN)Mandatory Compilation Complete in so_long!$(DEFAULT)"
 
@@ -88,6 +92,7 @@ compile_libft:
 	@make all -C libft/
 
 test: all
+	@$(ECHO) "$(YELLOW)Performing test with custom main...$(DEFAULT)"
 	@$(ECHO)
 	@$(ECHO) "Command: $(GRAY)$(LEAKS)./$(NAME) $(MAP)$(DEFAULT)"
 	@$(ECHO)
