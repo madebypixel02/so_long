@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 16:49:08 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/27 14:37:04 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/28 10:39:34 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,18 @@ int	main(int argc, char **argv)
 	ft_newlayout(&lay);
 	ft_newmap_error(&map_err);
 	if (argc != 2)
-		error_msg("Invalid number of arguments!", RED, NULL);
+		error_msg("Invalid number of arguments!", NULL, NULL);
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
-		error_msg("File not found!", RED, NULL);
+		error_msg("File not found!", NULL, NULL);
 	if (ft_strrncmp(argv[1], ".ber", 4))
-		error_msg("Invalid file type, use .ber!", RED, NULL);
+		error_msg("Invalid file type, use .ber!", NULL, NULL);
 	ft_readlayout(fd, &map_err, &lay, &map_str);
 	ft_print_map_error(&map_err, &map_str);
 	map = ft_split(map_str, '\n');
 	free(map_str);
 	tilemap = ft_tilemap(map, lay);
-	free_matrix(&map, 0);
-	free_tilemap(&tilemap, 1);
+	if (tilemap)
+		free_tilemap(&tilemap, 1);
 	return (0);
 }

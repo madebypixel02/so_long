@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 16:48:15 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/27 15:31:03 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/28 10:08:13 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_readlayout(int fd, t_map_err *map_err, t_lay *lay, char **map_str)
 			ft_checklayout(last_line, map_err, lay, 0);
 			free(last_line);
 			if (old_len == 0)
-				error_msg("Map is empty!", RED, NULL);
+				error_msg("Map is empty!", NULL, NULL);
 			break ;
 		}
 		free(last_line);
@@ -74,16 +74,16 @@ void	ft_checklayout(char *line, t_map_err *map_err, t_lay *lay, int old_len)
 int	ft_print_map_error(t_map_err *map_err, char **map_str)
 {
 	if (map_err->inv_rowlen)
-		error_msg("Map must be rectangular!", RED, map_str);
+		error_msg("Map must be rectangular!", map_str, NULL);
 	if (map_err->inv_borders)
-		error_msg("Map must be surrounded by walls!", RED, map_str);
+		error_msg("Map must be surrounded by walls!", map_str, NULL);
 	if (map_err->inv_char)
-		error_msg("Unexpected char(s) in map!", RED, map_str);
+		error_msg("Unexpected char(s) in map!", map_str, NULL);
 	if (map_err->inv_nExits)
-		error_msg("Invalid number of exits!", RED, map_str);
+		error_msg("Invalid number of exits!", map_str, NULL);
 	if (map_err->inv_nPlayers)
-		error_msg("Invalid number of players!", RED, map_str);
+		error_msg("Invalid number of players!", map_str, NULL);
 	if (map_err->inv_nCollect)
-		error_msg("There should be at least one collectible!", RED, map_str);
+		error_msg("There should be at least one collectible!", map_str, NULL);
 	return (0);
 }

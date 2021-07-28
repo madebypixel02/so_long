@@ -6,15 +6,13 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 19:36:06 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/26 17:50:54 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/28 10:23:30 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAP_H
 
 # define MAP_H
-
-# include "errors.h"
 
 typedef struct s_lay
 {
@@ -24,6 +22,16 @@ typedef struct s_lay
 	int	nPlayers;
 	int	nCollect;
 }				t_lay;
+
+typedef struct s_map_err
+{
+	int	inv_rowlen;
+	int	inv_char;
+	int	inv_nPlayers;
+	int	inv_nCollect;
+	int	inv_nExits;
+	int	inv_borders;
+}				t_map_err;
 
 void	ft_newlayout(t_lay *lay);
 void	ft_newmap_error(t_map_err *map_err);
