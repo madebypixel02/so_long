@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 19:32:49 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/28 10:35:55 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/28 12:37:40 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,15 @@
 # define TILE_H
 
 # include "map.h"
+#include "player.h"
 # include "vector.h"
 
 typedef struct s_tile
 {
 	t_vector	position;
 	char		content;
+	t_player	player;
+	t_player	enemy;
 }				t_tile;
 
 t_tile	ft_newtile(t_vector position, char content);

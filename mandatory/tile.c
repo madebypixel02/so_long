@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 19:34:55 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/28 11:04:26 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/28 13:00:01 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@ t_tile	ft_newtile(t_vector position, char content)
 {
 	t_tile	tile;
 
-	if (!content)
-	{
-		tile.position = position;
-		tile.content = '\0';
-	}
+	tile.position = position;
+	tile.content = content;
+	if (tile.content == 'P')
+		tile.player = ft_newplayer(1);
 	else
-	{
-		tile.position = position;
-		tile.content = content;
-	}
+		tile.player = ft_newplayer(-1);
+	if (tile.content == 'B')
+		tile.enemy = ft_newplayer(0);
+	else
+		tile.enemy = ft_newplayer(-1);
 	return (tile);
 }
 
