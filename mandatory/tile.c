@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 19:34:55 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/28 10:43:03 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/28 11:04:26 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_tile	ft_newtile(t_vector position, char content)
 {
-	t_tile tile;
+	t_tile	tile;
 
 	if (!content)
 	{
@@ -26,7 +26,6 @@ t_tile	ft_newtile(t_vector position, char content)
 		tile.position = position;
 		tile.content = content;
 	}
-	//printf("(%d, %d)\n", tile.position.x, tile.position.y);
 	return (tile);
 }
 
@@ -38,25 +37,21 @@ t_tile	**ft_tilemap(char **map, t_lay lay)
 
 	tilemap = malloc(sizeof(t_tile *) * (lay.nRow + 1));
 	if (!tilemap)
-	{
-		error_msg("Memory allocation error!", NULL, NULL);
-		return (NULL);
-	}
+		return (error_msg_tile("Memory allocation error!", NULL));
+	tilemap[lay.nRow] = NULL;
 	y = 0;
 	while (map[y])
 	{
 		x = 0;
 		tilemap[y] = malloc(sizeof(t_tile) * (lay.nCol + 1));
 		if (!tilemap[y])
-		{
-			error_msg("Memory allocation error!", NULL, &tilemap);
-			return (NULL);
-		}
+			return (error_msg_tile("Memory allocation error!", &tilemap));
 		while (map[y][x])
 		{
 			tilemap[y][x] = ft_newtile(ft_newvector(x, y), map[y][x]);
 			x++;
 		}
+		tilemap[y][x] = ft_newtile(ft_newvector(x, y), '\0');
 		y++;
 	}
 	free_matrix(&map, 0);

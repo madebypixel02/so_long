@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 18:56:18 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/27 14:54:16 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/28 11:06:11 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 # define VECTOR_H
 
-typedef struct	s_vector
+typedef struct s_vector
 {
 	int	x;
 	int	y;

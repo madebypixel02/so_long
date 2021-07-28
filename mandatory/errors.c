@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 18:28:25 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/28 09:14:42 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/28 10:57:19 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,15 @@ void	error_msg(char *msg, char **map_str, t_tile ***tilemap)
 		free_tilemap(tilemap, 0);
 	printf("Error\n%s%s%s\n", RED, msg, DEFAULT);
 	exit(0);
+}
+
+t_tile	**error_msg_tile(char *msg, t_tile ***tilemap)
+{
+	if (tilemap)
+		free_tilemap(tilemap, 0);
+	printf("Error\n%s%s%s\n", RED, msg, DEFAULT);
+	exit(0);
+	return (NULL);
 }
 
 void	free_matrix(char ***to_free, int print)
