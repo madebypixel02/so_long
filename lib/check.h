@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   check.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/22 16:51:31 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/28 18:54:11 by aperez-b         ###   ########.fr       */
+/*   Created: 2021/07/28 18:52:18 by aperez-b          #+#    #+#             */
+/*   Updated: 2021/07/28 18:55:38 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
+#ifndef CHECK_H
 
-# define SO_LONG_H
+# define CHECK_H
 
-# include "../get_next_line/get_next_line.h"
-# include "../libft/lib/libft.h"
-# include "colors.h"
-# include "errors.h"
-# include "map.h"
-# include "tile.h"
-# include "check.h"
-# include <mlx.h>
-# include "vector.h"
-# include "player.h"
-# include <stdio.h>
-# include <fcntl.h>
+void	check_params(int argc, char **argv);
 
 #endif

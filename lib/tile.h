@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 19:32:49 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/28 12:37:40 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/28 18:46:24 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # define TILE_H
 
 # include "map.h"
-#include "player.h"
+# include "player.h"
 # include "vector.h"
 
 typedef struct s_tile

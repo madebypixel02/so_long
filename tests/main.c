@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 16:49:08 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/28 14:25:02 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/28 19:01:23 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,27 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-int	main(int argc, char **argv)
+int	color_map_1(void *win, int w, int h, void *mlx)
+{
+	int	x;
+	int	y;
+	int	color;
+
+	x = w;
+	while (x--)
+	{
+		y = h;
+		while (y--)
+		{
+			color = (x * 255) / w + ((((w - x) * 255) / w) \
+							<< 16) + (((y * 255) / h) << 8);
+			mlx_pixel_put(mlx, win, x, y, color);
+		}
+	}
+	return (0);
+}
+
+/*int	main(int argc, char **argv)
 {
 	int			fd;
 	t_map_err	map_err;
@@ -45,7 +65,14 @@ int	main(int argc, char **argv)
 	tilemap = ft_tilemap(map, lay);
 	if (tilemap)
 		free_tilemap(&tilemap, 1);
-	mlx_win = mlx_new_window(mlx, 100, 100, "Test");
-	mlx_loop(mlx_win);
+	mlx_win = mlx_new_window(mlx, 242, 242, "Test");
+	color_map_1(mlx_win, 242, 242, mlx);
+	mlx_clear_window(mlx, mlx_win);
+	mlx_destroy_window(mlx, mlx_win);
+	mlx_destroy_display(mlx);
 	return (0);
+}*/
+
+int	main(int argc, char **argv)
+{
 }
