@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 16:49:08 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/28 19:35:15 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/28 19:51:34 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ int	color_map_1(void *win, int w, int h, void *mlx)
 
 int	main(int argc, char **argv)
 {
-	check_params(argc, argv);
+	t_tile	**tilemap;
+	
+	tilemap = check_params(argc, argv);
+	free_tilemap(&tilemap, 1);
 	return (0);
 }
