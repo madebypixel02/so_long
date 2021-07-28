@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 18:45:11 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/28 19:47:07 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/28 19:48:08 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,6 @@ t_tile	**check_map(int fd)
 	if (!map)
 		error_msg_params("Memory allocation error!", NULL);
 	tilemap = ft_tilemap(map, lay);
-	if (!tilemap)
-		error_msg_params("Memory allocation error!", NULL);
-	else
-		free_tilemap(&tilemap, 1);
+	free_tilemap(&tilemap, 1);
 	return (tilemap);
 }
