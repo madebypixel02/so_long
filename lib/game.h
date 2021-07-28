@@ -1,31 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/22 16:51:31 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/28 20:14:42 by aperez-b         ###   ########.fr       */
+/*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
+/*   Updated: 2021/07/28 22:31:01 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
+#ifndef GAME_H
 
-# define SO_LONG_H
+# define GAME_H
 
-# include "../get_next_line/get_next_line.h"
-# include "../libft/lib/libft.h"
-# include "colors.h"
-# include "errors.h"
-# include "map.h"
 # include "tile.h"
-# include "check.h"
-# include "game.h"
-# include <mlx.h>
 # include "vector.h"
-# include "player.h"
-# include <stdio.h>
-# include <fcntl.h>
+
+//# define SPRITE_SIZE 64 
+# define SPRITE_SIZE 64
+
+typedef struct s_mlx
+{
+	void	*id;
+	void	*window_id;
+	void	*hook_id;
+}				t_mlx;
+
+typedef struct s_game
+{
+	t_vector	wndw_size;
+	t_tile		**tilemap;
+	t_mlx		mlx;
+}				t_game;
+
+void	init_game(t_tile **tilemap, t_lay *lay);
+t_mlx	start_mlx(t_lay lay);
+t_game	ft_newgame(t_tile **tilemap, t_lay lay);
+void	print_tilemap(t_game *game);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 19:34:55 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/28 13:00:01 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/28 20:30:23 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ t_tile	**ft_tilemap(char **map, t_lay lay)
 		tilemap[y][x] = ft_newtile(ft_newvector(x, y), '\0');
 		y++;
 	}
-	free_matrix(&map, 0);
 	return (tilemap);
 }
 
