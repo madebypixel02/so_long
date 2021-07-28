@@ -6,22 +6,25 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 16:48:15 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/28 11:16:21 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/28 19:32:23 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/so_long.h"
 
-void	ft_newlayout(t_lay *lay)
+t_lay	ft_newlayout(void)
 {
-	lay->nRow = 0;
-	lay->nCol = 0;
-	lay->nExits = 0;
-	lay->nPlayers = 0;
-	lay->nCollect = 0;
+	t_lay	lay;
+
+	lay.nRow = 0;
+	lay.nCol = 0;
+	lay.nExits = 0;
+	lay.nPlayers = 0;
+	lay.nCollect = 0;
+	return (lay);
 }
 
-void	ft_readlayout(int fd, t_map_err *map_err, t_lay *lay, char **map_str)
+void	ft_readlayout(int fd, t_err *map_err, t_lay *lay, char **map_str)
 {
 	char		*line;
 	char		*last_line;
@@ -50,7 +53,7 @@ void	ft_readlayout(int fd, t_map_err *map_err, t_lay *lay, char **map_str)
 	}
 }
 
-void	ft_checklayout(char *line, t_map_err *map_err, t_lay *lay, int old_len)
+void	ft_checklayout(char *line, t_err *map_err, t_lay *lay, int old_len)
 {
 	if (old_len && old_len != (int)ft_strlen(line))
 		map_err->inv_rowlen = 1;
@@ -71,7 +74,7 @@ void	ft_checklayout(char *line, t_map_err *map_err, t_lay *lay, int old_len)
 		map_err->inv_char = 1;
 }
 
-int	ft_print_map_error(t_map_err *map_err, char **map_str)
+int	ft_print_map_error(t_err *map_err, char **map_str)
 {
 	if (map_err->inv_rowlen)
 		error_msg_params("Map must be rectangular!", map_str);

@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 18:52:18 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/28 18:55:38 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/28 19:11:29 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 # define CHECK_H
 
+# include "errors.h"
+# include <fcntl.h>
+# include "../libft/lib/libft.h"
+
 void	check_params(int argc, char **argv);
+char	*check_map(int fd);
 
 #endif

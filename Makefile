@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/07/28 18:49:35 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/07/28 19:08:51 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ DIR_OBJ = lib
 LIBFT = libft/libft.a
 NAME = so_long
 
-SOURCE_M = errors.c map.c tile.c player.c vector.c
+SOURCE_M = errors.c map.c tile.c player.c vector.c check.c
 
 SOURCE_GNL = get_next_line.c get_next_line_utils.c
 
@@ -66,11 +66,11 @@ OBJ_B = $(addprefix $(DIR_OBJ)/, $(SOURCE_B:.c=.o))
 all: $(NAME)
 
 $(NAME): $(OBJ_M) $(OBJ_GNL) compile_libft
-	$(CC) $(CFLAGS) $(CDEBUG) $(OBJ_M) $(OBJ_GNL) $(LIBFT) $(IMLX) $(LMLX) -o $@
+	@$(CC) $(CFLAGS) $(CDEBUG) $(OBJ_M) $(OBJ_GNL) $(LIBFT) $(IMLX) $(LMLX) -o $@
 
 $(OBJ_M): $(SRC_M)
 	@$(ECHO) "$(RED)Mandatory objects outdated in so_long! Compiling again...$(DEFAULT)"
-	$(CC) $(CFLAGS) $(CDEBUG) -c $^
+	@$(CC) $(CFLAGS) $(CDEBUG) -c $^
 	@mv -f $(SOURCE_M:.c=.o) main.o $(DIR_OBJ)
 	@$(ECHO) "$(GREEN)Mandatory Compilation Complete in so_long!$(DEFAULT)"
 
