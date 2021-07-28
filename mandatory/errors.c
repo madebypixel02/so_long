@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 18:28:25 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/28 10:57:19 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/28 11:15:59 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,10 @@ void	ft_newmap_error(t_map_err *map_err)
 	map_err->inv_nPlayers = 0;
 }
 
-void	error_msg(char *msg, char **map_str, t_tile ***tilemap)
+void	error_msg_params(char *msg, char **map_str)
 {
 	if (map_str)
 		free(*map_str);
-	if (tilemap)
-		free_tilemap(tilemap, 0);
 	printf("Error\n%s%s%s\n", RED, msg, DEFAULT);
 	exit(0);
 }

@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/07/27 14:36:20 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/07/28 11:38:24 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,30 +60,30 @@ OBJ_B = $(addprefix $(DIR_OBJ)/, $(SOURCE_B:.c=.o))
 
 all: $(NAME)
 
-$(NAME): $(OBJ_M) $(OBJ_GNL) $(LIBFT)
-	@make all -C libft/
-	@$(CC) $(CFLAGS) $(CDEBUG) $^ -o $@
-	@$(ECHO) "$(GREEN)$(NAME) Compilation Complete!$(DEFAULT)"
+$(NAME): $(OBJ_M) $(OBJ_GNL) compile_libft
+	@$(CC) $(CFLAGS) $(CDEBUG) $(OBJ_M) $(OBJ_GNL) $(LIBFT) -o $@
 
 $(OBJ_M): $(SRC_M)
 	@$(ECHO) "$(RED)Mandatory objects outdated in so_long! Compiling again...$(DEFAULT)"
 	@$(CC) $(CFLAGS) $(CDEBUG) -c $^
 	@mv -f $(SOURCE_M:.c=.o) main.o $(DIR_OBJ)
+	@$(ECHO) "$(GREEN)Mandatory Compilation Complete in so_long!$(DEFAULT)"
 
 $(OBJ_GNL): $(SRC_GNL)
 	@$(ECHO) "$(RED)Objects outdated in get_next_line! Compiling again...$(DEFAULT)"
 	@$(CC) $(CFLAGS) $(CDEBUG) -c $^
 	@mv -f $(SOURCE_GNL:.c=.o) $(DIR_OBJ)
+	@$(ECHO) "$(GREEN)get_next_line Compilation Complete!$(DEFAULT)"
 
 bonus: $(OBJ_B) $(LIBFT) $(OBJ_GNL)
-	@$(ECHO) "$(MAGENTA)Bonuses Compilation Complete in so_long!$(DEFAULT)"
 
 $(OBJ_B): $(SRC_B)
 	@$(ECHO) "$(RED)Bonus objects outdated in so_long! Compiling again...$(DEFAULT)"
 	@$(CC) $(CFLAGS) $(CDEBUG) -c $^
 	@mv -f $(SOURCE_B:.c=.o) $(DIR_OBJ)
+	@$(ECHO) "$(MAGENTA)Bonus Compilation Complete in so_long!$(DEFAULT)"
 
-$(LIBFT):
+compile_libft:
 	@make all -C libft/
 
 test: all
@@ -119,4 +119,4 @@ git:
 	git commit
 	git push
 
-.PHONY: all clean fclean bonus norminette test re
+.PHONY: all clean fclean bonus compile_libft norminette test git re

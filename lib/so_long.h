@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 16:51:31 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/26 20:35:53 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/28 11:13:04 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@
 
 # include "../get_next_line/get_next_line.h"
 # include "../libft/lib/libft.h"
-# include "../lib/colors.h"
-# include "../lib/errors.h"
-# include "../lib/map.h"
-# include "../lib/tile.h"
-# include "../lib/vector.h"
-# include "../lib/player.h"
+# include "colors.h"
+# include "errors.h"
+# include "map.h"
+# include "tile.h"
+//# include "mlx.h"
+# include "vector.h"
+# include "player.h"
 # include <stdio.h>
 # include <fcntl.h>
 
