@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:55:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/29 12:40:14 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/29 12:56:18 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	init_game(char **map, t_lay *lay)
 
 	game = ft_newgame(map, *lay);
 	mlx_loop_hook(game.mlx.id, print_map, (void *)&game);
-	mlx_hook(game.mlx.window_id, 14, 0, exit_msg, (void *)&game.map);
+	mlx_hook(game.mlx.window_id, 17, 0, exit_msg, (void *)&game.map);
 	mlx_loop(game.mlx.id);
 }
 	
@@ -53,6 +53,7 @@ int	print_map(t_game *game)
 
 	y = 0;
 	game->nFrames++;
+	mlx_clear_window(game->mlx.id, game->mlx.window_id);
 	while (game->map[y])
 	{
 		x = 0;
