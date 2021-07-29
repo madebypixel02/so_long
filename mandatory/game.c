@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:55:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/29 15:42:38 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/29 20:08:20 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,27 @@
 
 void	free_gamemap(t_game *game, int print)
 {
-	while (*game->map)
+	int	i;
+
+	i = 0;
+	while (game->map[i])
 	{
 		if (print)
-			printf("%s\n", *game->map);
-		free(*game->map);
-		game->map++;
+			printf("%s\n", game->map[i]);
+		free(game->map[i]);
+		i++;
 	}
+	free(game->map);
 }
 int	exit_msg(t_game *game)
 {
 	if (game->map)
-		free_gamemap(game, 1);
+		free_gamemap(game, 0);
 	printf("%sGame Finished!%s\n", GREEN, DEFAULT);
 	mlx_clear_window(game->mlx.id, game->mlx.window_id);
 	mlx_destroy_window(game->mlx.id, game->mlx.window_id);
+	mlx_destroy_display(game->mlx.id);
+	free(game->mlx.id);
 	exit(0);
 	return (0);
 }
