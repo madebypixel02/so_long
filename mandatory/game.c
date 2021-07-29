@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:55:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/29 12:56:18 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/29 14:06:41 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,35 @@
 #include "../libft/lib/libft.h"
 #include <mlx.h>
 #include <stdio.h>
+
+void	free_matrix(char ***to_free, int print)
+{
+	int	i;
+
+	i = 0;
+	while (to_free[0][i])
+	{
+		if (print)
+			printf("%s\n", to_free[0][i]);
+		free(to_free[0][i]);
+		i++;
+	}
+	free(to_free[0]);
+}
+int	exit_msg(t_game *game)
+{
+	char	***map;
+
+	map = &game->map;
+	printf("-> %d\n", map[0] == NULL);
+	if (game->map)
+		free_matrix(map, 1);
+	printf("%sGame Finished!%s\n", GREEN, DEFAULT);
+	mlx_clear_window(game->mlx.id, game->mlx.window_id);
+	mlx_destroy_window(game->mlx.id, game->mlx.window_id);
+	exit(0);
+	return (0);
+}
 
 void	init_game(char **map, t_lay *lay)
 {
@@ -61,7 +90,7 @@ int	print_map(t_game *game)
 		{
 			c = ft_chartostr(game->map[y][x]);
 			mlx_string_put(game->mlx.id, game->mlx.window_id, x * SPRITE_SIZE, y * SPRITE_SIZE + 10, 0xFDD663, c);
-			printf("%d\n", game->nFrames);
+			//printf("%d\n", game->nFrames);
 			free(c);
 			x++;
 		}

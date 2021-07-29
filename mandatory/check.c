@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 18:45:11 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/29 10:45:59 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/29 13:59:13 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ char	**check_map(int fd, t_lay *lay)
 	t_err	map_err;
 
 	map_str = NULL;
+	map = NULL;
 	map_err = ft_newmap_error();
 	*lay = ft_newlayout();
 	ft_readlayout(fd, &map_err, lay, &map_str);
@@ -40,6 +41,9 @@ char	**check_map(int fd, t_lay *lay)
 	map = ft_split(map_str, '\n');
 	free(map_str);
 	if (!map)
+	{
 		error_msg_params("Memory allocation error!", NULL);
+		return (0);
+	}
 	return (map);
 }
