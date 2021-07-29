@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/29 23:22:37 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/29 23:55:23 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ typedef struct s_game
 
 void	init_game(char **map, t_lay *lay);
 t_game	ft_newgame(char **map, t_lay lay);
-void	free_gamemap(t_game *game, int print);
 int		end_game(t_game *game);
-int		print_map(t_game *game);
+int		ft_update(t_game *game);
+int		key_hook(int keycode, t_game *game);
 
 #endif

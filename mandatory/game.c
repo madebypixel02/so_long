@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:55:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/29 23:25:42 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/29 23:59:08 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,27 @@
 #include <mlx.h>
 #include <stdio.h>
 
-void	free_gamemap(t_game *game, int print)
+int	key_hook(int keycode, t_game *game)
 {
-	int	i;
-
-	i = 0;
-	while (game->map[i])
-	{
-		if (print)
-			printf("%s\n", game->map[i]);
-		free(game->map[i]);
-		i++;
-	}
-	free(game->map);
+	if (keycode == KEY_Q || keycode == KEY_ESC)
+		end_game(game);
+	return (0);
 }
 
 int	end_game(t_game *game)
 {
+	int	i;
+
 	if (game->map)
-		free_gamemap(game, 0);
+	{
+		i = 0;
+		while (game->map[i])
+		{
+			free(game->map[i]);
+			i++;
+		}
+		free(game->map);
+	}
 	printf("%sGame Finished!%s\n", GREEN, DEFAULT);
 	mlx_clear_window(game->id, game->window_id);
 	mlx_destroy_window(game->id, game->window_id);
@@ -48,8 +50,9 @@ void	init_game(char **map, t_lay *lay)
 	t_game	game;
 
 	game = ft_newgame(map, *lay);
-	mlx_loop_hook(game.id, print_map, (void *)&game);
+	mlx_loop_hook(game.id, ft_update, (void *)&game);
 	mlx_hook(game.window_id, 17, 0, end_game, (void *)&game);
+	mlx_key_hook(game.window_id, key_hook, (void *)&game);
 	mlx_loop(game.id);
 }
 
@@ -67,7 +70,7 @@ t_game	ft_newgame(char **map, t_lay lay)
 	return (newgame);
 }
 
-int	print_map(t_game *game)
+int	ft_update(t_game *game)
 {
 	int		x;
 	int		y;
