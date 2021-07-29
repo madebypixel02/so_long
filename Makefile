@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/07/29 10:47:57 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/07/29 20:16:09 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,8 @@ UNAME = $(shell uname -s)
 ECHO = echo
 CDEBUG = -g3 -fsanitize=address
 LMLX = -lmlx -framework OpenGL -framework AppKit
-LMLX_PATH=/usr/lib/
-IMLX_PATH=/usr/include/
+LMLX_PATH=.
+IMLX_PATH=lib/
 ifeq ($(UNAME), Linux)
 	ECHO = echo -e
 	LEAKS = valgrind --leak-check=full --show-leak-kinds=all -s -q 
