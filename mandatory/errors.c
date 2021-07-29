@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 18:28:25 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/29 10:49:59 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/29 12:42:07 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,15 @@ void	error_msg_params(char *msg, char **map_str)
 		free(*map_str);
 	printf("Error\n%s%s%s\n", RED, msg, DEFAULT);
 	exit(0);
+}
+
+int	exit_msg(char ***map)
+{
+	if (map)
+		free_matrix(map, 0);
+	printf("Error\n%sGame Finished!%s\n", GREEN, DEFAULT);
+	exit(0);
+	return (0);
 }
 
 void	free_matrix(char ***to_free, int print)
