@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 20:35:25 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/28 13:01:08 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/29 22:58:38 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@ t_player	ft_newplayer(int is_main_player)
 	player.score = 0;
 	player.nLives = 3;
 	player.nMoves = 0;
+	player.direction = EAST;
 	return (player);
 }

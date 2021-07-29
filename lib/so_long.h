@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 16:51:31 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/29 20:14:08 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/29 23:00:09 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include "check.h"
 # include "game.h"
 # include "mlx.h"
-# include "vector.h"
 # include "player.h"
 # include <stdio.h>
 # include <fcntl.h>

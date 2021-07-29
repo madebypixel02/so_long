@@ -6,12 +6,11 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 18:28:25 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/29 13:14:47 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/29 22:52:22 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/so_long.h"
-#include <mlx.h>
 
 t_err	ft_newmap_error(void)
 {
