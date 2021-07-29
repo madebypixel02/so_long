@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 16:51:31 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/28 20:14:42 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/29 10:34:22 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include "colors.h"
 # include "errors.h"
 # include "map.h"
-# include "tile.h"
 # include "check.h"
 # include "game.h"
 # include <mlx.h>

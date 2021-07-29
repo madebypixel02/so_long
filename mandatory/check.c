@@ -6,13 +6,13 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 18:45:11 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/28 20:32:21 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/29 10:45:59 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/check.h"
 
-t_tile	**check_params(int argc, char **argv, t_lay *lay)
+char	**check_params(int argc, char **argv, t_lay *lay)
 {
 	int		fd;
 
@@ -26,12 +26,11 @@ t_tile	**check_params(int argc, char **argv, t_lay *lay)
 	return (check_map(fd, lay));
 }
 
-t_tile	**check_map(int fd, t_lay *lay)
+char	**check_map(int fd, t_lay *lay)
 {
 	char	*map_str;
 	char	**map;
 	t_err	map_err;
-	t_tile	**tilemap;
 
 	map_str = NULL;
 	map_err = ft_newmap_error();
@@ -42,7 +41,5 @@ t_tile	**check_map(int fd, t_lay *lay)
 	free(map_str);
 	if (!map)
 		error_msg_params("Memory allocation error!", NULL);
-	tilemap = ft_tilemap(map, *lay);
-	free_matrix(&map, 0);
-	return (tilemap);
+	return (map);
 }
