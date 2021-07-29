@@ -6,13 +6,16 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 19:36:06 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/28 19:32:07 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/29 23:41:48 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAP_H
 
 # define MAP_H
+
+# include <stdlib.h>
+# include "../get_next_line/get_next_line.h"
 
 typedef struct s_lay
 {

@@ -6,11 +6,25 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 18:45:11 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/29 17:56:30 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/29 23:41:01 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/check.h"
+
+void	error_msg_params(char *msg, char **map_str);
+
+t_lay	ft_newlayout(void)
+{
+	t_lay	lay;
+
+	lay.nRow = 0;
+	lay.nCol = 0;
+	lay.nExits = 0;
+	lay.nPlayers = 0;
+	lay.nCollect = 0;
+	return (lay);
+}
 
 char	**check_params(int argc, char **argv, t_lay *lay)
 {

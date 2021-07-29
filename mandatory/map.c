@@ -6,22 +6,33 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 16:48:15 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/29 20:37:39 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/29 23:42:16 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/so_long.h"
+#include "../lib/map.h"
+#include "../libft/lib/libft.h"
+#include "../lib/colors.h"
 
-t_lay	ft_newlayout(void)
+void	error_msg_params(char *msg, char **map_str)
 {
-	t_lay	lay;
+	if (map_str)
+		free(*map_str);
+	printf("Error\n%s%s%s\n", RED, msg, DEFAULT);
+	exit(0);
+}
 
-	lay.nRow = 0;
-	lay.nCol = 0;
-	lay.nExits = 0;
-	lay.nPlayers = 0;
-	lay.nCollect = 0;
-	return (lay);
+t_err	ft_newmap_error(void)
+{
+	t_err	map_err;
+
+	map_err.inv_borders = 0;
+	map_err.inv_char = 0;
+	map_err.inv_nExits = 0;
+	map_err.inv_nCollect = 0;
+	map_err.inv_rowlen = 0;
+	map_err.inv_nPlayers = 0;
+	return (map_err);
 }
 
 void	ft_readlayout(int fd, t_err *map_err, t_lay *lay, char **map_str)

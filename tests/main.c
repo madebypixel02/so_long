@@ -6,13 +6,14 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 16:49:08 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/29 20:31:57 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/29 23:44:04 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/so_long.h"
-#include <mlx.h>
+#include "mlx.h"
 #include <fcntl.h>
+#include "../lib/check.h"
+#include "../lib/game.h"
 #include <stdio.h>
 
 int	main(int argc, char **argv)
