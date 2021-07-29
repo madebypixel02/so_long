@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:55:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/29 14:06:41 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/29 15:42:38 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,20 @@
 #include <mlx.h>
 #include <stdio.h>
 
-void	free_matrix(char ***to_free, int print)
+void	free_gamemap(t_game *game, int print)
 {
-	int	i;
-
-	i = 0;
-	while (to_free[0][i])
+	while (*game->map)
 	{
 		if (print)
-			printf("%s\n", to_free[0][i]);
-		free(to_free[0][i]);
-		i++;
+			printf("%s\n", *game->map);
+		free(*game->map);
+		game->map++;
 	}
-	free(to_free[0]);
 }
 int	exit_msg(t_game *game)
 {
-	char	***map;
-
-	map = &game->map;
-	printf("-> %d\n", map[0] == NULL);
 	if (game->map)
-		free_matrix(map, 1);
+		free_gamemap(game, 1);
 	printf("%sGame Finished!%s\n", GREEN, DEFAULT);
 	mlx_clear_window(game->mlx.id, game->mlx.window_id);
 	mlx_destroy_window(game->mlx.id, game->mlx.window_id);
@@ -50,7 +42,7 @@ void	init_game(char **map, t_lay *lay)
 
 	game = ft_newgame(map, *lay);
 	mlx_loop_hook(game.mlx.id, print_map, (void *)&game);
-	mlx_hook(game.mlx.window_id, 17, 0, exit_msg, (void *)&game.map);
+	mlx_hook(game.mlx.window_id, 17, 0, exit_msg, (void *)&game);
 	mlx_loop(game.mlx.id);
 }
 	
