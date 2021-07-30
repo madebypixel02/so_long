@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/07/29 23:43:13 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/07/30 11:59:48 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,17 +21,43 @@ MAGENTA = \033[0;95m
 CYAN = \033[0;96m
 WHITE = \033[0;97m
 
+# Key Codes for MacOS
+ESC = KEY_ESC=53
+W = KEY_W=13
+A = KEY_A=0
+S = KEY_S=1
+D = KEY_D=2
+UP = KEY_UP=126
+DOWN = KEY_DOWN=125
+LEFT = KEY_LEFT=123
+RIGHT = KEY_RIGHT=124
+R = KEY_R=15
+Q = KEY_Q=12
+
 UNAME = $(shell uname -s)
 ECHO = echo
 CDEBUG = -g3 -fsanitize=address
 LMLX = -lmlx -framework OpenGL -framework AppKit
-LMLX_PATH=.
-IMLX_PATH=.
+LMLX_PATH=/usr/lib
+IMLX_PATH=/usr/include
 ifeq ($(UNAME), Linux)
 	ECHO = echo -e
 	LEAKS = valgrind --leak-check=full --show-leak-kinds=all -s -q 
 	LMLX = -L$(LMLX_PATH) -lmlx -lXext -lX11
 	IMLX = -I$(IMLX_PATH)
+	# Key Codes for Linux
+	ESC = KEY_ESC=65307
+	W = KEY_W=119
+	A = KEY_A=97
+	S = KEY_S=115
+	D = KEY_D=100
+	UP = KEY_UP=65362
+	DOWN = KEY_DOWN=65364
+	LEFT = KEY_LEFT=65361
+	RIGHT = KEY_RIGHT=65363
+	R = KEY_R=114
+	Q = KEY_Q=113
+
 	CDEBUG =
 endif
 
@@ -44,6 +70,7 @@ DIR_B = bonus
 DIR_OBJ = lib
 LIBFT = libft/libft.a
 NAME = so_long
+KEYCODES =  -D $(ESC) -D $(Q) -D $(W) -D $(A) -D $(S) -D $(D) -D $(UP) -D $(DOWN) -D $(LEFT) -D $(RIGHT)
 
 SOURCE_M = map.c player.c check.c game.c
 
@@ -70,7 +97,7 @@ $(NAME): $(OBJ_M) $(OBJ_GNL) compile_libft
 
 $(OBJ_M): $(SRC_M)
 	@$(ECHO) "$(RED)Mandatory objects outdated in so_long! Compiling again...$(DEFAULT)"
-	@$(CC) $(CFLAGS) $(CDEBUG) -c $^
+	$(CC) $(CFLAGS) $(CDEBUG) $(KEYCODES) -c $^
 	@mv -f $(SOURCE_M:.c=.o) main.o $(DIR_OBJ)
 	@$(ECHO) "$(GREEN)Mandatory Compilation Complete in so_long!$(DEFAULT)"
 

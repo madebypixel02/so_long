@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/30 09:52:41 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/30 11:41:26 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,6 @@
 # include "colors.h"
 
 # define SPRITE_SIZE 64
-
-enum e_keycodes
-{
-	KEY_ESC = 65307,
-	KEY_W = 119,
-	KEY_A = 97,
-	KEY_S = 115,
-	KEY_D = 100,
-	KEY_UP = 65362,
-	KEY_DOWN = 65364,
-	KEY_LEFT = 65361,
-	KEY_RIGHT = 65363,
-	KEY_R = 114,
-	KEY_Q = 113,
-};
 
 typedef struct s_game
 {
