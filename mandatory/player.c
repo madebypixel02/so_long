@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 20:35:25 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/30 10:43:26 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/30 13:08:51 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,21 +68,18 @@ int	move(char ***map, int d, t_player *p)
 	i = 0;
 	while (p[i].pos.x != -1 || p[i].pos.y != -1)
 	{
-		if (d == NORTH && ft_strchr("0C", map[0][p[i].pos.y + 1][p[i].pos.x]))
+		if (d == NORTH && ft_strchr("0C", map[0][p[i].pos.y - 1][p[i].pos.x]))
+			return (ft_swap_tile(map, ft_newvector(p[i].pos.x, \
+			p[i].pos.y), ft_newvector(p[i].pos.x, p[i].pos.y - 1), p));
+		if (d == SOUTH && ft_strchr("0C", map[0][p[i].pos.y + 1][p[i].pos.x]))
 			return (ft_swap_tile(map, ft_newvector(p[i].pos.x, \
 			p[i].pos.y), ft_newvector(p[i].pos.x, p[i].pos.y + 1), p));
-		if (d == SOUTH && (map[0][p[i].pos.y - 1][p[i].pos.x] == '0' \
-		|| map[0][p[i].pos.y - 1][p[i].pos.x] == 'C'))
+		if (d == EAST && ft_strchr("0C", map[0][p[i].pos.y][p[i].pos.x + 1]))
 			return (ft_swap_tile(map, ft_newvector(p[i].pos.x, \
-			p[i].pos.y), ft_newvector(p[i].pos.x, p[i].pos.y + 1), p));
-		if (d == EAST && (map[0][p[i].pos.y][p[i].pos.x + 1] == '0' \
-		|| map[0][p[i].pos.y][p[i].pos.x + 1] == 'C'))
+			p[i].pos.y), ft_newvector(p[i].pos.x + 1, p[i].pos.y), p));
+		if (d == WEST && ft_strchr("0C", map[0][p[i].pos.y][p[i].pos.x - 1]))
 			return (ft_swap_tile(map, ft_newvector(p[i].pos.x, \
 			p[i].pos.y), ft_newvector(p[i].pos.x - 1, p[i].pos.y), p));
-		if (d == WEST && (map[0][p[i].pos.y][p[i].pos.x - 1] == '0' \
-		|| map[0][p[i].pos.y][p[i].pos.x - 1] == 'C'))
-			return (ft_swap_tile(map, ft_newvector(p[i].pos.x, \
-			p[i].pos.y), ft_newvector(p[i].pos.x, p[i].pos.y + 1), p));
 		i++;
 	}
 	return (0);
@@ -94,9 +91,7 @@ int	ft_swap_tile(char ***m, t_vector old, t_vector nw, t_player *p)
 	int		i;
 
 	i = 0;
-	temp = *m[nw.y][nw.x];
-	*m[nw.y][nw.x] = *m[old.y][old.x];
-	*m[old.y][old.x] = temp;
+	printf("(%d, %d) %c, (%d, %d) %c, %d\n", old.x, old.y, m[0][old.y][old.x], nw.x, nw.y, m[0][nw.y][nw.x], p->nLives);
 	while (p[i].pos.x != -1 && p[i].pos.y != -1)
 	{
 		if (p[i].pos.x == old.x && p[i].pos.y == old.y)
@@ -106,5 +101,9 @@ int	ft_swap_tile(char ***m, t_vector old, t_vector nw, t_player *p)
 		}
 		i++;
 	}
+	temp = m[0][nw.y][nw.x];
+	ft_memset(&m[0][nw.y][nw.x], m[0][old.y][old.x], 1);
+	ft_memset(&m[0][old.y][old.x], temp, 1);
+
 	return (1);
 }
