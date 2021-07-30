@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 20:35:25 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/30 16:08:11 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/30 16:21:19 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,9 @@ int	ft_swap_tile(char ***m, t_vector old, t_vector nw, t_player *p)
 	i = 0;
 	temp = m[0][nw.y][nw.x];
 	if (temp == 'E' && p->lay->nCollect == 0)
-	{
 		p->lay->nCollect = -1;
+	else if (temp == 'E')
 		return (1);
-	}
 	if (temp == 'C' && p->is_main_player)
 		p->lay->nCollect--;
 	while (p[i].pos.x != -1 && p[i].pos.y != -1)
