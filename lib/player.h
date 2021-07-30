@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 20:35:31 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/30 10:43:17 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/30 15:52:53 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,15 @@ typedef struct s_player
 {
 	int			is_main_player;
 	t_vector	pos;
+	t_lay		*lay;
 	int			dir;
 	int			score;
 	int			nLives;
 	int			nMoves;
 }				t_player;
 
-t_player	ft_newplayer(int is_main_player, int x, int y);
-t_player	*ft_playerlist(char **map, t_lay lay);
+t_player	ft_newplayer(int is_main_player, int x, int y, t_lay *lay);
+t_player	*ft_playerlist(char **map, t_lay *lay);
 int			move(char ***map, int d, t_player *p);
 int			ft_swap_tile(char ***m, t_vector old, t_vector nw, t_player *p);
 t_vector	ft_newvector(int x, int y);

@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:55:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/30 11:55:50 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/30 16:11:06 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	key_hook(int keycode, t_game *game)
 		move(&game->map, EAST, game->players);
 	if (keycode == KEY_LEFT || keycode == KEY_A)
 		move(&game->map, WEST, game->players);
+	printf("%d\n", ++game->nFrames);
 	return (0);
 }
 
@@ -59,25 +60,26 @@ void	init_game(char **map, t_lay *lay)
 {
 	t_game	game;
 
-	game = ft_newgame(map, *lay);
+	game = ft_newgame(map, lay);
 	mlx_loop_hook(game.id, ft_update, (void *)&game);
 	mlx_hook(game.window_id, 17, 0, end_game, (void *)&game);
 	mlx_key_hook(game.window_id, key_hook, (void *)&game);
 	mlx_loop(game.id);
 }
 
-t_game	ft_newgame(char **map, t_lay lay)
+t_game	ft_newgame(char **map, t_lay *lay)
 {
 	t_game	newgame;
 
 	newgame.nFrames = 0;
-	newgame.width = lay.nCol * SPRITE_SIZE;
-	newgame.height = lay.nRow * SPRITE_SIZE;
+	newgame.width = lay->nCol * SPRITE_SIZE;
+	newgame.height = lay->nRow * SPRITE_SIZE;
+	newgame.lay = lay;
 	newgame.map = map;
 	newgame.players = ft_playerlist(map, lay);
 	newgame.id = mlx_init();
 	newgame.window_id = mlx_new_window(newgame.id, \
-	lay.nCol * SPRITE_SIZE, lay.nRow * SPRITE_SIZE, "Pac-Man Game");
+	lay->nCol * SPRITE_SIZE, lay->nRow * SPRITE_SIZE, "Pac-Man Game");
 	return (newgame);
 }
 
@@ -88,7 +90,8 @@ int	ft_update(t_game *game)
 	char	*c;
 
 	y = 0;
-	game->nFrames++;
+	if (game->lay->nCollect == -1)
+		end_game(game);
 	mlx_clear_window(game->id, game->window_id);
 	while (game->map[y])
 	{

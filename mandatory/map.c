@@ -6,13 +6,14 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 16:48:15 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/30 10:06:12 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/30 15:56:47 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/map.h"
 #include "../libft/lib/libft.h"
 #include "../lib/colors.h"
+#include <stdio.h>
 
 void	error_msg_params(char *msg, char **map_str)
 {
@@ -86,7 +87,7 @@ void	ft_checklayout(char *line, t_err *map_err, t_lay *lay, int old_len)
 	map_err->inv_nCollect = lay->nCollect < 1;
 	while (line[i])
 	{
-		if (!ft_strchr("01CEPB\n", line[i]))
+		if (!ft_strchr("01CEPG\n", line[i]))
 			map_err->inv_char = 1;
 		i++;
 	}
