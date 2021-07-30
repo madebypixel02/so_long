@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 18:45:11 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/29 23:41:01 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/30 09:35:56 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_lay	ft_newlayout(void)
 	lay.nCol = 0;
 	lay.nExits = 0;
 	lay.nPlayers = 0;
+	lay.nGhosts = 0;
 	lay.nCollect = 0;
 	return (lay);
 }

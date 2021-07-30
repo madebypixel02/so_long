@@ -6,19 +6,28 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:55:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/29 23:59:08 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/30 10:12:11 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/game.h"
+#include "../lib/player.h"
 #include "../libft/lib/libft.h"
-#include <mlx.h>
+#include "../mlx.h"
 #include <stdio.h>
 
 int	key_hook(int keycode, t_game *game)
 {
 	if (keycode == KEY_Q || keycode == KEY_ESC)
 		end_game(game);
+	if (keycode == KEY_UP || keycode == KEY_W)
+		move(&game->map, NORTH, game->players);
+	if (keycode == KEY_DOWN || keycode == KEY_S)
+		move(&game->map, SOUTH, game->players);
+	if (keycode == KEY_RIGHT || keycode == KEY_D)
+		move(&game->map, EAST, game->players);
+	if (keycode == KEY_LEFT || keycode == KEY_A)
+		move(&game->map, WEST, game->players);
 	return (0);
 }
 
@@ -36,6 +45,7 @@ int	end_game(t_game *game)
 		}
 		free(game->map);
 	}
+	free(game->players);
 	printf("%sGame Finished!%s\n", GREEN, DEFAULT);
 	mlx_clear_window(game->id, game->window_id);
 	mlx_destroy_window(game->id, game->window_id);
@@ -64,6 +74,7 @@ t_game	ft_newgame(char **map, t_lay lay)
 	newgame.width = lay.nCol * SPRITE_SIZE;
 	newgame.height = lay.nRow * SPRITE_SIZE;
 	newgame.map = map;
+	newgame.players = ft_playerlist(map, lay);
 	newgame.id = mlx_init();
 	newgame.window_id = mlx_new_window(newgame.id, \
 	lay.nCol * SPRITE_SIZE, lay.nRow * SPRITE_SIZE, "Pac-Man Game");

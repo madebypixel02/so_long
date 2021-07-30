@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/29 23:55:23 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/30 09:52:41 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # define GAME_H
 
 # include "map.h"
+# include "player.h"
 # include "colors.h"
 
 # define SPRITE_SIZE 64
@@ -36,12 +37,13 @@ enum e_keycodes
 
 typedef struct s_game
 {
-	int		width;
-	int		height;
-	char	**map;
-	void	*id;
-	void	*window_id;
-	int		nFrames;
+	int			width;
+	int			height;
+	char		**map;
+	void		*id;
+	void		*window_id;
+	int			nFrames;
+	t_player	*players;
 }				t_game;
 
 void	init_game(char **map, t_lay *lay);
