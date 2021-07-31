@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 19:36:06 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/30 09:35:13 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/31 10:26:39 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,22 @@
 
 typedef struct s_lay
 {
-	int	nRow;
-	int	nCol;
-	int	nExits;
-	int	nPlayers;
-	int	nGhosts;
-	int	nCollect;
+	int	n_row;
+	int	n_col;
+	int	n_exits;
+	int	n_players;
+	int	n_ghosts;
+	int	n_collect;
 }				t_lay;
 
 typedef struct s_err
 {
 	int	inv_rowlen;
 	int	inv_char;
-	int	inv_nPlayers;
-	int	inv_nGhosts;
-	int	inv_nCollect;
-	int	inv_nExits;
+	int	inv_n_players;
+	int	inv_n_ghosts;
+	int	inv_n_collect;
+	int	inv_n_exits;
 	int	inv_borders;
 }				t_err;
 

@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 16:48:15 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/30 15:56:47 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/31 10:26:39 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ t_err	ft_newmap_error(void)
 
 	map_err.inv_borders = 0;
 	map_err.inv_char = 0;
-	map_err.inv_nExits = 0;
-	map_err.inv_nCollect = 0;
+	map_err.inv_n_exits = 0;
+	map_err.inv_n_collect = 0;
 	map_err.inv_rowlen = 0;
-	map_err.inv_nPlayers = 0;
-	map_err.inv_nGhosts = 0;
+	map_err.inv_n_players = 0;
+	map_err.inv_n_ghosts = 0;
 	return (map_err);
 }
 
@@ -62,7 +62,7 @@ void	ft_readlayout(int fd, t_err *map_err, t_lay *lay, char **map_str)
 		old_len = ft_strlen(line);
 		last_line = ft_substr(line, 0, ft_strlen(line));
 		*map_str = ft_strenlarge(*map_str, line);
-		lay->nRow++;
+		lay->n_row++;
 	}
 }
 
@@ -76,15 +76,15 @@ void	ft_checklayout(char *line, t_err *map_err, t_lay *lay, int old_len)
 	if (line && (line[0] != '1' || line[ft_strlen(line) - 2] != '1' || \
 		(!old_len && ft_countchar(line, '1') != (int)ft_strlen(line) - 1)))
 		map_err->inv_borders = 1;
-	lay->nExits += ft_countchar(line, 'E');
-	lay->nPlayers += ft_countchar(line, 'P');
-	lay->nGhosts += ft_countchar(line, 'G');
-	lay->nCollect += ft_countchar(line, 'C');
-	if (!lay->nCol)
-		lay->nCol = ft_strlen(line) - 1;
-	map_err->inv_nExits = lay->nExits < 1;
-	map_err->inv_nPlayers = lay->nPlayers < 1;
-	map_err->inv_nCollect = lay->nCollect < 1;
+	lay->n_exits += ft_countchar(line, 'E');
+	lay->n_players += ft_countchar(line, 'P');
+	lay->n_ghosts += ft_countchar(line, 'G');
+	lay->n_collect += ft_countchar(line, 'C');
+	if (!lay->n_col)
+		lay->n_col = ft_strlen(line) - 1;
+	map_err->inv_n_exits = lay->n_exits < 1;
+	map_err->inv_n_players = lay->n_players < 1;
+	map_err->inv_n_collect = lay->n_collect < 1;
 	while (line[i])
 	{
 		if (!ft_strchr("01CEPG\n", line[i]))
@@ -101,11 +101,11 @@ int	ft_print_map_error(t_err *map_err, char **map_str)
 		error_msg_params("Map must be surrounded by walls!", map_str);
 	if (map_err->inv_char)
 		error_msg_params("Unexpected char(s) in map!", map_str);
-	if (map_err->inv_nExits)
+	if (map_err->inv_n_exits)
 		error_msg_params("Invalid number of exits!", map_str);
-	if (map_err->inv_nPlayers)
+	if (map_err->inv_n_players)
 		error_msg_params("Invalid number of players!", map_str);
-	if (map_err->inv_nCollect)
+	if (map_err->inv_n_collect)
 		error_msg_params("There should be at least one collectible!", map_str);
 	return (0);
 }

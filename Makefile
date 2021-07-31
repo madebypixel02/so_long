@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/07/30 14:10:27 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/07/31 10:34:35 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ LMLX_PATH=/usr/lib
 IMLX_PATH=/usr/include
 ifeq ($(UNAME), Linux)
 	ECHO = echo -e
-	LEAKS = valgrind --leak-check=full --show-leak-kinds=all -s -q 
+	LEAKS = #valgrind --leak-check=full --show-leak-kinds=all -s -q 
 	LMLX = -L$(LMLX_PATH) -lmlx -lXext -lX11
 	IMLX = -I$(IMLX_PATH)
 	# Key Codes for Linux
@@ -72,7 +72,7 @@ LIBFT = libft/libft.a
 NAME = so_long
 KEYCODES =  -D $(ESC) -D $(Q) -D $(W) -D $(A) -D $(S) -D $(D) -D $(UP) -D $(DOWN) -D $(LEFT) -D $(RIGHT)
 
-SOURCE_M = map.c player.c check.c game.c
+SOURCE_M = map.c player.c check.c game.c sprites.c
 
 SOURCE_GNL = get_next_line.c get_next_line_utils.c
 

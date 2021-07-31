@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 20:35:25 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/30 16:21:19 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/31 10:43:56 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_player	*ft_playerlist(char **map, t_lay *lay)
 
 	y = 0;
 	i = 0;
-	players = malloc(sizeof(t_player) * (lay->nPlayers + lay->nGhosts + 1));
+	players = malloc(sizeof(t_player) * (lay->n_players + lay->n_ghosts + 1));
 	while (map[y])
 	{
 		x = 0;
@@ -48,8 +48,8 @@ t_player	ft_newplayer(int is_main_player, int x, int y, t_lay *lay)
 	player.lay = lay;
 	player.is_main_player = is_main_player;
 	player.score = 0;
-	player.nLives = 3;
-	player.nMoves = 0;
+	player.n_lives = 3;
+	player.n_moves = 0;
 	player.dir = EAST;
 	return (player);
 }
@@ -94,12 +94,17 @@ int	ft_swap_tile(char ***m, t_vector old, t_vector nw, t_player *p)
 
 	i = 0;
 	temp = m[0][nw.y][nw.x];
-	if (temp == 'E' && p->lay->nCollect == 0)
-		p->lay->nCollect = -1;
+	if (temp == 'E' && p->lay->n_collect <= 0)
+	{
+		ft_memset(&m[0][old.y][old.x], '0', 1);
+		p->lay->n_players--;
+		p->lay->n_collect = -1;
+		return (1);
+	}
 	else if (temp == 'E')
 		return (1);
 	if (temp == 'C' && p->is_main_player)
-		p->lay->nCollect--;
+		p->lay->n_collect--;
 	while (p[i].pos.x != -1 && p[i].pos.y != -1)
 	{
 		if (p[i].pos.x == old.x && p[i].pos.y == old.y && (ft_strchr("CE0", temp)))

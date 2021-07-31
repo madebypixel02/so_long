@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:55:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/30 16:11:06 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/31 10:29:53 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,10 @@ int	end_game(t_game *game)
 	}
 	free(game->players);
 	printf("%sGame Finished!%s\n", GREEN, DEFAULT);
+	free_sprites(game);
 	mlx_clear_window(game->id, game->window_id);
 	mlx_destroy_window(game->id, game->window_id);
-	//mlx_destroy_display(game->id);
+	mlx_destroy_display(game->id);
 	free(game->id);
 	exit(0);
 	return (0);
@@ -72,14 +73,16 @@ t_game	ft_newgame(char **map, t_lay *lay)
 	t_game	newgame;
 
 	newgame.nFrames = 0;
-	newgame.width = lay->nCol * SPRITE_SIZE;
-	newgame.height = lay->nRow * SPRITE_SIZE;
+	newgame.width = lay->n_col * SPRITE_SIZE;
+	newgame.height = lay->n_row * SPRITE_SIZE;
 	newgame.lay = lay;
 	newgame.map = map;
 	newgame.players = ft_playerlist(map, lay);
 	newgame.id = mlx_init();
 	newgame.window_id = mlx_new_window(newgame.id, \
-	lay->nCol * SPRITE_SIZE, lay->nRow * SPRITE_SIZE, "Pac-Man Game");
+	lay->n_col * SPRITE_SIZE, lay->n_row * SPRITE_SIZE, "Pac-Man Game");
+	newgame.sprites = ft_initsprites(&newgame);
+	newgame.map_printed = 0;
 	return (newgame);
 }
 
@@ -87,10 +90,9 @@ int	ft_update(t_game *game)
 {
 	int		x;
 	int		y;
-	char	*c;
 
 	y = 0;
-	if (game->lay->nCollect == -1)
+	if (game->lay->n_collect == -1 && !game->lay->n_players)
 		end_game(game);
 	mlx_clear_window(game->id, game->window_id);
 	while (game->map[y])
@@ -98,13 +100,18 @@ int	ft_update(t_game *game)
 		x = 0;
 		while (game->map[y][x])
 		{
-			c = ft_chartostr(game->map[y][x]);
-			mlx_string_put(game->id, game->window_id, x * SPRITE_SIZE, \
-			y * SPRITE_SIZE + 10, 0xFDD663, c);
-			free(c);
+			if (game->map[y][x] == '1')
+				mlx_put_image_to_window(game->id, game->window_id, game->sprites.wall, x * SPRITE_SIZE, y * SPRITE_SIZE);
+			if (game->map[y][x] == 'E')
+				mlx_put_image_to_window(game->id, game->window_id, game->sprites.portal, x * SPRITE_SIZE, y * SPRITE_SIZE);
+			if (game->map[y][x] == 'P')
+				mlx_put_image_to_window(game->id, game->window_id, game->sprites.pacman, x * SPRITE_SIZE, y * SPRITE_SIZE);
+			if (game->map[y][x] == 'C')
+				mlx_put_image_to_window(game->id, game->window_id, game->sprites.pacfood, x * SPRITE_SIZE, y * SPRITE_SIZE);
 			x++;
 		}
 		y++;
 	}
+	game->map_printed = 1;
 	return (0);
 }
