@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 16:48:15 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/31 10:26:39 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/31 17:15:43 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,6 @@ void	ft_readlayout(int fd, t_err *map_err, t_lay *lay, char **map_str)
 
 void	ft_checklayout(char *line, t_err *map_err, t_lay *lay, int old_len)
 {
-	int	i;
-
-	i = 0;
 	if (old_len && old_len != (int)ft_strlen(line))
 		map_err->inv_rowlen = 1;
 	if (line && (line[0] != '1' || line[ft_strlen(line) - 2] != '1' || \
@@ -85,11 +82,11 @@ void	ft_checklayout(char *line, t_err *map_err, t_lay *lay, int old_len)
 	map_err->inv_n_exits = lay->n_exits < 1;
 	map_err->inv_n_players = lay->n_players < 1;
 	map_err->inv_n_collect = lay->n_collect < 1;
-	while (line[i])
+	while (*line)
 	{
-		if (!ft_strchr("01CEPG\n", line[i]))
+		if (!ft_strchr("01CEPG\n", *line))
 			map_err->inv_char = 1;
-		i++;
+		line++;
 	}
 }
 

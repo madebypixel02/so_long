@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/07/31 10:34:35 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/07/31 13:39:30 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,7 @@ DIR_B = bonus
 DIR_OBJ = lib
 LIBFT = libft/libft.a
 NAME = so_long
-KEYCODES =  -D $(ESC) -D $(Q) -D $(W) -D $(A) -D $(S) -D $(D) -D $(UP) -D $(DOWN) -D $(LEFT) -D $(RIGHT)
+KEYCODES =  -D $(ESC) -D $(Q) -D $(R) -D $(W) -D $(A) -D $(S) -D $(D) -D $(UP) -D $(DOWN) -D $(LEFT) -D $(RIGHT)
 
 SOURCE_M = map.c player.c check.c game.c sprites.c
 

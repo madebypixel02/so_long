@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/31 08:57:46 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/07/31 17:26:30 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,26 @@
 # define GAME_H
 
 # include "map.h"
-# include "player.h"
 # include "colors.h"
+# include "../libft/lib/libft.h"
 # include "../mlx.h"
 
 # define SPRITE_SIZE 32
+
+enum e_direction
+{
+	ST = 0,
+	N = 1,
+	S = -1,
+	E = 2,
+	W = -2
+};
+
+typedef struct s_vector
+{
+	int	x;
+	int	y;
+}				t_vector;
 
 typedef struct s_sprite
 {
@@ -28,9 +43,14 @@ typedef struct s_sprite
 	void		*pacfood;
 	void		*portal;
 	void		*black;
-	//t_pacman	*pacman;
-	//t_ghost		*ghost;
 }				t_sprite;
+
+typedef struct s_player
+{
+	int			is_main_player;
+	t_vector	pos;
+	int			dir;
+}				t_player;
 
 typedef struct s_game
 {
@@ -38,12 +58,13 @@ typedef struct s_game
 	int			height;
 	t_lay		*lay;
 	char		**map;
+	t_sprite	sprites;
 	void		*id;
 	void		*window_id;
-	int			nFrames;
+	int			n_frames;
+	int			n_moves;
 	int			map_printed;
-	t_sprite	sprites;
-	t_player	*players;
+	t_player	*p;
 }				t_game;
 
 void		init_game(char **map, t_lay *lay);
@@ -52,6 +73,14 @@ int			end_game(t_game *game);
 int			ft_update(t_game *game);
 int			key_hook(int keycode, t_game *game);
 t_sprite	ft_initsprites(t_game *game);
-void		free_sprites(t_game *game);
+int			free_sprites(t_game *game, int only_pac);
+void		ft_newdirection(t_game *game, int direction);
+t_player	ft_newplayer(int is_main_player, int x, int y);
+t_player	*ft_playerlist(char **map, t_game *g);
+void		move(char ***map, int d, t_game *g);
+int			ft_swap_tile(char ***m, t_vector old, t_vector nw, t_game *g);
+t_vector	ft_newvector(int x, int y);
+void		ft_redraw(t_vector old, t_vector nw, t_game *g, int hide);
+void		ft_print_static(t_game *g, int x, int y);
 
 #endif
