@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/31 17:26:30 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/02 21:09:19 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,11 @@
 # include "colors.h"
 # include "../libft/lib/libft.h"
 # include "../mlx.h"
+# include <stdio.h>
 
 # define SPRITE_SIZE 32
+# define OFFSET 42
+# define GAMERATE 8000
 
 enum e_direction
 {
@@ -39,6 +42,7 @@ typedef struct s_vector
 typedef struct s_sprite
 {
 	void		*pacman;
+	void		*logo;
 	void		**wall;
 	void		*pacfood;
 	void		*portal;
@@ -63,7 +67,7 @@ typedef struct s_game
 	void		*window_id;
 	int			n_frames;
 	int			n_moves;
-	int			map_printed;
+	int			redraw;
 	t_player	*p;
 }				t_game;
 

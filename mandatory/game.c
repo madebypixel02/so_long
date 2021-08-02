@@ -6,14 +6,11 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:55:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/31 17:22:11 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/02 21:20:12 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/game.h"
-#include "../libft/lib/libft.h"
-#include "../mlx.h"
-#include <stdio.h>
 
 int	key_hook(int key, t_game *game)
 {
@@ -51,7 +48,6 @@ int	end_game(t_game *game)
 		i = 0;
 		while (game->map[i])
 		{
-			printf("%s\n", game->map[i]);
 			free(game->map[i]);
 			i++;
 		}
@@ -91,10 +87,10 @@ t_game	ft_newgame(char **map, t_lay *lay)
 	newgame.map = map;
 	newgame.id = mlx_init();
 	newgame.window_id = mlx_new_window(newgame.id, \
-	lay->n_col * SPRITE_SIZE, lay->n_row * SPRITE_SIZE, "Pac-Man Game");
+	lay->n_col * SPRITE_SIZE, lay->n_row * SPRITE_SIZE + OFFSET, "Pac-Man Game");
 	newgame.sprites = ft_initsprites(&newgame);
 	newgame.p = ft_playerlist(map, &newgame);
-	newgame.map_printed = 0;
+	newgame.redraw = 1;
 	return (newgame);
 }
 
@@ -105,12 +101,11 @@ int	ft_update(t_game *game)
 
 	y = 0;
 	game->n_frames++;
-	if (!(game->n_frames % 5000))
+	if (!(game->n_frames % GAMERATE))
 		move(&game->map, game->p[0].dir, game);
-	printf("Players: %d Food: %d\n", game->lay->n_players, game->lay->n_collect);
 	if (!game->lay->n_players && !game->lay->n_collect)
 		end_game(game);
-	while (game->map[y] && !game->map_printed)
+	while (game->map[y] && game->redraw)
 	{
 		x = 0;
 		while (game->map[y][x])
@@ -119,7 +114,11 @@ int	ft_update(t_game *game)
 			x++;
 		}
 		y++;
+		mlx_string_put(game->id, game->window_id, 10, 15, 0xFDD663, "Score: ");
+		mlx_string_put(game->id, game->window_id, 10, 33, 0x87FFC5, "Moves: ");
+		mlx_put_image_to_window(game->id, game->window_id, game->sprites.logo,
+		game->width - 134, 4);
 	}
-	game->map_printed = 1;
+	game->redraw = 0;
 	return (0);
 }

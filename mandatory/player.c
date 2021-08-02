@@ -6,24 +6,13 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 20:35:25 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/31 17:29:34 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/02 20:56:09 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/game.h"
 #include <mlx.h>
 #include <stdlib.h>
-
-void	ft_delete_player(t_game *g, int n)
-{
-	int	i;
-
-	i = 0;
-	while (g->p[i].pos.x == -1)
-	{
-		i++;
-	}
-}
 
 t_player	*ft_playerlist(char **map, t_game *g)
 {
@@ -103,18 +92,16 @@ int	ft_swap_tile(char ***m, t_vector old, t_vector nw, t_game *g)
 		g->lay->n_collect--;
 	if (m[0][nw.y][nw.x] == 'E')
 	{
-		if (g->lay->n_collect)
-			return (1);
-		return (ft_delete_player(g, i));
+		if (!g->lay->n_collect)
+			g->lay->n_players--;
+		return (1);
 	}
+
 	while (g->p[i].pos.x != -1)
 	{
 		if (g->p[i].pos.x == old.x && g->p[i].pos.y == old.y
-			&& ft_strchr("C0", m[0][nw.y][nw.x]))
+			&& ft_strchr("CE0", m[0][nw.y][nw.x]))
 			g->p[i].pos = ft_newvector(nw.x, nw.y);
-		if (g->p[i].pos.x == old.x && g->p[i].pos.y == old.y
-			&& m[0][nw.y][nw.x] == 'E')
-			g->p[i].pos = ft_newvector(0, 0);
 		i++;
 	}
 	ft_memset(&m[0][nw.y][nw.x], m[0][old.y][old.x], 1);
@@ -141,8 +128,8 @@ void	ft_redraw(t_vector old, t_vector nw, t_game *g, int hide)
 		g->sprites.pacman = mlx_xpm_file_to_image(g->id,
 			"sprites/Pac-Man/pac_semi_left.xpm", &size, &size);
 	mlx_put_image_to_window(g->id, g->window_id, g->sprites.black,
-	old.x * SPRITE_SIZE, old.y * SPRITE_SIZE);
+	old.x * SPRITE_SIZE, old.y * SPRITE_SIZE + OFFSET);
 	if (!hide)
 		mlx_put_image_to_window(g->id, g->window_id, g->sprites.pacman,
-	nw.x * SPRITE_SIZE, nw.y * SPRITE_SIZE);
+	nw.x * SPRITE_SIZE, nw.y * SPRITE_SIZE + OFFSET);
 }
