@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/02 21:09:19 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/03 09:28:01 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include <stdio.h>
 
 # define SPRITE_SIZE 32
-# define OFFSET 42
-# define GAMERATE 8000
+# define OFFSET 60
+# define GAMERATE 10000
 
 enum e_direction
 {

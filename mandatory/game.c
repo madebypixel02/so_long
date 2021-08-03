@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:55:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/03 09:04:00 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/03 09:28:16 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ t_game	ft_newgame(char **map, t_lay *lay)
 	newgame.map = map;
 	newgame.id = mlx_init();
 	newgame.window_id = mlx_new_window(newgame.id, \
-	lay->n_col * SPRITE_SIZE, lay->n_row * SPRITE_SIZE + (2 * OFFSET), "Pac-Man Game");
+	lay->n_col * SPRITE_SIZE, lay->n_row * SPRITE_SIZE + 100, "Pac-Man Game");
 	newgame.sprites = ft_initsprites(&newgame);
 	newgame.p = ft_playerlist(map, &newgame);
 	newgame.redraw = 1;
@@ -101,7 +101,7 @@ int	ft_update(t_game *game)
 
 	y = 0;
 	game->n_frames++;
-	if (!(game->n_frames % GAMERATE))
+	if (!(game->n_frames % 8000))
 		move(&game->map, game->p[0].dir, game);
 	if (!game->lay->n_players && !game->lay->n_collect)
 		end_game(game);
