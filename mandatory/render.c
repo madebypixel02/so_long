@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 17:09:20 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/03 18:22:00 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/03 20:48:11 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	ft_check_game(t_game *g)
 		move(&g->map, g->pl[0].dir, g);
 	if (!g->lay->n_pl && !g->lay->n_collect)
 	{
+		g->pac_dying = 1;
 		if (!(g->n_frames % g->anim_rate))
 			ft_anim_pacdeath(g);
 		if (!g->pac_dying)
