@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 23:02:26 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/03 17:17:04 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/03 19:14:31 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_sprite	ft_initsprites(t_game *g)
 	g->sprites.logo = mlx_xpm_file_to_image(g->id, \
 		"sprites/Other/Logo/logo.xpm", &size, &size);
 	g->sprites.pac_dying = ft_load_pacdeath(g);
+	g->sprites.pac_dying_bak = g->sprites.pac_dying;
 	return (g->sprites);
 }
 

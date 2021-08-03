@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:55:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/03 17:08:54 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/03 20:03:44 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,22 @@ int	key_hook(int key, t_game *g)
 {
 	if (key == KEY_Q || key == KEY_ESC)
 		end_game(g);
-	if ((key == KEY_UP || key == KEY_W) && g->p[0].dir != N)
+	if ((key == KEY_UP || key == KEY_W) && g->pl->dir != N)
 	{
 		ft_newdirection(g, N);
 		move(&g->map, N, g);
 	}
-	if ((key == KEY_DOWN || key == KEY_S) && g->p[0].dir != S)
+	if ((key == KEY_DOWN || key == KEY_S) && g->pl->dir != S)
 	{
 		ft_newdirection(g, S);
 		move(&g->map, S, g);
 	}
-	if ((key == KEY_RIGHT || key == KEY_D) && g->p[0].dir != E)
+	if ((key == KEY_RIGHT || key == KEY_D) && g->pl->dir != E)
 	{
 		ft_newdirection(g, E);
 		move(&g->map, E, g);
 	}
-	if ((key == KEY_LEFT || key == KEY_A) && g->p[0].dir != W)
+	if ((key == KEY_LEFT || key == KEY_A) && g->pl->dir != W)
 	{
 		ft_newdirection(g, W);
 		move(&g->map, W, g);
@@ -54,7 +54,7 @@ int	end_game(t_game *g)
 		free(g->map);
 	}
 	free_sprites(g);
-	free(g->p);
+	ft_free_playerlist(g);
 	printf("%sGame Finished!%s\n", GREEN, DEFAULT);
 	mlx_clear_window(g->id, g->w_id);
 	mlx_destroy_window(g->id, g->w_id);
@@ -89,7 +89,9 @@ t_game	ft_newgame(char **map, t_lay *lay)
 	g.w_id = mlx_new_window(g.id, lay->n_col * SIZE, \
 			lay->n_row * SIZE + 100, "Pac-Man");
 	g.sprites = ft_initsprites(&g);
-	g.p = ft_playerlist(map, &g);
+	g.pl = NULL;
+	g.gh = NULL;
+	ft_playerlist(map, &g);
 	g.redraw = 1;
 	g.pac_dying = 0;
 	g.pac_moving = 0;

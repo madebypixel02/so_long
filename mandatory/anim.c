@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 10:16:09 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/03 18:01:34 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/03 20:08:36 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 void	ft_anim_pacdeath(t_game *g)
 {
-	int	i;
+	t_player	*temp_pl;
 
-	i = 0;
+	temp_pl = g->pl;
 	if (g->sprites.pac_dying)
 	{
 		g->pac_dying = 1;
-		while (g->p[i].pos.x != -1)
+		while (temp_pl)
 		{
 			mlx_put_image_to_window(g->id, g->w_id, g->sprites.black, \
-				g->p[i].pos.x * SIZE, g->p[i].pos.y * SIZE + OFFSET);
+				temp_pl->pos.x * SIZE, temp_pl->pos.y * SIZE + OFFSET);
 			mlx_put_image_to_window(g->id, g->w_id,
-				g->sprites.pac_dying->content, g->p[i].pos.x * SIZE, \
-			g->p[i].pos.y * SIZE + OFFSET);
-			i++;
+				g->sprites.pac_dying->content, temp_pl->pos.x * SIZE, \
+			temp_pl->pos.y * SIZE + OFFSET);
+			temp_pl = temp_pl->next;
 		}
 		g->sprites.pac_dying = g->sprites.pac_dying->next;
 	}
@@ -61,16 +61,15 @@ t_list	*ft_load_pacdeath(t_game *g)
 
 void	free_animation(t_game *g)
 {
-	t_list	**start;
-	t_list	*temp;
+	t_list		*start;
+	t_list		*temp;
 
-	start = &g->sprites.pac_dying;
+	start = g->sprites.pac_dying_bak;
 	temp = NULL;
-	while (*start)
+	while (start)
 	{
-		printf("HEY!\n");
-		temp = *start;
-		*start = temp->next;
+		temp = start;
+		start = start->next;
 		mlx_destroy_image(g->id, temp->content);
 		free(temp);
 	}

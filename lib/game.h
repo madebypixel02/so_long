@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/03 18:01:00 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/03 20:03:24 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_sprite
 	void		*pacfood;
 	void		*portal;
 	void		*black;
+	t_list		*pac_dying_bak;
 	t_list		*pac_dying;
 	t_list		*pac_moving;
 }				t_sprite;
@@ -57,8 +58,9 @@ typedef struct s_sprite
 /* Main Player struct with position and direction (linked list) */
 typedef struct s_player
 {
-	t_vector	pos;
-	int			dir;
+	t_vector		pos;
+	int				dir;
+	struct s_player	*next;
 }				t_player;
 
 /* Main attributes for the game */
@@ -78,7 +80,8 @@ typedef struct s_game
 	int			n_frames;
 	int			n_moves;
 	int			redraw;
-	t_player	*p;
+	t_player	*pl;
+	t_player	*gh;
 }				t_game;
 
 /* Initiates game object and starts looking for input */
@@ -109,10 +112,16 @@ void		ft_check_game(t_game *g);
 void		ft_newdirection(t_game *g, int direction);
 
 /* Creates new player in a given position */
-t_player	ft_newplayer(int x, int y);
+t_player	*ft_plrnew(int x, int y);
+
+/* ft_lstadd_back for player struct */
+void		ft_plradd_back(t_player **lst, t_player *newnode);
 
 /* Creates array of players for future use */
-t_player	*ft_playerlist(char **map, t_game *g);
+void		ft_playerlist(char **map, t_game *g);
+
+/* Frees linked lists for players and ghosts */
+void		ft_free_playerlist(t_game *g);
 
 /* Checks 2D map and updates player's position if possible */
 void		move(char ***m, int d, t_game *g);

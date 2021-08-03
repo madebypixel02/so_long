@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 20:35:25 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/03 17:00:16 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/03 20:07:55 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,66 +15,58 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-t_player	*ft_playerlist(char **map, t_game *g)
+void	ft_playerlist(char **map, t_game *g)
 {
-	t_player	*players;
-	int			i;
 	int			x;
 	int			y;
 
 	y = 0;
-	i = 0;
-	players = malloc(sizeof(t_player) * (g->lay->n_pl + g->lay->n_gh + 1));
 	while (map[y])
 	{
 		x = 0;
 		while (map[y][x])
 		{
 			if (map[y][x] == 'P')
-				players[i++] = ft_newplayer(x, y);
+				ft_plradd_back(&g->pl, ft_plrnew(x, y));
 			if (map[y][x] == 'G')
-				players[i++] = ft_newplayer(x, y);
+				ft_plradd_back(&g->gh, ft_plrnew(x, y));
 			x++;
 		}
 		y++;
 	}
-	players[i++] = ft_newplayer(-1, -1);
-	return (players);
 }
 
-t_player	ft_newplayer(int x, int y)
+void	ft_free_playerlist(t_game *g)
 {
-	t_player	player;
+	t_player	*temp;
 
-	player.pos = ft_newvector(x, y);
-	player.dir = ST;
+	while (g->pl)
+	{
+		temp = g->pl;
+		g->pl = g->pl->next;
+		free(temp);
+		temp = NULL;
+	}
+	while (g->gh)
+	{
+		temp = g->gh;
+		g->gh = g->gh->next;
+		free(temp);
+		temp = NULL;
+	}
+}
+
+t_player	*ft_plrnew(int x, int y)
+{
+	t_player	*player;
+
+	player = malloc(sizeof(t_player));
+	if (!player)
+		return (NULL);
+	player->pos = ft_newvector(x, y);
+	player->dir = ST;
+	player->next = NULL;
 	return (player);
-}
-
-int	ft_swap_tile(char ***m, t_vector old, t_vector nw, t_game *g)
-{
-	int		i;
-
-	i = 0;
-	if (m[0][nw.y][nw.x] == 'C')
-		g->lay->n_collect--;
-	if (m[0][nw.y][nw.x] == 'E')
-	{
-		if (!g->lay->n_collect)
-			g->lay->n_pl--;
-		return (1);
-	}
-	while (g->p[i].pos.x != -1)
-	{
-		if (g->p[i].pos.x == old.x && g->p[i].pos.y == old.y
-			&& ft_strchr("CE0", m[0][nw.y][nw.x]))
-			g->p[i].pos = ft_newvector(nw.x, nw.y);
-		i++;
-	}
-	ft_memset(&m[0][nw.y][nw.x], m[0][old.y][old.x], 1);
-	ft_memset(&m[0][old.y][old.x], '0', 1);
-	ft_redraw(ft_newvector(old.x, old.y), ft_newvector(nw.x, nw.y), g, 0);
-	return (1);
 }
 
 void	ft_redraw(t_vector old, t_vector nw, t_game *g, int hide)
@@ -82,16 +74,16 @@ void	ft_redraw(t_vector old, t_vector nw, t_game *g, int hide)
 	int	size;
 
 	mlx_destroy_image(g->id, g->sprites.pacman);
-	if (g->p[0].dir == N)
+	if (g->pl && g->pl->dir == N)
 		g->sprites.pacman = mlx_xpm_file_to_image(g->id, \
 			"sprites/Pac-Man/pac_semi_up.xpm", &size, &size);
-	if (g->p[0].dir == S)
+	if (g->pl && g->pl->dir == S)
 		g->sprites.pacman = mlx_xpm_file_to_image(g->id, \
 			"sprites/Pac-Man/pac_semi_down.xpm", &size, &size);
-	if (g->p[0].dir == E)
+	if (g->pl && g->pl->dir == E)
 		g->sprites.pacman = mlx_xpm_file_to_image(g->id, \
 			"sprites/Pac-Man/pac_semi_right.xpm", &size, &size);
-	if (g->p[0].dir == W)
+	if (g->pl && g->pl->dir == W)
 		g->sprites.pacman = mlx_xpm_file_to_image(g->id, \
 			"sprites/Pac-Man/pac_semi_left.xpm", &size, &size);
 	mlx_put_image_to_window(g->id, g->w_id, g->sprites.black, \
@@ -101,4 +93,19 @@ void	ft_redraw(t_vector old, t_vector nw, t_game *g, int hide)
 	if (!hide)
 		mlx_put_image_to_window(g->id, g->w_id, g->sprites.pacman, \
 			nw.x * SIZE, nw.y * SIZE + OFFSET);
+}
+
+void	ft_plradd_back(t_player **lst, t_player *newnode)
+{
+	t_player	*start;
+
+	start = *lst;
+	if (*lst)
+	{
+		while (start->next)
+			start = start->next;
+		start->next = newnode;
+	}
+	else
+		*lst = newnode;
 }
