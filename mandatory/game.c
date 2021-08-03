@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:55:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/03 09:28:16 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/03 10:00:28 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	ft_update(t_game *game)
 
 	y = 0;
 	game->n_frames++;
-	if (!(game->n_frames % 8000))
+	if (!(game->n_frames % 3000))
 		move(&game->map, game->p[0].dir, game);
 	if (!game->lay->n_players && !game->lay->n_collect)
 		end_game(game);

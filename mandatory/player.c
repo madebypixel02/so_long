@@ -6,12 +6,13 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 20:35:25 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/02 20:56:09 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/03 10:09:43 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/game.h"
 #include <mlx.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 t_player	*ft_playerlist(char **map, t_game *g)
@@ -129,6 +130,8 @@ void	ft_redraw(t_vector old, t_vector nw, t_game *g, int hide)
 			"sprites/Pac-Man/pac_semi_left.xpm", &size, &size);
 	mlx_put_image_to_window(g->id, g->window_id, g->sprites.black,
 	old.x * SPRITE_SIZE, old.y * SPRITE_SIZE + OFFSET);
+	mlx_put_image_to_window(g->id, g->window_id, g->sprites.black,
+	nw.x * SPRITE_SIZE, nw.y * SPRITE_SIZE + OFFSET);
 	if (!hide)
 		mlx_put_image_to_window(g->id, g->window_id, g->sprites.pacman,
 	nw.x * SPRITE_SIZE, nw.y * SPRITE_SIZE + OFFSET);
