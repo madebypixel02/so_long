@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:55:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/02 21:20:12 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/03 08:26:33 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,12 @@ t_game	ft_newgame(char **map, t_lay *lay)
 	newgame.n_frames = 1;
 	newgame.n_moves = 1;
 	newgame.width = lay->n_col * SPRITE_SIZE;
-	newgame.height = lay->n_row * SPRITE_SIZE;
+	newgame.height = lay->n_row * SPRITE_SIZE + OFFSET;
 	newgame.lay = lay;
 	newgame.map = map;
 	newgame.id = mlx_init();
 	newgame.window_id = mlx_new_window(newgame.id, \
-	lay->n_col * SPRITE_SIZE, lay->n_row * SPRITE_SIZE + OFFSET, "Pac-Man Game");
+	lay->n_col * SPRITE_SIZE, lay->n_row * SPRITE_SIZE + (2 * OFFSET), "Pac-Man Game");
 	newgame.sprites = ft_initsprites(&newgame);
 	newgame.p = ft_playerlist(map, &newgame);
 	newgame.redraw = 1;
@@ -116,8 +116,7 @@ int	ft_update(t_game *game)
 		y++;
 		mlx_string_put(game->id, game->window_id, 10, 15, 0xFDD663, "Score: ");
 		mlx_string_put(game->id, game->window_id, 10, 33, 0x87FFC5, "Moves: ");
-		mlx_put_image_to_window(game->id, game->window_id, game->sprites.logo,
-		game->width - 134, 4);
+		mlx_put_image_to_window(game->id, game->window_id, game->sprites.logo, (game->width - 131) / 2, game->height + 4);
 	}
 	game->redraw = 0;
 	return (0);
