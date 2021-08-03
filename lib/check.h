@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 18:52:18 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/29 23:37:48 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/03 17:51:52 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@
 # include "../libft/lib/libft.h"
 # include "map.h"
 
+/* Basic checks to see if the correct file has been opened */
 char	**check_params(int argc, char **argv, t_lay *lay);
+
+/* Runs all map checker and builds map as a matrix */
 char	**check_map(int fd, t_lay *lay);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 19:36:06 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/03 16:43:41 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/03 17:49:48 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include "../get_next_line/get_next_line.h"
 
+/* Struct to store and handle layout properties */
 typedef struct s_lay
 {
 	int	n_row;
@@ -27,6 +28,7 @@ typedef struct s_lay
 	int	n_collect;
 }				t_lay;
 
+/* Struct to handle all possible layout errors */
 typedef struct s_err
 {
 	int	inv_rowlen;
@@ -38,10 +40,19 @@ typedef struct s_err
 	int	inv_borders;
 }				t_err;
 
+/* Creates new layout with all attributes set to zero */
 t_lay	ft_newlayout(void);
+
+/* Creates new map error struct and sets attributes to zero */
 t_err	ft_newmap_error(void);
+
+/* Checks map error struct to print an error and exit the game */
 int		ft_print_map_error(t_err *map_err, char **map_str);
+
+/* Uses get_next_line to check errors and builds a string of the map */
 void	ft_readlayout(int fd, t_err *map_err, t_lay *lay, char **map_str);
+
+/* Checks a given line to handle errors on it */
 void	ft_checklayout(char *line, t_err *map_err, t_lay *lay, int old_len);
 
 #endif
