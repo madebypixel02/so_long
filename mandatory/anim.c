@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 10:16:09 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/03 14:49:56 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/03 17:19:14 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,11 @@ void	ft_anim_pacdeath(t_game *g)
 		g->pac_dying = 1;
 		while (g->p[i].pos.x != -1)
 		{
-			if (g->p[i].is_main_player)
-			{
-					mlx_put_image_to_window(g->id, g->window_id, g->sprites.black,
-					g->p[i].pos.x * SPRITE_SIZE, g->p[i].pos.y * SPRITE_SIZE + OFFSET);
-					mlx_put_image_to_window(g->id, g->window_id, g->sprites.pac_dying->img_ptr,
-					g->p[i].pos.x * SPRITE_SIZE, g->p[i].pos.y * SPRITE_SIZE + OFFSET);
-			}
+			mlx_put_image_to_window(g->id, g->w_id, g->sprites.black, \
+				g->p[i].pos.x * SIZE, g->p[i].pos.y * SIZE + OFFSET);
+			mlx_put_image_to_window(g->id, g->w_id,
+				g->sprites.pac_dying->img_ptr, g->p[i].pos.x * SIZE, \
+			g->p[i].pos.y * SIZE + OFFSET);
 			i++;
 		}
 		g->sprites.pac_dying = g->sprites.pac_dying->next;
@@ -40,6 +38,7 @@ void	ft_anim_pacdeath(t_game *g)
 t_anim	*ft_newanim(void *img_ptr)
 {
 	t_anim	*anim;
+
 	anim = malloc(sizeof(t_anim));
 	if (!anim)
 		return (NULL);
@@ -61,31 +60,35 @@ t_anim	*ft_load_pacdeath(t_game *g)
 	while (c++ < '8' + 1)
 	{
 		ft_memset(&s[34], c, 1);
-		ft_animadd_back(&pacdeath, ft_newanim(mlx_xpm_file_to_image(g->id, s, &size, &size)));
+		ft_animadd_back(&pacdeath, \
+			ft_newanim(mlx_xpm_file_to_image(g->id, s, &size, &size)));
 	}
 	free(s);
-	ft_animadd_back(&pacdeath, ft_newanim(mlx_xpm_file_to_image(g->id, "sprites/Pac-Man/Dying/pacman_dying10.xpm", &size, &size)));
-	ft_animadd_back(&pacdeath, ft_newanim(mlx_xpm_file_to_image(g->id, "sprites/Pac-Man/Dying/pacman_woosh.xpm", &size, &size)));
+	ft_animadd_back(&pacdeath, ft_newanim(mlx_xpm_file_to_image(g->id, \
+		"sprites/Pac-Man/Dying/pacman_dying10.xpm", &size, &size)));
+	ft_animadd_back(&pacdeath, ft_newanim(mlx_xpm_file_to_image(g->id, \
+		"sprites/Pac-Man/Dying/pacman_woosh.xpm", &size, &size)));
 	return (pacdeath);
 }
 
 void	free_animation(t_game *g)
 {
-	t_anim	*start;
+	t_anim	**start;
 	t_anim	*temp;
 
-	start = g->sprites.pac_dying;
+	start = &g->sprites.pac_dying;
 	temp = NULL;
-	while (start)
+	while (*start)
 	{
-		temp = start;
-		start = start->next;
+		printf("HEY!\n");
+		temp = *start;
+		*start = temp->next;
 		mlx_destroy_image(g->id, temp->img_ptr);
 		free(temp);
 	}
 }
 
-void		ft_animadd_back(t_anim **anim, t_anim  *newnode)
+void	ft_animadd_back(t_anim **anim, t_anim *newnode)
 {
 	t_anim	*start;
 

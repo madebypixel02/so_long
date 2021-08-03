@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 16:48:15 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/03 08:31:15 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/03 16:51:41 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,18 +71,18 @@ void	ft_checklayout(char *line, t_err *map_err, t_lay *lay, int old_len)
 	if (old_len && old_len != (int)ft_strlen(line))
 		map_err->inv_rowlen = 1;
 	if (line && (line[0] != '1' || line[ft_strlen(line) - 2] != '1' || \
-		(!old_len && ft_countchar(line, '1') != (int)ft_strlen(line) - 1)))
+			(!old_len && ft_countchar(line, '1') != (int)ft_strlen(line) - 1)))
 		map_err->inv_borders = 1;
-	lay->n_exits += ft_countchar(line, 'E');
-	lay->n_players += ft_countchar(line, 'P');
-	lay->n_ghosts += ft_countchar(line, 'G');
+	lay->n_exit += ft_countchar(line, 'E');
+	lay->n_pl += ft_countchar(line, 'P');
+	lay->n_gh += ft_countchar(line, 'G');
 	lay->n_collect += ft_countchar(line, 'C');
 	if (!lay->n_col)
 		lay->n_col = ft_strlen(line) - 1;
-	map_err->inv_n_exits = lay->n_exits < 1;
-	map_err->inv_n_players = lay->n_players < 1;
+	map_err->inv_n_exits = lay->n_exit < 1;
+	map_err->inv_n_players = lay->n_pl < 1;
 	map_err->inv_n_collect = lay->n_collect < 1;
-	while (*line)
+	while (line && *line)
 	{
 		if (!ft_strchr("01CEPG\n", *line))
 			map_err->inv_char = 1;

@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 18:45:11 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/31 10:29:20 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/03 16:44:21 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ t_lay	ft_newlayout(void)
 
 	lay.n_row = 0;
 	lay.n_col = 0;
-	lay.n_exits = 0;
-	lay.n_players = 0;
-	lay.n_ghosts = 0;
+	lay.n_exit = 0;
+	lay.n_pl = 0;
+	lay.n_gh = 0;
 	lay.n_collect = 0;
 	return (lay);
 }
@@ -58,7 +58,7 @@ char	**check_map(int fd, t_lay *lay)
 	if (!map)
 	{
 		error_msg_params("Memory allocation error!", NULL);
-		return (0);
+		return (NULL);
 	}
 	return (map);
 }

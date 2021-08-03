@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 19:36:06 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/31 10:26:39 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/03 16:43:41 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ typedef struct s_lay
 {
 	int	n_row;
 	int	n_col;
-	int	n_exits;
-	int	n_players;
-	int	n_ghosts;
+	int	n_exit;
+	int	n_pl;
+	int	n_gh;
 	int	n_collect;
 }				t_lay;
 
