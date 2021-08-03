@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/03 17:44:46 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/03 18:01:00 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,6 @@ typedef struct s_vector
 	int	y;
 }				t_vector;
 
-/* Linked list to handle animations */
-typedef struct s_anim
-{
-	void			*img_ptr;
-	struct s_anim	*next;
-}				t_anim;
-
 /* MLX image pointers */
 typedef struct s_sprite
 {
@@ -57,8 +50,8 @@ typedef struct s_sprite
 	void		*pacfood;
 	void		*portal;
 	void		*black;
-	t_anim		*pac_dying;
-	t_anim		*pac_moving;
+	t_list		*pac_dying;
+	t_list		*pac_moving;
 }				t_sprite;
 
 /* Main Player struct with position and direction (linked list) */
@@ -140,16 +133,10 @@ void		ft_put_map(t_game *g, int x, int y);
 void		ft_anim_pacdeath(t_game *g);
 
 /* Loads necessary sprites (mlx) for pacman's death */
-t_anim		*ft_load_pacdeath(t_game *g);
-
-/* Creates linked list node for animation */
-t_anim		*ft_newanim(void *img_ptr);
+t_list		*ft_load_pacdeath(t_game *g);
 
 /* Draws Score, Moves, and pacman logo */
 void		ft_put_extras(t_game *g);
-
-/* lstadd_back for animations */
-void		ft_animadd_back(t_anim **anim, t_anim *newnode);
 
 /* Frees all nodes in animation list */
 void		free_animation(t_game *g);
