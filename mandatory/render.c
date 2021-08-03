@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 17:09:20 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/03 21:06:23 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/03 23:53:47 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_put_extras(t_game *g)
 void	ft_check_game(t_game *g)
 {
 	if (!(g->n_frames % g->g_rate) && !g->pac_dying)
-		move(g->pl[0].dir, g, g->pl);
+		move(g->pl[0].dir, g, &g->pl);
 	if (!g->lay->n_pl && !g->lay->n_collect)
 	{
 		g->pac_dying = 1;

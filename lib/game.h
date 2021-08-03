@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/03 21:04:07 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/04 00:31:47 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,11 +123,23 @@ void		ft_playerlist(char **map, t_game *g);
 /* Frees linked lists for players and ghosts */
 void		ft_free_playerlist(t_game *g);
 
+/*  */
+void		ft_deletefirst_plr(t_player **pl);
+
+/*  */
+void		ft_deletelast_plr(t_player **pl);
+
+/*  */
+void		ft_delete_player(t_game *g, t_vector old, t_player **pl);
+
+/*  */
+void		ft_print_plrs(t_game *g);
+
 /* Checks 2D map and updates player's position if possible */
-void		move(int d, t_game *g, t_player *pl);
+void		move(int d, t_game *g, t_player **pl);
 
 /* Helper tool for move function */
-int			ft_swap_tile(t_vector old, t_vector nw, t_game *g);
+int			ft_swap_tile(t_vector old, t_vector nw, t_game *g, t_player **pl);
 
 /* Creates new vector with given x and y */
 t_vector	ft_newvector(int x, int y);
