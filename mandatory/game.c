@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:55:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/03 10:10:52 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/03 14:59:21 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	end_game(t_game *game)
 	free_sprites(game, 0);
 	mlx_clear_window(game->id, game->window_id);
 	mlx_destroy_window(game->id, game->window_id);
-	//mlx_destroy_display(game->id);
+	mlx_destroy_display(game->id);
 	free(game->id);
 	exit(0);
 	return (0);
@@ -86,11 +86,14 @@ t_game	ft_newgame(char **map, t_lay *lay)
 	newgame.lay = lay;
 	newgame.map = map;
 	newgame.id = mlx_init();
+	newgame.g_rate = 3000;
+	newgame.anim_rate = newgame.g_rate / 2;
 	newgame.window_id = mlx_new_window(newgame.id, \
 	lay->n_col * SPRITE_SIZE, lay->n_row * SPRITE_SIZE + 100, "Pac-Man Game");
 	newgame.sprites = ft_initsprites(&newgame);
 	newgame.p = ft_playerlist(map, &newgame);
 	newgame.redraw = 1;
+	newgame.pac_dying = 0;
 	return (newgame);
 }
 
@@ -101,10 +104,15 @@ int	ft_update(t_game *game)
 
 	y = 0;
 	game->n_frames++;
-	if (!(game->n_frames % 1000))
+	if (!(game->n_frames % game->g_rate) && !game->pac_dying)
 		move(&game->map, game->p[0].dir, game);
 	if (!game->lay->n_players && !game->lay->n_collect)
-		end_game(game);
+	{
+		if (!(game->n_frames % game->anim_rate)) 
+			ft_anim_pacdeath(game);
+		if (!game->pac_dying)
+			end_game(game);
+	}
 	while (game->map[y] && game->redraw)
 	{
 		x = 0;
@@ -114,10 +122,10 @@ int	ft_update(t_game *game)
 			x++;
 		}
 		y++;
-		mlx_string_put(game->id, game->window_id, 10, 15, 0xFDD663, "Score: ");
-		mlx_string_put(game->id, game->window_id, 10, 33, 0x87FFC5, "Moves: ");
-		mlx_put_image_to_window(game->id, game->window_id, game->sprites.logo, (game->width - 131) / 2, game->height + 4);
 	}
+	mlx_string_put(game->id, game->window_id, 10, 15, 0xFDD663, "Score: ");
+	mlx_string_put(game->id, game->window_id, 10, 33, 0x87FFC5, "Moves: ");
+	mlx_put_image_to_window(game->id, game->window_id, game->sprites.logo, (game->width - 131) / 2, game->height + 4);
 	game->redraw = 0;
 	return (0);
 }

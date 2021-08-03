@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/03 11:39:13 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/03 14:57:30 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 
 # define SPRITE_SIZE 32
 # define OFFSET 60
-# define GAMERATE 10000
 
 enum e_direction
 {
@@ -70,6 +69,10 @@ typedef struct s_game
 	t_lay		*lay;
 	char		**map;
 	t_sprite	sprites;
+	int			pac_dying;
+	int			pac_moving;
+	int			g_rate;
+	int			anim_rate;
 	void		*id;
 	void		*window_id;
 	int			n_frames;
@@ -96,6 +99,7 @@ void		ft_print_static(t_game *g, int x, int y);
 void		ft_anim_pacdeath(t_game *g);
 t_anim		*ft_load_pacdeath(t_game *g);
 t_anim		*ft_newanim(void *img_ptr);
+void		ft_animadd_back(t_anim **anim, t_anim *newnode);
 void		free_animation(t_game *g);
 
 #endif
