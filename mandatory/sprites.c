@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 23:02:26 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/02 21:10:43 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/03 08:33:22 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	free_sprites(t_game *game, int only_pac)
 	mlx_destroy_image(game->id, game->sprites.pacfood);
 	mlx_destroy_image(game->id, game->sprites.portal);
 	mlx_destroy_image(game->id, game->sprites.pacman);
+	mlx_destroy_image(game->id, game->sprites.logo);
 	return (0);
 }
 
