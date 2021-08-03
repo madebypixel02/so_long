@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:55:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/03 20:52:11 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/03 21:06:03 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,22 @@ int	key_hook(int key, t_game *g)
 	if ((key == KEY_UP || key == KEY_W) && g->pl->dir != N)
 	{
 		ft_newdirection(g, N);
-		move(&g->map, N, g);
+		move(N, g, g->pl);
 	}
 	if ((key == KEY_DOWN || key == KEY_S) && g->pl->dir != S)
 	{
 		ft_newdirection(g, S);
-		move(&g->map, S, g);
+		move(S, g, g->pl);
 	}
 	if ((key == KEY_RIGHT || key == KEY_D) && g->pl->dir != E)
 	{
 		ft_newdirection(g, E);
-		move(&g->map, E, g);
+		move(E, g, g->pl);
 	}
 	if ((key == KEY_LEFT || key == KEY_A) && g->pl->dir != W)
 	{
 		ft_newdirection(g, W);
-		move(&g->map, W, g);
+		move(W, g, g->pl);
 	}
 	return (0);
 }
@@ -96,6 +96,6 @@ t_game	ft_newgame(char **map, t_lay *lay)
 	g.pac_dying = 0;
 	g.pac_moving = 0;
 	g.g_rate = 4000;
-	g.anim_rate = 1200;
+	g.anim_rate = 1500;
 	return (g);
 }

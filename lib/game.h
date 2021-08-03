@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/03 20:03:24 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/03 21:04:07 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,10 +124,10 @@ void		ft_playerlist(char **map, t_game *g);
 void		ft_free_playerlist(t_game *g);
 
 /* Checks 2D map and updates player's position if possible */
-void		move(char ***m, int d, t_game *g);
+void		move(int d, t_game *g, t_player *pl);
 
 /* Helper tool for move function */
-int			ft_swap_tile(char ***m, t_vector old, t_vector nw, t_game *g);
+int			ft_swap_tile(t_vector old, t_vector nw, t_game *g);
 
 /* Creates new vector with given x and y */
 t_vector	ft_newvector(int x, int y);

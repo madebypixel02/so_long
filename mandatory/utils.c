@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 17:13:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/03 20:04:23 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/03 21:04:59 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,33 +34,37 @@ t_vector	ft_newvector(int x, int y)
 	return (position);
 }
 
-void	move(char ***m, int d, t_game *g)
+void	move(int d, t_game *g, t_player *pl)
 {
 	t_player	*temp;
+	char		***m;
 
-	temp = g->pl;
+	m = &g->map;
+	temp = pl;
 	while (temp)
 	{
 		if (d == N && ft_strchr("0CE", m[0][temp->pos.y - 1][temp->pos.x]))
-			ft_swap_tile(m, ft_newvector(temp->pos.x, temp->pos.y), \
+			ft_swap_tile(ft_newvector(temp->pos.x, temp->pos.y), \
 				ft_newvector(temp->pos.x, temp->pos.y - 1), g);
 		if (d == S && ft_strchr("0CE", m[0][temp->pos.y + 1][temp->pos.x]))
-			ft_swap_tile(m, ft_newvector(temp->pos.x, temp->pos.y), \
+			ft_swap_tile(ft_newvector(temp->pos.x, temp->pos.y), \
 				ft_newvector(temp->pos.x, temp->pos.y + 1), g);
 		if (d == E && ft_strchr("0CE", m[0][temp->pos.y][temp->pos.x + 1]))
-			ft_swap_tile(m, ft_newvector(temp->pos.x, temp->pos.y), \
+			ft_swap_tile(ft_newvector(temp->pos.x, temp->pos.y), \
 				ft_newvector(temp->pos.x + 1, temp->pos.y), g);
 		if (d == W && ft_strchr("0CE", m[0][temp->pos.y][temp->pos.x - 1]))
-			ft_swap_tile(m, ft_newvector(temp->pos.x, temp->pos.y), \
+			ft_swap_tile(ft_newvector(temp->pos.x, temp->pos.y), \
 				ft_newvector(temp->pos.x - 1, temp->pos.y), g);
 		temp = temp->next;
 	}
 }
 
-int	ft_swap_tile(char ***m, t_vector old, t_vector nw, t_game *g)
+int	ft_swap_tile(t_vector old, t_vector nw, t_game *g)
 {
 	t_player	*temp;
+	char		***m;
 
+	m = &g->map;
 	temp = g->pl;
 	if (m[0][nw.y][nw.x] == 'C')
 		g->lay->n_collect--;
