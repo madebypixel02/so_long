@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/03 09:47:52 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/03 11:39:13 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ typedef struct s_vector
 	int	y;
 }				t_vector;
 
+typedef struct s_anim
+{
+	void			*img_ptr;
+	struct s_anim	*next;
+}				t_anim;
+
 typedef struct s_sprite
 {
 	void		*pacman;
@@ -47,6 +53,7 @@ typedef struct s_sprite
 	void		*pacfood;
 	void		*portal;
 	void		*black;
+	t_anim		*pac_dying;
 }				t_sprite;
 
 typedef struct s_player
@@ -76,7 +83,7 @@ t_game		ft_newgame(char **map, t_lay *lay);
 int			end_game(t_game *game);
 int			ft_update(t_game *game);
 int			key_hook(int keycode, t_game *game);
-t_sprite	ft_initsprites(t_game *game);
+t_sprite	ft_initsprites(t_game *g);
 int			free_sprites(t_game *game, int only_pac);
 void		ft_newdirection(t_game *game, int direction);
 t_player	ft_newplayer(int is_main_player, int x, int y);
@@ -86,5 +93,9 @@ int			ft_swap_tile(char ***m, t_vector old, t_vector nw, t_game *g);
 t_vector	ft_newvector(int x, int y);
 void		ft_redraw(t_vector old, t_vector nw, t_game *g, int hide);
 void		ft_print_static(t_game *g, int x, int y);
+void		ft_anim_pacdeath(t_game *g);
+t_anim		*ft_load_pacdeath(t_game *g);
+t_anim		*ft_newanim(void *img_ptr);
+void		free_animation(t_game *g);
 
 #endif
