@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:55:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/03 08:26:33 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/03 09:04:00 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	end_game(t_game *game)
 	free_sprites(game, 0);
 	mlx_clear_window(game->id, game->window_id);
 	mlx_destroy_window(game->id, game->window_id);
-	mlx_destroy_display(game->id);
+	//mlx_destroy_display(game->id);
 	free(game->id);
 	exit(0);
 	return (0);

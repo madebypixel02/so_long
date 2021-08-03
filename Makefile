@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/08/03 08:30:37 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/08/03 08:34:54 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ LMLX_PATH=/usr/lib
 IMLX_PATH=/usr/include
 ifeq ($(UNAME), Linux)
 	ECHO = echo -e
-	LEAKS = valgrind --leak-check=full --show-leak-kinds=all -s -q 
+	LEAKS = #valgrind --leak-check=full --show-leak-kinds=all -s -q 
 	LMLX = -L$(LMLX_PATH) -lmlx -lXext -lX11
 	IMLX = -I$(IMLX_PATH)
 	# Key Codes for Linux
