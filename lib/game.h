@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/04 10:37:08 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/04 10:51:05 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "map.h"
 # include "colors.h"
 # include "../libft/lib/libft.h"
-# include "../mlx.h"
+# include <mlx.h>
 # include <stdio.h>
 
 # define SIZE 32
