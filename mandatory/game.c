@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:55:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/04 13:05:34 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/04 18:32:24 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ int	end_game(t_game *g)
 	}
 	free_sprites(g);
 	ft_free_playerlist(g);
-	printf("%sGame Finished!%s\n", GREEN, DEFAULT);
+	printf("%sGame Finished!\n%sTotal Moves: %d\n\n%s", GREEN, \
+					BLUE, g->n_moves, DEFAULT);
 	mlx_clear_window(g->id, g->w_id);
 	mlx_destroy_window(g->id, g->w_id);
 	mlx_destroy_display(g->id);
@@ -81,20 +82,28 @@ t_game	ft_newgame(char **map, t_lay *lay)
 	t_game	g;
 
 	g.n_frames = 1;
-	g.n_moves = 1;
+	g.n_moves = 0;
 	g.width = lay->n_col * SIZE;
-	g.height = lay->n_row * SIZE + OFFSET;
+	g.height = lay->n_row * SIZE;
 	g.lay = lay;
 	g.map = map;
 	g.id = mlx_init();
 	g.w_id = mlx_new_window(g.id, lay->n_col * SIZE, \
-			lay->n_row * SIZE + 100, "Pac-Man");
+			lay->n_row * SIZE + 60, "Pac-Man");
 	g.sprites = ft_initsprites(&g);
 	g.pl = NULL;
 	g.gh = NULL;
 	ft_playerlist(map, &g);
 	g.redraw = 1;
-	g.g_rate = 3000;
-	g.anim_rate = 1200;
+	g.g_rate = 2000;
+	g.anim_rate = 1000;
 	return (g);
+}
+
+void	ft_check_game(t_game *g)
+{
+	if (!(g->n_frames % g->g_rate))
+		move(g->pl->dir, g, &g->pl);
+	if (!g->lay->n_collect && !g->lay->n_pl)
+		end_game(g);
 }

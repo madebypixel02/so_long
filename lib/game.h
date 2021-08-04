@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/04 11:21:44 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/04 18:02:04 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <stdio.h>
 
 # define SIZE 32
-# define OFFSET 60
 
 /* Enum for North, South, East, West as ints */
 enum e_direction
@@ -50,6 +49,7 @@ typedef struct s_sprite
 	void		*pacfood;
 	void		*portal;
 	void		*black;
+	void		*black_font;
 	t_list		*pac_dying_bak;
 	t_list		*pac_dying;
 	t_list		*pac_moving;
@@ -161,5 +161,8 @@ void		ft_put_extras(t_game *g);
 
 /* Frees all nodes in animation list */
 void		free_animation(t_game *g);
+
+/*  */
+void		ft_update_score(t_game *g);
 
 #endif

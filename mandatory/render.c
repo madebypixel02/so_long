@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 17:09:20 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/04 12:04:31 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/04 18:34:49 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	ft_update(t_game *g)
 	y = 0;
 	g->n_frames++;
 	ft_check_game(g);
+	ft_update_score(g);
 	if (g->redraw)
 		ft_put_extras(g);
 	while (g->map[y] && g->redraw)
@@ -37,12 +38,26 @@ int	ft_update(t_game *g)
 	return (0);
 }
 
+void	ft_update_score(t_game *g)
+{
+	char	*moves;
+
+	moves = ft_itoa(g->n_moves);
+	mlx_put_image_to_window(g->id, g->w_id, g->sprites.black_font, \
+					g->width / 2 + 10, g->height + 7);
+	mlx_put_image_to_window(g->id, g->w_id, g->sprites.black_font, \
+					g->width / 2 + 42, g->height + 7);
+	mlx_string_put(g->id, g->w_id, g->width / 2 + 14, g->height + 16, \
+					0xFDD663, moves);
+	free(moves);
+}
+
 void	ft_put_extras(t_game *g)
 {
-	mlx_string_put(g->id, g->w_id, 10, 15, 0xFDD663, "Score: ");
-	mlx_string_put(g->id, g->w_id, 10, 33, 0x87FFC5, "Moves: ");
+	mlx_string_put(g->id, g->w_id, g->width / 2 - 25, g->height + 15, \
+					0xFDD663, "Moves: ");
 	mlx_put_image_to_window(g->id, g->w_id, g->sprites.logo, \
-		(g->width - 131) / 2, g->height + 4);
+		(g->width - 131) / 2, g->height + 20);
 }
 
 void	ft_redraw(t_vector old, t_vector nw, t_game *g, int hide)
@@ -65,18 +80,10 @@ void	ft_redraw(t_vector old, t_vector nw, t_game *g, int hide)
 			g->sprites.pacman = mlx_xpm_file_to_image(g->id, \
 				"sprites/Pac-Man/pac_semi_left.xpm", &size, &size);
 		mlx_put_image_to_window(g->id, g->w_id, g->sprites.black, \
-		nw.x * SIZE, nw.y * SIZE + OFFSET);
+		nw.x * SIZE, nw.y * SIZE);
 		mlx_put_image_to_window(g->id, g->w_id, g->sprites.pacman, \
-			nw.x * SIZE, nw.y * SIZE + OFFSET);
+			nw.x * SIZE, nw.y * SIZE);
 	}
 	mlx_put_image_to_window(g->id, g->w_id, g->sprites.black, \
-		old.x * SIZE, old.y * SIZE + OFFSET);
-}
-
-void	ft_check_game(t_game *g)
-{
-	if (!(g->n_frames % g->g_rate))
-		move(g->pl->dir, g, &g->pl);
-	if (!g->lay->n_collect && !g->lay->n_pl)
-		end_game(g);
+		old.x * SIZE, old.y * SIZE);
 }
