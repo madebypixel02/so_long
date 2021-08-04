@@ -6,11 +6,12 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:55:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/04 12:04:47 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/04 13:05:34 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/game.h"
+#include <mlx.h>
 
 int	key_hook(int key, t_game *g)
 {
@@ -58,6 +59,7 @@ int	end_game(t_game *g)
 	printf("%sGame Finished!%s\n", GREEN, DEFAULT);
 	mlx_clear_window(g->id, g->w_id);
 	mlx_destroy_window(g->id, g->w_id);
+	mlx_destroy_display(g->id);
 	free(g->id);
 	exit(0);
 	return (0);
