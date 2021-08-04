@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/08/03 17:12:16 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/08/04 10:35:16 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,7 +73,7 @@ NAME = so_long
 KEYCODES =  -D $(ESC) -D $(Q) -D $(R) -D $(W) -D $(A) -D $(S) -D $(D) -D $(UP) -D $(DOWN) -D $(LEFT) -D $(RIGHT)
 
 SOURCE_M = map.c player.c check.c game.c sprites.c	\
-		   utils.c anim.c render.c
+		   utils.c anim.c render.c playerlist.c
 
 SOURCE_GNL = get_next_line.c get_next_line_utils.c
 

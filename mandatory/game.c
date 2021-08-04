@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:55:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/03 23:53:31 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/04 10:17:44 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,22 @@ int	key_hook(int key, t_game *g)
 {
 	if (key == KEY_Q || key == KEY_ESC)
 		end_game(g);
-	if ((key == KEY_UP || key == KEY_W) && g->pl->dir != N)
+	if ((key == KEY_UP || key == KEY_W) && g->pl && g->pl->dir != N)
 	{
 		ft_newdirection(g, N);
 		move(N, g, &g->pl);
 	}
-	if ((key == KEY_DOWN || key == KEY_S) && g->pl->dir != S)
+	if ((key == KEY_DOWN || key == KEY_S) && g->pl && g->pl->dir != S)
 	{
 		ft_newdirection(g, S);
 		move(S, g, &g->pl);
 	}
-	if ((key == KEY_RIGHT || key == KEY_D) && g->pl->dir != E)
+	if ((key == KEY_RIGHT || key == KEY_D) && g->pl && g->pl->dir != E)
 	{
 		ft_newdirection(g, E);
 		move(E, g, &g->pl);
 	}
-	if ((key == KEY_LEFT || key == KEY_A) && g->pl->dir != W)
+	if ((key == KEY_LEFT || key == KEY_A) && g->pl && g->pl->dir != W)
 	{
 		ft_newdirection(g, W);
 		move(W, g, &g->pl);
