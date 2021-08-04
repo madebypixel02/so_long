@@ -6,39 +6,30 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 10:33:55 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/04 10:34:39 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/04 11:05:13 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/game.h"
 
-int	ft_delete_player(t_vector old, t_player **pl)
+void	ft_free_playerlist(t_game *g)
 {
 	t_player	*temp;
-	t_player	*prev;
 
-	temp = *pl;
-	prev = NULL;
-	while (temp)
+	while (g->pl)
 	{
-		if (temp->pos.x == old.x && temp->pos.y == old.y)
-		{
-			if (!prev)
-				return (ft_deletefirst_plr(pl));
-			if (prev && !temp->next)
-				return (ft_deletelast_plr(pl));
-			prev->next = temp->next;
-			free(temp);
-			temp = NULL;
-			return (1);
-		}
-		else
-		{
-			prev = temp;
-			temp = temp->next;
-		}
+		temp = g->pl;
+		g->pl = g->pl->next;
+		free(temp);
+		temp = NULL;
 	}
-	return (1);
+	while (g->gh)
+	{
+		temp = g->gh;
+		g->gh = g->gh->next;
+		free(temp);
+		temp = NULL;
+	}
 }
 
 int	ft_deletefirst_plr(t_player **pl)
@@ -65,4 +56,25 @@ int	ft_deletelast_plr(t_player **pl)
 	free(head->next);
 	head->next = NULL;
 	return (1);
+}
+
+void	ft_playerlist(char **map, t_game *g)
+{
+	int			x;
+	int			y;
+
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] == 'P')
+				ft_plradd_back(&g->pl, ft_plrnew(x, y));
+			if (map[y][x] == 'G')
+				ft_plradd_back(&g->gh, ft_plrnew(x, y));
+			x++;
+		}
+		y++;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 10:16:09 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/03 20:51:05 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/04 11:19:55 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	ft_anim_pacdeath(t_game *g)
 	t_player	*temp_pl;
 
 	temp_pl = g->pl;
-	if (g->sprites.pac_dying)
+	while (temp_pl)
 	{
-		while (temp_pl)
+		if (g->pl->dying)
 		{
 			mlx_put_image_to_window(g->id, g->w_id, g->sprites.black, \
 				temp_pl->pos.x * SIZE, temp_pl->pos.y * SIZE + OFFSET);
@@ -28,12 +28,10 @@ void	ft_anim_pacdeath(t_game *g)
 			mlx_put_image_to_window(g->id, g->w_id,
 				g->sprites.pac_dying->content, temp_pl->pos.x * SIZE, \
 			temp_pl->pos.y * SIZE + OFFSET);
-			temp_pl = temp_pl->next;
+			g->sprites.pac_dying = g->sprites.pac_dying->next;
 		}
-		g->sprites.pac_dying = g->sprites.pac_dying->next;
+		temp_pl = temp_pl->next;
 	}
-	else
-		g->pac_dying = 0;
 }
 
 t_list	*ft_load_pacdeath(t_game *g)

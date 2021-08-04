@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 17:09:20 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/03 23:53:47 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/04 11:06:11 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,36 @@ void	ft_put_extras(t_game *g)
 		(g->width - 131) / 2, g->height + 4);
 }
 
+void	ft_redraw(t_vector old, t_vector nw, t_game *g, int hide)
+{
+	int	size;
+
+	mlx_destroy_image(g->id, g->sprites.pacman);
+	if (g->pl && g->pl->dir == N)
+		g->sprites.pacman = mlx_xpm_file_to_image(g->id, \
+			"sprites/Pac-Man/pac_semi_up.xpm", &size, &size);
+	if (g->pl && g->pl->dir == S)
+		g->sprites.pacman = mlx_xpm_file_to_image(g->id, \
+			"sprites/Pac-Man/pac_semi_down.xpm", &size, &size);
+	if (g->pl && g->pl->dir == E)
+		g->sprites.pacman = mlx_xpm_file_to_image(g->id, \
+			"sprites/Pac-Man/pac_semi_right.xpm", &size, &size);
+	if (g->pl && g->pl->dir == W)
+		g->sprites.pacman = mlx_xpm_file_to_image(g->id, \
+			"sprites/Pac-Man/pac_semi_left.xpm", &size, &size);
+	mlx_put_image_to_window(g->id, g->w_id, g->sprites.black, \
+		old.x * SIZE, old.y * SIZE + OFFSET);
+	mlx_put_image_to_window(g->id, g->w_id, g->sprites.black, \
+		nw.x * SIZE, nw.y * SIZE + OFFSET);
+	if (!hide)
+		mlx_put_image_to_window(g->id, g->w_id, g->sprites.pacman, \
+			nw.x * SIZE, nw.y * SIZE + OFFSET);
+}
+
 void	ft_check_game(t_game *g)
 {
-	if (!(g->n_frames % g->g_rate) && !g->pac_dying)
-		move(g->pl[0].dir, g, &g->pl);
-	if (!g->lay->n_pl && !g->lay->n_collect)
-	{
-		g->pac_dying = 1;
-		if (!(g->n_frames % g->anim_rate))
-			ft_anim_pacdeath(g);
-		if (!g->pac_dying)
+	if (!(g->n_frames % g->g_rate))
+		move(g->pl->dir, g, &g->pl);
+	if (!g->lay->n_collect && !g->lay->n_pl)
 			end_game(g);
-	}
 }

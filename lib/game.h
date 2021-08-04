@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/04 10:51:05 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/04 11:21:44 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,6 @@ typedef struct s_game
 	t_lay		*lay;
 	char		**map;
 	t_sprite	sprites;
-	int			pac_dying;
-	int			pac_moving;
 	int			g_rate;
 	int			anim_rate;
 	void		*id;
