@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:55:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/04 18:32:24 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/04 19:12:55 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	end_game(t_game *g)
 	free_sprites(g);
 	ft_free_playerlist(g);
 	printf("%sGame Finished!\n%sTotal Moves: %d\n\n%s", GREEN, \
-					BLUE, g->n_moves, DEFAULT);
+		BLUE, g->n_moves, DEFAULT);
 	mlx_clear_window(g->id, g->w_id);
 	mlx_destroy_window(g->id, g->w_id);
 	mlx_destroy_display(g->id);

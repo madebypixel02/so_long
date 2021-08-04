@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 23:02:26 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/04 18:02:56 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/04 19:23:19 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ t_sprite	ft_initsprites(t_game *g)
 		"sprites/Pac-Man/pac_closed.xpm", &size, &size);
 	g->sprites.logo = mlx_xpm_file_to_image(g->id, \
 		"sprites/Other/Logo/logo.xpm", &size, &size);
+	g->sprites.ghost = mlx_xpm_file_to_image(g->id, \
+		"sprites/Ghosts/R/ghost_right.xpm", &size, &size);
 	g->sprites.pac_dying = ft_load_pacdeath(g);
 	g->sprites.pac_dying_bak = g->sprites.pac_dying;
 	return (g->sprites);
@@ -44,6 +46,7 @@ int	free_sprites(t_game *g)
 	mlx_destroy_image(g->id, g->sprites.pacfood);
 	mlx_destroy_image(g->id, g->sprites.portal);
 	mlx_destroy_image(g->id, g->sprites.pacman);
+	mlx_destroy_image(g->id, g->sprites.ghost);
 	mlx_destroy_image(g->id, g->sprites.logo);
 	free_animation(g);
 	return (0);
