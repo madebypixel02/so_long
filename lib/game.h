@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/04 19:09:58 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/04 19:52:58 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_game
 	t_sprite	sprites;
 	int			g_rate;
 	int			anim_rate;
+	int			pac_dying;
 	void		*id;
 	void		*w_id;
 	int			n_frames;
@@ -162,7 +163,10 @@ void		ft_put_extras(t_game *g);
 /* Frees all nodes in animation list */
 void		free_animation(t_game *g);
 
-/*  */
+/* Updates the score that appears on screen */
 void		ft_update_score(t_game *g);
+
+/* Checks if Pacman is about to move to a ghost, initiates dath sequence */
+void		ft_checkmvtogh(t_game *g, int d, t_player *pl);
 
 #endif

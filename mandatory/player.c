@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 20:35:25 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/04 12:04:12 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/04 20:05:01 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,16 @@ int	ft_delete_player(t_vector old, t_player **pl)
 		temp = temp->next;
 	}
 	return (1);
+}
+
+void	ft_checkmvtogh(t_game *g, int d, t_player *pl)
+{
+	if (d == N && g->map[pl->pos.y - 1][pl->pos.x] == 'G')
+		g->pac_dying = 1;
+	else if (d == S && g->map[pl->pos.y + 1][pl->pos.x] == 'G')
+		g->pac_dying = 1;
+	else if (d == E && g->map[pl->pos.y][pl->pos.x + 1] == 'G')
+		g->pac_dying = 1;
+	else if (d == W && g->map[pl->pos.y][pl->pos.x - 1] == 'G')
+		g->pac_dying = 1;
 }

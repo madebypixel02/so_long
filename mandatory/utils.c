@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 17:13:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/04 17:23:54 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/04 20:20:36 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ void	move(int d, t_game *g, t_player **pl)
 
 	temp = *pl;
 	old_n_pl = g->lay->n_pl;
-	while (temp)
+	while (temp && !g->pac_dying)
 	{
+		ft_checkmvtogh(g, d, temp);
 		if (d == N && ft_strchr("0CE", g->map[temp->pos.y - 1][temp->pos.x]))
 			ft_swap_tile(ft_newvector(temp->pos.x, temp->pos.y), \
 				ft_newvector(temp->pos.x, temp->pos.y - 1), g, pl);
