@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 17:13:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/04 00:38:17 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/04 09:48:06 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,15 @@ t_vector	ft_newvector(int x, int y)
 	return (position);
 }
 
-void	move(int d, t_game *g, t_player **pl)
+int	move(int d, t_game *g, t_player **pl)
 {
 	t_player	*temp;
 	char		***m;
+	int			old_n_pl;
 
 	m = &g->map;
 	temp = *pl;
+	old_n_pl = g->lay->n_pl;
 	while (temp)
 	{
 
@@ -56,8 +58,11 @@ void	move(int d, t_game *g, t_player **pl)
 		if (d == W && ft_strchr("0CE", m[0][temp->pos.y][temp->pos.x - 1]))
 			ft_swap_tile(ft_newvector(temp->pos.x, temp->pos.y), \
 				ft_newvector(temp->pos.x - 1, temp->pos.y), g, pl);
+		if (old_n_pl != g->lay->n_pl)
+			return (1);
 		temp = temp->next;
 	}
+	return (1);
 }
 
 int	ft_swap_tile(t_vector old, t_vector nw, t_game *g, t_player **pl)
@@ -70,7 +75,10 @@ int	ft_swap_tile(t_vector old, t_vector nw, t_game *g, t_player **pl)
 	if (m[0][nw.y][nw.x] == 'C')
 		g->lay->n_collect--;
 	if (m[0][nw.y][nw.x] == 'E' && !g->lay->n_collect)
-		ft_delete_player(g, old, pl);
+	{
+		ft_delete_player(old, pl);
+		g->lay->n_pl--;
+	}
 	else if (m[0][nw.y][nw.x] == 'E')
 		return (1);
 	else
@@ -89,31 +97,25 @@ int	ft_swap_tile(t_vector old, t_vector nw, t_game *g, t_player **pl)
 	return (1);
 }
 
-void	ft_delete_player(t_game *g, t_vector old, t_player **pl)
+int	ft_delete_player(t_vector old, t_player **pl)
 {
 	t_player	*temp;
 	t_player	*prev;
-	int			deleted;
 
 	temp = *pl;
-	deleted = 0;
 	prev = NULL;
-	while (temp && !deleted)
+	while (temp)
 	{
 		if (temp->pos.x == old.x && temp->pos.y == old.y)
 		{
-			ft_print_plrs(g);
 			if (!prev)
-				ft_deletefirst_plr(pl);
+				return (ft_deletefirst_plr(pl));
 			if (prev && !temp->next)
-				ft_deletelast_plr(pl);
-			else if (prev)
-			{
-				prev->next = temp->next;
-				free(temp);
-			}
-			deleted = 1;
-			ft_print_plrs(g);
+				return (ft_deletelast_plr(pl));
+			prev->next = temp->next;
+			free(temp);
+			temp = NULL;
+			return (1);
 		}
 		else
 		{
@@ -121,10 +123,10 @@ void	ft_delete_player(t_game *g, t_vector old, t_player **pl)
 			temp = temp->next;
 		}
 	}
-	g->lay->n_pl--;
+	return (1);
 }
 
-void	ft_deletefirst_plr(t_player **pl)
+int	ft_deletefirst_plr(t_player **pl)
 {
 	t_player	*head;
 
@@ -134,9 +136,11 @@ void	ft_deletefirst_plr(t_player **pl)
 	else
 		*pl = NULL;
 	free(head);
+	head = NULL;
+	return (1);
 }
 
-void	ft_deletelast_plr(t_player **pl)
+int	ft_deletelast_plr(t_player **pl)
 {
 	t_player	*head;
 
@@ -145,6 +149,7 @@ void	ft_deletelast_plr(t_player **pl)
 		head = head->next;
 	free(head->next);
 	head->next = NULL;
+	return (1);
 }
 
 void	ft_print_plrs(t_game *g)
