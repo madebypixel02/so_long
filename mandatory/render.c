@@ -6,11 +6,12 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 17:09:20 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/04 11:29:24 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/04 11:52:24 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/game.h"
+#include <mlx.h>
 
 int	ft_update(t_game *g)
 {
@@ -48,28 +49,28 @@ void	ft_redraw(t_vector old, t_vector nw, t_game *g, int hide)
 {
 	int	size;
 
-	mlx_destroy_image(g->id, g->sprites.pacman);
-	if (g->pl && g->pl->dir == N)
-		g->sprites.pacman = mlx_xpm_file_to_image(g->id, \
-			"sprites/Pac-Man/pac_semi_up.xpm", &size, &size);
-	if (g->pl && g->pl->dir == S)
-		g->sprites.pacman = mlx_xpm_file_to_image(g->id, \
-			"sprites/Pac-Man/pac_semi_down.xpm", &size, &size);
-	if (g->pl && g->pl->dir == E)
-		g->sprites.pacman = mlx_xpm_file_to_image(g->id, \
-			"sprites/Pac-Man/pac_semi_right.xpm", &size, &size);
-	if (g->pl && g->pl->dir == W)
-		g->sprites.pacman = mlx_xpm_file_to_image(g->id, \
-			"sprites/Pac-Man/pac_semi_left.xpm", &size, &size);
-	mlx_put_image_to_window(g->id, g->w_id, g->sprites.black, \
-		old.x * SIZE, old.y * SIZE + OFFSET);
 	if (!hide)
 	{
+		mlx_destroy_image(g->id, g->sprites.pacman);
+		if (g->pl && g->pl->dir == N)
+			g->sprites.pacman = mlx_xpm_file_to_image(g->id, \
+				"sprites/Pac-Man/pac_semi_up.xpm", &size, &size);
+		if (g->pl && g->pl->dir == S)
+			g->sprites.pacman = mlx_xpm_file_to_image(g->id, \
+				"sprites/Pac-Man/pac_semi_down.xpm", &size, &size);
+		if (g->pl && g->pl->dir == E)
+			g->sprites.pacman = mlx_xpm_file_to_image(g->id, \
+				"sprites/Pac-Man/pac_semi_right.xpm", &size, &size);
+		if (g->pl && g->pl->dir == W)
+			g->sprites.pacman = mlx_xpm_file_to_image(g->id, \
+				"sprites/Pac-Man/pac_semi_left.xpm", &size, &size);
 		mlx_put_image_to_window(g->id, g->w_id, g->sprites.black, \
 		nw.x * SIZE, nw.y * SIZE + OFFSET);
 		mlx_put_image_to_window(g->id, g->w_id, g->sprites.pacman, \
 			nw.x * SIZE, nw.y * SIZE + OFFSET);
 	}
+	mlx_put_image_to_window(g->id, g->w_id, g->sprites.black, \
+		old.x * SIZE, old.y * SIZE + OFFSET);
 }
 
 void	ft_check_game(t_game *g)

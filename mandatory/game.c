@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:55:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/04 11:00:44 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/04 11:55:25 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ t_game	ft_newgame(char **map, t_lay *lay)
 	g.gh = NULL;
 	ft_playerlist(map, &g);
 	g.redraw = 1;
-	g.g_rate = 4000;
-	g.anim_rate = 1500;
+	g.g_rate = 3000;
+	g.anim_rate = 1200;
 	return (g);
 }
