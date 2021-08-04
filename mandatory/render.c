@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 17:09:20 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/04 11:52:24 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/04 12:04:31 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,5 @@ void	ft_check_game(t_game *g)
 	if (!(g->n_frames % g->g_rate))
 		move(g->pl->dir, g, &g->pl);
 	if (!g->lay->n_collect && !g->lay->n_pl)
-			end_game(g);
+		end_game(g);
 }

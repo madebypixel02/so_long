@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 20:35:25 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/04 11:21:34 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/04 12:04:12 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <mlx.h>
 #include <stdio.h>
 #include <stdlib.h>
-
 
 t_player	*ft_plrnew(int x, int y)
 {
@@ -67,11 +66,8 @@ int	ft_delete_player(t_vector old, t_player **pl)
 			temp = NULL;
 			return (1);
 		}
-		else
-		{
-			prev = temp;
-			temp = temp->next;
-		}
+		prev = temp;
+		temp = temp->next;
 	}
 	return (1);
 }

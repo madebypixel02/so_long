@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 17:13:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/04 11:34:58 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/04 12:01:11 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,7 @@ int	ft_swap_tile(t_vector old, t_vector nw, t_game *g, t_player **pl)
 			temp->pos = ft_newvector(nw.x, nw.y);
 		temp = temp->next;
 	}
-	if (!hide)
-		ft_memset(&g->map[nw.y][nw.x], g->map[old.y][old.x], 1);
+	ft_memset(&g->map[nw.y][nw.x], g->map[old.y][old.x], !hide);
 	ft_memset(&g->map[old.y][old.x], '0', 1);
 	ft_redraw(ft_newvector(old.x, old.y), ft_newvector(nw.x, nw.y), g, hide);
 	return (1);
