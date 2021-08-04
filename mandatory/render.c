@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 17:09:20 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/04 11:06:11 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/04 11:29:24 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,13 @@ void	ft_redraw(t_vector old, t_vector nw, t_game *g, int hide)
 			"sprites/Pac-Man/pac_semi_left.xpm", &size, &size);
 	mlx_put_image_to_window(g->id, g->w_id, g->sprites.black, \
 		old.x * SIZE, old.y * SIZE + OFFSET);
-	mlx_put_image_to_window(g->id, g->w_id, g->sprites.black, \
-		nw.x * SIZE, nw.y * SIZE + OFFSET);
 	if (!hide)
+	{
+		mlx_put_image_to_window(g->id, g->w_id, g->sprites.black, \
+		nw.x * SIZE, nw.y * SIZE + OFFSET);
 		mlx_put_image_to_window(g->id, g->w_id, g->sprites.pacman, \
 			nw.x * SIZE, nw.y * SIZE + OFFSET);
+	}
 }
 
 void	ft_check_game(t_game *g)
