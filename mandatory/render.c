@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 17:09:20 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/05 11:34:43 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/05 19:11:48 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@ int	ft_update(t_game *g)
 
 	y = 0;
 	g->n_frames++;
+	printf("%d\n", g->n_frames);
+	ft_put_ghosts(g);
 	ft_check_game(g);
 	if (g->redraw)
 	{
 		ft_put_extras(g);
-		ft_put_ghosts(g);
 		ft_update_score(g);
 		while (g->map[y])
 		{
@@ -64,28 +65,11 @@ void	ft_put_extras(t_game *g)
 
 void	ft_redraw(t_vector old, t_vector nw, t_game *g, int hide)
 {
-	int	size;
-
-	if (!hide)
-	{
-		mlx_destroy_image(g->id, g->sprites.pacman);
-		if (g->pl && g->pl->dir == N)
-			g->sprites.pacman = mlx_xpm_file_to_image(g->id, \
-				"sprites/Pac-Man/pac_semi_up.xpm", &size, &size);
-		if (g->pl && g->pl->dir == S)
-			g->sprites.pacman = mlx_xpm_file_to_image(g->id, \
-				"sprites/Pac-Man/pac_semi_down.xpm", &size, &size);
-		if (g->pl && g->pl->dir == E)
-			g->sprites.pacman = mlx_xpm_file_to_image(g->id, \
-				"sprites/Pac-Man/pac_semi_right.xpm", &size, &size);
-		if (g->pl && g->pl->dir == W)
-			g->sprites.pacman = mlx_xpm_file_to_image(g->id, \
-				"sprites/Pac-Man/pac_semi_left.xpm", &size, &size);
-		mlx_put_image_to_window(g->id, g->w_id, g->sprites.black, \
-		nw.x * SIZE, nw.y * SIZE);
-		mlx_put_image_to_window(g->id, g->w_id, g->sprites.pacman, \
-			nw.x * SIZE, nw.y * SIZE);
-	}
 	mlx_put_image_to_window(g->id, g->w_id, g->sprites.black, \
 		old.x * SIZE, old.y * SIZE);
+	if (!hide)
+		mlx_put_image_to_window(g->id, g->w_id, g->sprites.black, \
+			nw.x * SIZE, nw.y * SIZE);
+	if (!g->pac_dying)
+		ft_put_pacman(g);
 }

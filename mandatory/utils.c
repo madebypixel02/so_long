@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 17:13:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/05 09:52:45 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/05 18:59:50 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ void	move(int d, t_game *g, t_player **pl)
 
 int	ft_swap_tile(t_vector old, t_vector nw, t_game *g, t_player **pl)
 {
-	t_player	*temp;
+	t_player	*player;
 	int			hide;
 
-	temp = g->pl;
+	player = g->pl;
 	hide = 0;
 	if (g->map[nw.y][nw.x] == 'C')
 		g->lay->n_collect--;
@@ -80,11 +80,11 @@ int	ft_swap_tile(t_vector old, t_vector nw, t_game *g, t_player **pl)
 	}
 	else if (g->map[nw.y][nw.x] == 'E')
 		return (1);
-	while (!hide && temp)
+	while (!hide && player)
 	{
-		if (temp->pos.x == old.x && temp->pos.y == old.y)
-			temp->pos = ft_newvector(nw.x, nw.y);
-		temp = temp->next;
+		if (player->pos.x == old.x && player->pos.y == old.y)
+			player->pos = ft_newvector(nw.x, nw.y);
+		player = player->next;
 	}
 	ft_memset(&g->map[nw.y][nw.x], g->map[old.y][old.x], !hide);
 	ft_memset(&g->map[old.y][old.x], '0', 1);

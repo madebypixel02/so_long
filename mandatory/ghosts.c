@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 16:59:34 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/05 11:59:33 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/05 18:39:19 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	*ft_chooseghcolor(t_game *g, int i, int dir)
 	void	*sprite;
 	char	*s;
 
+	s = NULL;
 	if (dir == N)
 		s = ft_substr("sprites/Ghosts/R/ghost_up.xpm", 0, 29);
 	else if (dir == S)
@@ -34,18 +35,18 @@ void	*ft_chooseghcolor(t_game *g, int i, int dir)
 
 void	ft_load_ghosts(t_game *g)
 {
-	t_player	*temp;
+	t_player	*ghost;
 	int			i;
 
 	i = 0;
-	temp = g->gh;
-	while (temp)
+	ghost = g->gh;
+	while (ghost)
 	{
-		temp->sprites.up = ft_chooseghcolor(g, i, N);
-		temp->sprites.down = ft_chooseghcolor(g, i, S);
-		temp->sprites.right = ft_chooseghcolor(g, i, E);
-		temp->sprites.left = ft_chooseghcolor(g, i, W);
-		temp = temp->next;
+		ghost->sprites.up = ft_chooseghcolor(g, i, N);
+		ghost->sprites.down = ft_chooseghcolor(g, i, S);
+		ghost->sprites.right = ft_chooseghcolor(g, i, E);
+		ghost->sprites.left = ft_chooseghcolor(g, i, W);
+		ghost = ghost->next;
 		i++;
 	}
 }
@@ -57,7 +58,17 @@ void	ft_put_ghosts(t_game *g)
 	ghost = g->gh;
 	while (ghost)
 	{
-		mlx_put_image_to_window(g->id, g->w_id, ghost->sprites.right, \
+		if (ghost->dir == N)
+			mlx_put_image_to_window(g->id, g->w_id, ghost->sprites.up, \
+				ghost->pos.x * SIZE, ghost->pos.y * SIZE);
+		if (ghost->dir == S)
+			mlx_put_image_to_window(g->id, g->w_id, ghost->sprites.down, \
+				ghost->pos.x * SIZE, ghost->pos.y * SIZE);
+		if (ghost->dir == E || ghost->dir == ST)
+			mlx_put_image_to_window(g->id, g->w_id, ghost->sprites.right, \
+				ghost->pos.x * SIZE, ghost->pos.y * SIZE);
+		if (ghost->dir == W)
+			mlx_put_image_to_window(g->id, g->w_id, ghost->sprites.left, \
 				ghost->pos.x * SIZE, ghost->pos.y * SIZE);
 		ghost = ghost->next;
 	}

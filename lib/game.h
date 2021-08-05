@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/05 11:57:30 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/05 19:11:06 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <mlx.h>
 # include <stdio.h>
 
+# define GAME_RATE 2000
+# define ANIM_RATE 800
 # define SIZE 32
 # define COLORS "RGBOYKP"
 
@@ -51,14 +53,13 @@ typedef struct s_pl_sprite
 /* MLX image pointers */
 typedef struct s_sprite
 {
-	void		*pacman;
 	void		*logo;
 	void		**wall;
 	void		*pacfood;
 	void		*portal;
 	void		*black;
 	void		*black_font;
-	t_list		*ghost;
+	void		*pacman;
 	t_list		*pac_dying_bak;
 	t_list		*pac_dying;
 	t_list		*pac_moving;
@@ -83,8 +84,6 @@ typedef struct s_game
 	t_lay		*lay;
 	char		**map;
 	t_sprite	sprites;
-	int			g_rate;
-	int			anim_rate;
 	int			pac_dying;
 	void		*id;
 	void		*w_id;
@@ -164,6 +163,9 @@ void		ft_put_map(t_game *g, int x, int y);
 /* Prints ghosts on screen */
 void		ft_put_ghosts(t_game *g);
 
+/*  */
+void	ft_put_pacman(t_game *g);
+
 /* Iterates to animate pacman's death */
 void		ft_anim_pacdeath(t_game *g);
 
@@ -176,6 +178,9 @@ void		*ft_chooseghcolor(t_game *g, int i, int dir);
 /* Loads necessary sprites for ghosts */
 void		ft_load_ghosts(t_game *g);
 
+/*  */
+void	ft_load_pacmans(t_game *g);
+
 /* Draws Score, Moves, and pacman logo */
 void		ft_put_extras(t_game *g);
 
@@ -183,7 +188,7 @@ void		ft_put_extras(t_game *g);
 void		free_animation(t_game *g);
 
 /* Free every ghosts' sprites */
-void		free_ghosts(t_game *g);
+void		free_players(t_game *g);
 
 /* Updates the score that appears on screen */
 void		ft_update_score(t_game *g);
