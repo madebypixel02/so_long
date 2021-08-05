@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 17:09:20 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/05 21:06:49 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/05 21:14:35 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	ft_update(t_game *g)
 
 	y = 0;
 	g->n_frames++;
-	printf("%d\n", g->n_frames);
 	ft_check_game(g);
 	if (g->redraw)
 	{
