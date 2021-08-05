@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:55:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/05 10:08:54 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/05 11:58:18 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ t_game	ft_newgame(char **map, t_lay *lay)
 	g.pl = NULL;
 	g.gh = NULL;
 	ft_playerlist(map, &g);
+	ft_load_ghosts(&g);
 	g.pac_dying = 0;
 	g.redraw = 1;
 	g.g_rate = 2500;
@@ -107,5 +108,8 @@ void	ft_check_game(t_game *g)
 	if (!(g->n_frames % g->g_rate))
 		move(g->pl->dir, g, &g->pl);
 	if (!g->lay->n_collect && !g->lay->n_pl && !g->pac_dying)
+	{
+		printf("%sCONGRATULATIONS, YOU WIN!%s\n\n", GREEN, DEFAULT);
 		end_game(g);
+	}
 }

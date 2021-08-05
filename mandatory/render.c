@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 17:09:20 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/05 09:56:05 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/05 11:34:43 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,20 @@ int	ft_update(t_game *g)
 	if (g->redraw)
 	{
 		ft_put_extras(g);
+		ft_put_ghosts(g);
 		ft_update_score(g);
-	}
-	while (g->map[y] && g->redraw)
-	{
-		x = 0;
-		while (g->map[y][x])
+		while (g->map[y])
 		{
-			ft_put_map(g, x, y);
-			x++;
+			x = 0;
+			while (g->map[y][x])
+			{
+				ft_put_map(g, x, y);
+				x++;
+			}
+			y++;
 		}
-		y++;
+		g->redraw = 0;
 	}
-	g->redraw = 0;
 	return (0);
 }
 
@@ -47,8 +48,8 @@ void	ft_update_score(t_game *g)
 
 	moves = ft_itoa(g->n_moves);
 	mlx_put_image_to_window(g->id, g->w_id, g->sprites.black_font, \
-					g->width / 2 + 23, g->height - 65);
-	mlx_string_put(g->id, g->w_id, g->width / 2 + 23, g->height - 70, \
+					g->width / 2 + 25, g->height - 65);
+	mlx_string_put(g->id, g->w_id, g->width / 2 + 25, g->height - 70, \
 					0xFDD663, moves);
 	free(moves);
 }

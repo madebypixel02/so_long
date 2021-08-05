@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/05 10:08:36 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/05 11:57:30 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdio.h>
 
 # define SIZE 32
+# define COLORS "RGBOYKP"
 
 /* Enum for North, South, East, West as ints */
 enum e_direction
@@ -39,17 +40,25 @@ typedef struct s_vector
 	int	y;
 }				t_vector;
 
+typedef struct s_pl_sprite
+{
+	void	*up;
+	void	*down;
+	void	*left;
+	void	*right;
+}				t_pl_sprite;
+
 /* MLX image pointers */
 typedef struct s_sprite
 {
 	void		*pacman;
-	void		*ghost;
 	void		*logo;
 	void		**wall;
 	void		*pacfood;
 	void		*portal;
 	void		*black;
 	void		*black_font;
+	t_list		*ghost;
 	t_list		*pac_dying_bak;
 	t_list		*pac_dying;
 	t_list		*pac_moving;
@@ -62,6 +71,7 @@ typedef struct s_player
 	int				dir;
 	int				moving;
 	int				dying;
+	t_pl_sprite		sprites;
 	struct s_player	*next;
 }				t_player;
 
@@ -151,11 +161,20 @@ void		ft_redraw(t_vector old, t_vector nw, t_game *g, int hide);
 /* Draws walls, collectibles, and initial positions for players/enemies */
 void		ft_put_map(t_game *g, int x, int y);
 
+/* Prints ghosts on screen */
+void		ft_put_ghosts(t_game *g);
+
 /* Iterates to animate pacman's death */
 void		ft_anim_pacdeath(t_game *g);
 
 /* Loads necessary sprites (mlx) for pacman's death */
 t_list		*ft_load_pacdeath(t_game *g);
+
+/*  */
+void		*ft_chooseghcolor(t_game *g, int i, int dir);
+
+/* Loads necessary sprites for ghosts */
+void		ft_load_ghosts(t_game *g);
 
 /* Draws Score, Moves, and pacman logo */
 void		ft_put_extras(t_game *g);
