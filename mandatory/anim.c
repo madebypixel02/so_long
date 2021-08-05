@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 10:16:09 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/04 20:31:19 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/05 10:05:48 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ void	ft_anim_pacdeath(t_game *g)
 	temp_pl = g->pl;
 	while (temp_pl)
 	{
-		mlx_put_image_to_window(g->id, g->w_id, g->sprites.black, \
-			temp_pl->pos.x * SIZE, temp_pl->pos.y * SIZE);
 		mlx_put_image_to_window(g->id, g->w_id, g->sprites.black, \
 			temp_pl->pos.x * SIZE, temp_pl->pos.y * SIZE);
 		mlx_put_image_to_window(g->id, g->w_id,
