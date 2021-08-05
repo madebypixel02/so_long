@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 17:09:20 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/05 19:11:48 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/05 19:59:30 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ void	ft_update_score(t_game *g)
 	moves = ft_itoa(g->n_moves);
 	mlx_put_image_to_window(g->id, g->w_id, g->sprites.black_font, \
 					g->width / 2 + 25, g->height - 70);
-	mlx_string_put(g->id, g->w_id, g->width / 2 + 25, g->height - 55, \
+	mlx_string_put(g->id, g->w_id, g->width / 2 + 25, g->height - 60, \
 					0xFDD663, moves);
 	free(moves);
 }
 
 void	ft_put_extras(t_game *g)
 {
-	mlx_string_put(g->id, g->w_id, g->width / 2 - 37, g->height - 55, \
+	mlx_string_put(g->id, g->w_id, g->width / 2 - 37, g->height - 60, \
 		0xFDD663, "Moves:");
 	mlx_put_image_to_window(g->id, g->w_id, g->sprites.logo, \
 		(g->width - 131) / 2, g->height - 42);
