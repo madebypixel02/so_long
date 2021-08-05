@@ -6,12 +6,13 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 17:09:20 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/04 19:11:27 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/05 09:56:05 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/game.h"
 #include <mlx.h>
+#include <stdio.h>
 
 int	ft_update(t_game *g)
 {
@@ -21,9 +22,11 @@ int	ft_update(t_game *g)
 	y = 0;
 	g->n_frames++;
 	ft_check_game(g);
-	ft_update_score(g);
 	if (g->redraw)
+	{
 		ft_put_extras(g);
+		ft_update_score(g);
+	}
 	while (g->map[y] && g->redraw)
 	{
 		x = 0;
@@ -44,20 +47,18 @@ void	ft_update_score(t_game *g)
 
 	moves = ft_itoa(g->n_moves);
 	mlx_put_image_to_window(g->id, g->w_id, g->sprites.black_font, \
-					g->width / 2 + 10, g->height + 7);
-	mlx_put_image_to_window(g->id, g->w_id, g->sprites.black_font, \
-					g->width / 2 + 42, g->height + 7);
-	mlx_string_put(g->id, g->w_id, g->width / 2 + 14, g->height + 16, \
+					g->width / 2 + 23, g->height - 65);
+	mlx_string_put(g->id, g->w_id, g->width / 2 + 23, g->height - 70, \
 					0xFDD663, moves);
 	free(moves);
 }
 
 void	ft_put_extras(t_game *g)
 {
-	mlx_string_put(g->id, g->w_id, g->width / 2 - 25, g->height + 15, \
+	mlx_string_put(g->id, g->w_id, g->width / 2 - 37, g->height - 70, \
 		0xFDD663, "Moves:");
 	mlx_put_image_to_window(g->id, g->w_id, g->sprites.logo, \
-		(g->width - 131) / 2, g->height + 20);
+		(g->width - 131) / 2, g->height - 42);
 }
 
 void	ft_redraw(t_vector old, t_vector nw, t_game *g, int hide)

@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:55:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/04 20:31:48 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/05 09:56:31 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 int	key_hook(int key, t_game *g)
 {
+	g->n_moves_old = g->n_moves;
 	if (key == KEY_Q || key == KEY_ESC)
 		end_game(g);
 	if ((key == KEY_UP || key == KEY_W) && g->pl && g->pl->dir != N)
@@ -82,21 +83,22 @@ t_game	ft_newgame(char **map, t_lay *lay)
 
 	g.n_frames = 1;
 	g.n_moves = 0;
+	g.n_moves = 0;
 	g.width = lay->n_col * SIZE;
-	g.height = lay->n_row * SIZE;
+	g.height = lay->n_row * SIZE + 80;
 	g.lay = lay;
 	g.map = map;
 	g.id = mlx_init();
 	g.w_id = mlx_new_window(g.id, lay->n_col * SIZE, \
-			lay->n_row * SIZE + 60, "Pac-Man");
+			lay->n_row * SIZE + 80, "Pac-Man");
 	g.sprites = ft_initsprites(&g);
 	g.pl = NULL;
 	g.gh = NULL;
 	ft_playerlist(map, &g);
 	g.pac_dying = 0;
 	g.redraw = 1;
-	g.g_rate = 2000;
-	g.anim_rate = 1000;
+	g.g_rate = 2500;
+	g.anim_rate = 800;
 	return (g);
 }
 

@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/04 19:52:58 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/05 09:39:48 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct s_game
 	void		*w_id;
 	int			n_frames;
 	int			n_moves;
+	int			n_moves_old;
 	int			redraw;
 	t_player	*pl;
 	t_player	*gh;
