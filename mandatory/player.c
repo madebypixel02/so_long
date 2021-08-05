@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 20:35:25 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/05 11:53:14 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/05 20:40:42 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_plradd_back(t_player **lst, t_player *newnode)
 		*lst = newnode;
 }
 
-int	ft_delete_player(t_vector old, t_player **pl)
+int	ft_delete_player(t_game *g, t_vector old, t_player **pl)
 {
 	t_player	*temp;
 	t_player	*prev;
@@ -56,6 +56,7 @@ int	ft_delete_player(t_vector old, t_player **pl)
 	{
 		if (temp->pos.x == old.x && temp->pos.y == old.y)
 		{
+			ft_free_singlepl(g, temp);
 			temp->dying = 1;
 			if (!prev)
 				return (ft_deletefirst_plr(pl));

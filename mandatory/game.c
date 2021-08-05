@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:55:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/05 20:24:02 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/05 20:49:01 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int	end_game(t_game *g)
 		BLUE, g->n_moves, DEFAULT);
 	mlx_clear_window(g->id, g->w_id);
 	mlx_destroy_window(g->id, g->w_id);
-	mlx_destroy_display(g->id);
 	free(g->id);
 	exit(0);
 	return (0);

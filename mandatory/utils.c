@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 17:13:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/05 20:23:21 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/05 20:38:10 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	ft_swap_tile(t_vector old, t_vector nw, t_game *g, t_player **pl)
 	{
 		hide = 1;
 		g->lay->n_pl--;
-		ft_delete_player(old, pl);
+		ft_delete_player(g, old, pl);
 	}
 	else if (g->map[nw.y][nw.x] == 'E')
 		return (1);

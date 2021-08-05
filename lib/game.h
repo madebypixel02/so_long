@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/05 20:27:06 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/05 20:47:37 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <mlx.h>
 # include <stdio.h>
 
-# define GAME_RATE 2500
-# define ANIM_RATE 800
+# define GAME_RATE 1700
+# define ANIM_RATE 350
 # define SIZE 32
 # define COLORS "RGBOYKP"
 
@@ -140,7 +140,7 @@ int			ft_deletefirst_plr(t_player **pl);
 int			ft_deletelast_plr(t_player **pl);
 
 /* Deletes the player in a specific position from list */
-int			ft_delete_player(t_vector old, t_player **pl);
+int			ft_delete_player(t_game *g, t_vector old, t_player **pl);
 
 /* Prints current list of players and ghost */
 void		ft_print_plrs(t_game *g);
@@ -163,8 +163,8 @@ void		ft_put_map(t_game *g, int x, int y);
 /* Prints ghosts on screen */
 void		ft_put_ghosts(t_game *g);
 
-/*  */
-void	ft_put_pacman(t_game *g);
+/* Prints every pacman at its current state */
+void		ft_put_pacman(t_game *g);
 
 /* Iterates to animate pacman's death */
 void		ft_anim_pacdeath(t_game *g);
@@ -172,14 +172,14 @@ void		ft_anim_pacdeath(t_game *g);
 /* Loads necessary sprites (mlx) for pacman's death */
 t_list		*ft_load_pacdeath(t_game *g);
 
-/*  */
+/* Selects color for a ghost depending on the number of ghosts */
 void		*ft_chooseghcolor(t_game *g, int i, int dir);
 
 /* Loads necessary sprites for ghosts */
 void		ft_load_ghosts(t_game *g);
 
-/*  */
-void	ft_load_pacmans(t_game *g);
+/* Initiates sprites for every pacman */
+void		ft_load_pacmans(t_game *g);
 
 /* Draws Score, Moves, and pacman logo */
 void		ft_put_extras(t_game *g);
@@ -189,6 +189,9 @@ void		free_animation(t_game *g);
 
 /* Free every ghosts' sprites */
 void		free_players(t_game *g);
+
+/* Frees up, down, left, right for given player */
+void		ft_free_singlepl(t_game *g, t_player *pl);
 
 /* Updates the score that appears on screen */
 void		ft_update_score(t_game *g);
