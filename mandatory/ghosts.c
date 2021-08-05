@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 16:59:34 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/05 18:39:19 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/05 21:49:29 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	*ft_chooseghcolor(t_game *g, int i, int dir)
 	else if (dir == W)
 		s = ft_substr("sprites/Ghosts/R/ghost_left.xpm", 0, 31);
 	if (i > 0)
-		ft_memset(&s[15], COLORS[i % 6], 1);
+		ft_memset(&s[15], COLORS[i % 7], 1);
 	sprite = mlx_xpm_file_to_image(g->id, s, &dir, &dir);
 	free(s);
 	return (sprite);
