@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:55:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/05 09:56:31 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/05 10:08:54 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 int	key_hook(int key, t_game *g)
 {
-	g->n_moves_old = g->n_moves;
 	if (key == KEY_Q || key == KEY_ESC)
 		end_game(g);
 	if ((key == KEY_UP || key == KEY_W) && g->pl && g->pl->dir != N)
@@ -82,7 +81,6 @@ t_game	ft_newgame(char **map, t_lay *lay)
 	t_game	g;
 
 	g.n_frames = 1;
-	g.n_moves = 0;
 	g.n_moves = 0;
 	g.width = lay->n_col * SIZE;
 	g.height = lay->n_row * SIZE + 80;
