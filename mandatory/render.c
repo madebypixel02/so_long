@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 17:09:20 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/05 19:59:30 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/05 20:21:19 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ int	ft_update(t_game *g)
 	y = 0;
 	g->n_frames++;
 	printf("%d\n", g->n_frames);
-	ft_put_ghosts(g);
 	ft_check_game(g);
 	if (g->redraw)
 	{
+		ft_put_ghosts(g);
 		ft_put_extras(g);
 		ft_update_score(g);
 		while (g->map[y])

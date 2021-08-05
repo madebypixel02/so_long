@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/05 19:11:06 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/05 20:27:06 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <mlx.h>
 # include <stdio.h>
 
-# define GAME_RATE 2000
+# define GAME_RATE 2500
 # define ANIM_RATE 800
 # define SIZE 32
 # define COLORS "RGBOYKP"
