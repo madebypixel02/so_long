@@ -182,6 +182,9 @@ void		ft_put_extras(t_game *g);
 /* Frees all nodes in animation list */
 void		free_animation(t_game *g);
 
+/* Free every ghosts' sprites */
+void		free_ghosts(t_game *g);
+
 /* Updates the score that appears on screen */
 void		ft_update_score(t_game *g);
 

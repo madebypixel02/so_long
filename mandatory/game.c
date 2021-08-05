@@ -60,6 +60,7 @@ int	end_game(t_game *g)
 		BLUE, g->n_moves, DEFAULT);
 	mlx_clear_window(g->id, g->w_id);
 	mlx_destroy_window(g->id, g->w_id);
+	mlx_destroy_display(g->id);
 	free(g->id);
 	exit(0);
 	return (0);

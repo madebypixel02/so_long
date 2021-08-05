@@ -42,7 +42,7 @@ LMLX_PATH=/usr/lib
 IMLX_PATH=/usr/include
 ifeq ($(UNAME), Linux)
 	ECHO = echo -e
-	LEAKS = #valgrind --leak-check=full --show-leak-kinds=all -s -q 
+	LEAKS = valgrind --leak-check=full --show-leak-kinds=all -s -q 
 	LMLX = -L$(LMLX_PATH) -lmlx -lXext -lX11
 	IMLX = -I$(IMLX_PATH)
 	# Key Codes for Linux

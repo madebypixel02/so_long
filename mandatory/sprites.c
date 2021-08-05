@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../lib/game.h"
+#include <mlx.h>
 
 t_sprite	ft_initsprites(t_game *g)
 {
@@ -45,8 +46,25 @@ int	free_sprites(t_game *g)
 	mlx_destroy_image(g->id, g->sprites.portal);
 	mlx_destroy_image(g->id, g->sprites.pacman);
 	mlx_destroy_image(g->id, g->sprites.logo);
+	free_ghosts(g);
 	free_animation(g);
 	return (0);
+}
+
+
+void		free_ghosts(t_game *g)
+{
+	t_player	*ghost;
+
+	ghost = g->gh;
+	while (ghost)
+	{
+		mlx_destroy_image(g->id, ghost->sprites.up);
+		mlx_destroy_image(g->id, ghost->sprites.down);
+		mlx_destroy_image(g->id, ghost->sprites.left);
+		mlx_destroy_image(g->id, ghost->sprites.right);
+		ghost = ghost->next;
+	}
 }
 
 void	ft_put_map(t_game *g, int x, int y)
