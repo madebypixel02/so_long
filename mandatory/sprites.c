@@ -51,8 +51,7 @@ int	free_sprites(t_game *g)
 	return (0);
 }
 
-
-void		free_ghosts(t_game *g)
+void	free_ghosts(t_game *g)
 {
 	t_player	*ghost;
 
