@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/06 14:02:40 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/06 14:30:52 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 # include <mlx.h>
 # include <stdio.h>
 
-# define GAME_RATE 3500
+# define GAME_RATE 3000
 # define ANIM_RATE 700
 # define SIZE 32
-# define COLORS "RGBOYKP"
+# define COLORS "RBGOYKP"
 
 /* Enum for North, South, East, West as ints */
 enum e_direction

@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:55:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/06 14:10:17 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/06 14:27:59 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	ft_check_game(t_game *g)
 	if (!g->lay->n_collect)
 	{
 		if (!g->panic_mode)
-			g->g_rate -= g->g_rate / 2;
+			g->g_rate -= g->g_rate / 4;
 		g->panic_mode = 1;
 	}
 	if (!(g->n_frames % g->g_rate) && g->pl->dir != ST && !g->pac_dying)
