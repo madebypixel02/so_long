@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/05 21:47:42 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/06 09:11:58 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,6 @@ enum e_direction
 	E = 2,
 	W = -2
 };
-
-/* Vector with x and y coordinates */
-typedef struct s_vector
-{
-	int	x;
-	int	y;
-}				t_vector;
 
 typedef struct s_pl_sprite
 {
