@@ -6,11 +6,12 @@
 /*   By: aperez-b <aperez-b@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 18:03:12 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/05 19:05:28 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/06 09:46:22 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/game.h"
+#include <mlx.h>
 
 void	ft_load_pacmans(t_game *g)
 {
@@ -39,6 +40,8 @@ void	ft_put_pacman(t_game *g)
 	pacman = g->pl;
 	while (pacman)
 	{
+		mlx_put_image_to_window(g->id, g->w_id, g->sprites.black, \
+						pacman->pos.x * SIZE, pacman->pos.y * SIZE);
 		if (pacman->dir == N)
 			mlx_put_image_to_window(g->id, g->w_id, pacman->sprites.up, \
 				pacman->pos.x * SIZE, pacman->pos.y * SIZE);
