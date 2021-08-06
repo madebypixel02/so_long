@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 23:02:26 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/05 20:44:08 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/06 13:16:48 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void	free_players(t_game *g)
 		mlx_destroy_image(g->id, ghost->sprites.down);
 		mlx_destroy_image(g->id, ghost->sprites.left);
 		mlx_destroy_image(g->id, ghost->sprites.right);
+		mlx_destroy_image(g->id, ghost->sprites.panic1);
+		mlx_destroy_image(g->id, ghost->sprites.panic2);
 		ghost = ghost->next;
 	}
 	while (pacman)

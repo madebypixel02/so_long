@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 17:13:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/06 11:36:56 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/06 13:03:30 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,16 @@ void	ft_move(int d, t_game *g, t_player **pl)
 	while (temp && !g->pac_dying)
 	{
 		ft_checkmvtogh(g, d, temp);
-		if (d == N && ft_strchr("0CE", g->map[temp->pos.y - 1][temp->pos.x]))
+		if (d == N && ft_strchr("0CEG", g->map[temp->pos.y - 1][temp->pos.x]))
 			ft_swap_tile(ft_newvector(temp->pos.x, temp->pos.y), \
 				ft_newvector(temp->pos.x, temp->pos.y - 1), g, pl);
-		if (d == S && ft_strchr("0CE", g->map[temp->pos.y + 1][temp->pos.x]))
+		if (d == S && ft_strchr("0CEG", g->map[temp->pos.y + 1][temp->pos.x]))
 			ft_swap_tile(ft_newvector(temp->pos.x, temp->pos.y), \
 				ft_newvector(temp->pos.x, temp->pos.y + 1), g, pl);
-		if (d == E && ft_strchr("0CE", g->map[temp->pos.y][temp->pos.x + 1]))
+		if (d == E && ft_strchr("0CEG", g->map[temp->pos.y][temp->pos.x + 1]))
 			ft_swap_tile(ft_newvector(temp->pos.x, temp->pos.y), \
 				ft_newvector(temp->pos.x + 1, temp->pos.y), g, pl);
-		if (d == W && ft_strchr("0CE", g->map[temp->pos.y][temp->pos.x - 1]))
+		if (d == W && ft_strchr("0CEG", g->map[temp->pos.y][temp->pos.x - 1]))
 			ft_swap_tile(ft_newvector(temp->pos.x, temp->pos.y), \
 				ft_newvector(temp->pos.x - 1, temp->pos.y), g, pl);
 		if (old_n_pl != g->lay->n_pl)

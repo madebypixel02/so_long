@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/06 12:23:46 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/06 14:02:40 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <mlx.h>
 # include <stdio.h>
 
-# define GAME_RATE 3000
-# define ANIM_RATE 800
+# define GAME_RATE 3500
+# define ANIM_RATE 700
 # define SIZE 32
 # define COLORS "RGBOYKP"
 
@@ -41,6 +41,8 @@ typedef struct s_pl_sprite
 	void	*down;
 	void	*left;
 	void	*right;
+	void	*panic1;
+	void	*panic2;
 }				t_pl_sprite;
 
 /* MLX image pointers */
@@ -88,11 +90,13 @@ typedef struct s_game
 	char		**map;
 	t_sprite	sprites;
 	int			pac_dying;
+	int			panic_mode;
 	void		*id;
 	void		*w_id;
 	int			n_frames;
 	int			n_moves;
 	int			redraw;
+	int			g_rate;
 	t_player	*pl;
 	t_player	*gh;
 }				t_game;

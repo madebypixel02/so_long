@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 10:23:45 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/06 11:49:16 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/06 12:36:37 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ int	ft_choose_dir(t_player *gh, t_player *pac)
 	len = ft_legal_len(gh);
 	if (len > 1)
 	{
-		if (gh->pos.y < pac->pos.y && gh->legal.north)
+		if (gh->pos.y > pac->pos.y && gh->legal.north)
 			return (N);
-		if (gh->pos.y > pac->pos.y && gh->legal.south)
+		if (gh->pos.y < pac->pos.y && gh->legal.south)
 			return (S);
 		if (gh->pos.x < pac->pos.x && gh->legal.east)
 			return (E);

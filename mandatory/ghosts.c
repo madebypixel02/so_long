@@ -6,11 +6,12 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 16:59:34 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/06 12:11:43 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/06 13:31:23 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/game.h"
+#include <mlx.h>
 
 void	*ft_chooseghcolor(t_game *g, int i, int dir)
 {
@@ -37,6 +38,7 @@ void	ft_load_ghosts(t_game *g)
 {
 	t_player	*ghost;
 	int			i;
+	int			size;
 
 	i = 0;
 	ghost = g->gh;
@@ -46,6 +48,10 @@ void	ft_load_ghosts(t_game *g)
 		ghost->sprites.down = ft_chooseghcolor(g, i, S);
 		ghost->sprites.right = ft_chooseghcolor(g, i, E);
 		ghost->sprites.left = ft_chooseghcolor(g, i, W);
+		ghost->sprites.panic1 = mlx_xpm_file_to_image(g->id, \
+			"sprites/Ghosts/Panic/ghost_panic1.xpm", &size, &size);
+		ghost->sprites.panic2 = mlx_xpm_file_to_image(g->id, \
+			"sprites/Ghosts/Panic/ghost_panic2.xpm", &size, &size);
 		ghost = ghost->next;
 		i++;
 	}
@@ -58,17 +64,23 @@ void	ft_put_ghosts(t_game *g)
 	ghost = g->gh;
 	while (ghost)
 	{
-		if (ghost->dir == N)
+		if (ghost->dir == N && !g->panic_mode)
 			mlx_put_image_to_window(g->id, g->w_id, ghost->sprites.up, \
 				ghost->pos.x * SIZE, ghost->pos.y * SIZE);
-		if (ghost->dir == S)
+		if (ghost->dir == S && !g->panic_mode)
 			mlx_put_image_to_window(g->id, g->w_id, ghost->sprites.down, \
 				ghost->pos.x * SIZE, ghost->pos.y * SIZE);
-		if (ghost->dir == E || ghost->dir == ST)
+		if ((ghost->dir == E || ghost->dir == ST) && !g->panic_mode)
 			mlx_put_image_to_window(g->id, g->w_id, ghost->sprites.right, \
 				ghost->pos.x * SIZE, ghost->pos.y * SIZE);
-		if (ghost->dir == W)
+		if (ghost->dir == W && !g->panic_mode)
 			mlx_put_image_to_window(g->id, g->w_id, ghost->sprites.left, \
+				ghost->pos.x * SIZE, ghost->pos.y * SIZE);
+		else if (g->panic_mode && g->n_frames % ANIM_RATE < ANIM_RATE / 2)
+			mlx_put_image_to_window(g->id, g->w_id, ghost->sprites.panic1, \
+				ghost->pos.x * SIZE, ghost->pos.y * SIZE);
+		else if (g->panic_mode)
+			mlx_put_image_to_window(g->id, g->w_id, ghost->sprites.panic2, \
 				ghost->pos.x * SIZE, ghost->pos.y * SIZE);
 		ghost = ghost->next;
 	}
