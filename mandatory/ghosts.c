@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 16:59:34 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/05 21:49:29 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/06 09:43:06 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,28 @@ void	ft_put_ghosts(t_game *g)
 				ghost->pos.x * SIZE, ghost->pos.y * SIZE);
 		ghost = ghost->next;
 	}
+}
+
+t_player	*ft_getnearestpac(t_game *g, t_player *ghost)
+{
+	int 		mindistance;
+	int			distance;
+	t_player	*pacman;
+	t_player	*closest;
+
+	pacman = g->pl;
+	closest = NULL;
+	mindistance = 0;
+	while (pacman)
+	{
+		distance = ft_euclideandistance(ft_newvector(ghost->pos.x, ghost->pos.y), \
+						ft_newvector(pacman->pos.x, pacman->pos.y));
+		if (!mindistance || distance < mindistance)
+		{
+			closest = pacman;
+			mindistance = distance;
+		}
+		pacman = pacman->next;
+	}
+	return (closest);
 }

@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/06 09:11:58 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/06 09:34:13 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,9 +144,6 @@ void		move(int d, t_game *g, t_player **pl);
 /* Helper tool for move function */
 int			ft_swap_tile(t_vector old, t_vector nw, t_game *g, t_player **pl);
 
-/* Creates new vector with given x and y */
-t_vector	ft_newvector(int x, int y);
-
 /* Re-Draws Pacmans and the floor if necessary to new position */
 void		ft_redraw(t_vector old, t_vector nw, t_game *g, int hide);
 
@@ -191,5 +188,8 @@ void		ft_update_score(t_game *g);
 
 /* Checks if Pacman is about to move to a ghost, initiates dath sequence */
 void		ft_checkmvtogh(t_game *g, int d, t_player *pl);
+
+/*  */
+t_player	*ft_getnearestpac(t_game *g, t_player *ghost);
 
 #endif

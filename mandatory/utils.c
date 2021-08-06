@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 17:13:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/06 09:12:27 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/06 09:23:19 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,6 @@ void	ft_newdirection(t_game *g, int direction)
 		temp->dir = direction;
 		temp = temp->next;
 	}
-}
-
-t_vector	ft_newvector(int x, int y)
-{
-	t_vector	position;
-
-	position.x = x;
-	position.y = y;
-	return (position);
 }
 
 void	move(int d, t_game *g, t_player **pl)
