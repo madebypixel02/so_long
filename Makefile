@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/08/06 15:26:25 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/08/06 21:42:19 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,14 +37,20 @@ Q = KEY_Q=12
 UNAME = $(shell uname -s)
 ECHO = echo
 CDEBUG = -g3 -fsanitize=address
+GRATE = GAME_RATE=2000
+ARATE = ANIM_RATE=700
+GAME = game_mac.c
 LMLX = -lmlx -framework OpenGL -framework AppKit
 LMLX_PATH=/usr/lib
 IMLX_PATH=/usr/include
 ifeq ($(UNAME), Linux)
 	ECHO = echo -e
-	LEAKS = valgrind --leak-check=full --show-leak-kinds=all -s -q 
+	LEAKS = #valgrind --leak-check=full --show-leak-kinds=all -s -q 
 	LMLX = -L$(LMLX_PATH) -lmlx -lXext -lX11
 	IMLX = -I$(IMLX_PATH)
+	GRATE = GAME_RATE=10000
+	ARATE = ANIM_RATE=4500
+	GAME = game_linux.c
 	# Key Codes for Linux
 	ESC = KEY_ESC=65307
 	W = KEY_W=119
@@ -70,13 +76,28 @@ DIR_B = bonus
 DIR_OBJ = lib
 LIBFT = libft/libft.a
 NAME = so_long
+
 KEYCODES =  -D $(ESC) -D $(Q) -D $(R) -D $(W) -D $(A) -D $(S) -D $(D) -D $(UP) -D $(DOWN) -D $(LEFT) -D $(RIGHT)
 
-SRC_MAPS = min.ber test.ber medium.ber google.ber complete.ber classic.ber
+RATES = -D $(GRATE) -D $(ARATE)
 
-MAPS = $(addprefix tests/, $(SRC_MAPS))
+SRC_MAPS1 = min.ber test.ber ghosts.ber multipac.ber medium.ber	\
+		   google.ber run.ber classic.ber
 
-SOURCE_M = map.c player.c check.c game.c sprites.c	\
+SRC_MAPS2 = 20Hunt.ber bigHunt.ber capsuleClassic.ber			\
+			classic.ber contestClassic.ber labAA1.ber			\
+			labAA2.ber labAA3.ber labAA4.ber labAA5.ber			\
+			mediumClassic.ber mimapa.ber minimaxClassic.ber		\
+			newmap.ber oneHunt.ber openClassic.ber				\
+			openHunt.ber originalClassic.ber ourLayout.ber		\
+			sixHunt.ber smallClassic.ber smallHunt.ber			\
+			testClassic.ber trappedClassic.ber trickyClassic.ber
+
+MAPS1 = $(addprefix tests/, $(SRC_MAPS1))
+
+MAPS2 = $(addprefix tests/other-maps/, $(SRC_MAPS2))
+
+SOURCE_M = map.c player.c check.c $(GAME) sprites.c	\
 		   utils.c anim.c render.c playerlist.c		\
 		   ghosts.c pacman.c chase.c legal.c
 
@@ -103,7 +124,7 @@ $(NAME): $(OBJ_M) $(OBJ_GNL) compile_libft
 
 $(OBJ_M): $(SRC_M)
 	@$(ECHO) "$(RED)Mandatory objects outdated in so_long! Compiling again...$(DEFAULT)"
-	@$(CC) $(CFLAGS) $(CDEBUG) $(KEYCODES) -c $^
+	@$(CC) $(CFLAGS) $(CDEBUG) $(KEYCODES) $(RATES) -c $^
 	@mv -f $(SOURCE_M:.c=.o) main.o $(DIR_OBJ)
 	@$(ECHO) "$(GREEN)Mandatory Compilation Complete in so_long!$(DEFAULT)"
 
@@ -132,7 +153,14 @@ test: all
 	@$(LEAKS)./$(NAME) $(MAP)
 
 play: all
-	@for map in $(MAPS) ; do \
+	@for map in $(MAPS1) ; do \
+		$(ECHO) ; \
+		$(ECHO) "Command: $(GRAY)$(LEAKS)./$(NAME) $$map$(DEFAULT)" ; \
+		$(LEAKS) ./$(NAME) $$map ; \
+	done
+
+play2: all
+	@for map in $(MAPS2) ; do \
 		$(ECHO) ; \
 		$(ECHO) "Command: $(GRAY)$(LEAKS)./$(NAME) $$map$(DEFAULT)" ; \
 		$(LEAKS) ./$(NAME) $$map ; \

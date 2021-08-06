@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 16:49:08 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/29 23:44:04 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/06 20:13:50 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ int	main(int argc, char **argv)
 	t_lay	lay;
 
 	map = check_params(argc, argv, &lay);
-	init_game(map, &lay);
+	init_game(map, lay);
 	return (0);
 }

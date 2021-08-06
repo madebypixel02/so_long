@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 17:13:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/06 13:03:30 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/06 21:34:07 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,22 @@ void	ft_print_plrs(t_game *g)
 		head = head->next;
 	}
 	printf("\n");
+}
+
+int	ft_reset(t_game *g)
+{
+	t_lay	lay;
+	char	**map;
+
+	map = ft_dup_matrix(g->map_bak);
+	if (!map)
+		return (0);
+	lay = g->lay_bak;
+	if (g->map)
+		ft_free_matrix(&g->map);
+	free_sprites(g);
+	ft_free_playerlist(g);
+	mlx_clear_window(g->id, g->w_id);
+	ft_newgame(g, map, &lay);
+	return (1);
 }

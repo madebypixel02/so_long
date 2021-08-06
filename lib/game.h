@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/06 15:25:52 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/06 21:04:51 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 # include <mlx.h>
 # include <stdio.h>
 
-# define GAME_RATE 2300
-# define ANIM_RATE 700
 # define SIZE 32
 # define COLORS "RBGOYKP"
 
@@ -87,7 +85,9 @@ typedef struct s_game
 	int			width;
 	int			height;
 	t_lay		*lay;
+	t_lay		lay_bak;
 	char		**map;
+	char		**map_bak;
 	t_sprite	sprites;
 	int			pac_dying;
 	int			panic_mode;
@@ -103,10 +103,10 @@ typedef struct s_game
 }				t_game;
 
 /* Initiates game object and starts looking for input */
-void		init_game(char **map, t_lay *lay);
+void		init_game(char **map, t_lay lay);
 
 /* Starts game with all attributes */
-t_game		ft_newgame(char **map, t_lay *lay);
+void		ft_newgame(t_game *g, char **m, t_lay *lay);
 
 /* Stops execution and frees allocated memory */
 int			end_game(t_game *g);
@@ -224,5 +224,8 @@ void		ft_restrict_legal(t_player *ghost);
 
 /*  */
 int			ft_legal_len(t_player *player);
+
+/*  */
+int			ft_reset(t_game *g);
 
 #endif
