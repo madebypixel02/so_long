@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 20:35:25 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/06 12:08:29 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/06 12:32:08 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,15 +80,15 @@ void	ft_checkmvtogh(t_game *g, int d, t_player *pl)
 	gh = g->gh;
 	while (gh)
 	{
-		if (d == N && pl->pos.y - 1 == gh->pos.x && pl->pos.x == gh->pos.x)
+		if (d == N && pl->pos.y - 1 == gh->pos.y && pl->pos.x == gh->pos.x)
 			g->pac_dying = 1;
-		if (d == S && pl->pos.y + 1 == gh->pos.x && pl->pos.x == gh->pos.x)
+		if (d == S && pl->pos.y + 1 == gh->pos.y && pl->pos.x == gh->pos.x)
 			g->pac_dying = 1;
-		if (d == E && pl->pos.y == gh->pos.x && pl->pos.x + 1 == gh->pos.x)
+		if (d == E && pl->pos.y == gh->pos.y && pl->pos.x + 1 == gh->pos.x)
 			g->pac_dying = 1;
-		if (d == W && pl->pos.y == gh->pos.x && pl->pos.x - 1 == gh->pos.x)
+		if (d == W && pl->pos.y == gh->pos.y && pl->pos.x - 1 == gh->pos.x)
 			g->pac_dying = 1;
-		if (pl->pos.y == gh->pos.x && pl->pos.x == gh->pos.x)
+		if (pl->pos.y == gh->pos.y && pl->pos.x == gh->pos.x)
 			g->pac_dying = 1;
 		gh = gh->next;
 	}
