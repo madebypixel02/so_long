@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 10:43:50 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/06 11:16:29 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/06 12:01:35 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,14 @@ void	ft_update_legal(t_game *g)
 	ghost = g->gh;
 	while (ghost)
 	{
-		ghost->legal.north = g->map[ghost->pos.y - 1][ghost->pos.x] != '1';
-		ghost->legal.south = g->map[ghost->pos.y + 1][ghost->pos.x] != '1';
-		ghost->legal.east = g->map[ghost->pos.y][ghost->pos.x + 1] != '1';
-		ghost->legal.east = g->map[ghost->pos.y][ghost->pos.x - 1] != '1';
+		ghost->legal.north = !ft_strchr("1EG", \
+				g->map[ghost->pos.y - 1][ghost->pos.x]);
+		ghost->legal.south = !ft_strchr("1EG", \
+				g->map[ghost->pos.y + 1][ghost->pos.x]);
+		ghost->legal.east = !ft_strchr("1EG", \
+				g->map[ghost->pos.y][ghost->pos.x + 1]);
+		ghost->legal.west = !ft_strchr("1EG", \
+				g->map[ghost->pos.y][ghost->pos.x - 1]);
 		ghost = ghost->next;
 	}
 }

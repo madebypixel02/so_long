@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 10:23:45 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/06 11:17:21 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/06 11:49:16 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ int	ft_choose_dir(t_player *gh, t_player *pac)
 		if (gh->pos.x > pac->pos.x && gh->legal.west)
 			return (W);
 	}
-	else if (gh->legal.north)
+	if (gh->legal.north)
 		return (N);
-	else if (gh->legal.south)
+	if (gh->legal.south)
 		return (S);
-	else if (gh->legal.east)
+	if (gh->legal.east)
 		return (E);
-	else if (gh->legal.west)
+	if (gh->legal.west)
 		return (W);
 	return (ST);
 }

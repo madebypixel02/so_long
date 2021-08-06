@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:55:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/06 10:14:16 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/06 11:51:13 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,11 @@ t_game	ft_newgame(char **map, t_lay *lay)
 
 void	ft_check_game(t_game *g)
 {
+	ft_print_plrs(g);
 	if (!(g->n_frames % GAME_RATE) && g->pl->dir != ST && !g->pac_dying)
 	{
-		ft_move(g->pl->dir, g, &g->pl);
 		ft_update_ghosts(g, &g->pl);
+		ft_move(g->pl->dir, g, &g->pl);
 	}
 	if (g->pac_dying && !(g->n_frames % ANIM_RATE))
 		ft_anim_pacdeath(g);

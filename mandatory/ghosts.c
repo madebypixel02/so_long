@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 16:59:34 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/06 11:38:23 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/06 12:11:43 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,9 @@ void	ft_update_ghosts(t_game *g, t_player **pl)
 
 void	ft_move_ghost(int d, t_game *g, t_player *gh, t_player **pl)
 {
+	t_vector	old;
+
+	old = ft_newvector(gh->pos.x, gh->pos.y);
 	mlx_put_image_to_window(g->id, g->w_id, g->sprites.black, \
 		gh->pos.x * SIZE, gh->pos.y * SIZE);
 	if (g->map[gh->pos.y][gh->pos.x] == 'C')
@@ -111,9 +114,8 @@ void	ft_move_ghost(int d, t_game *g, t_player *gh, t_player **pl)
 	gh->dir = d;
 	if (g->map[gh->pos.y][gh->pos.x] == 'P')
 	{
-		ft_memset(&g->map[gh->pos.y][gh->pos.x], '0', 1);
-		g->lay->n_pl--;
-		ft_delete_player(g, ft_newvector(gh->pos.x, gh->pos.y), &g->gh);
+		g->pac_dying = 1;
+		gh->pos = old;
 	}
 	ft_put_ghosts(g);
 }
