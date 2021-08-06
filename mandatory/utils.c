@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 17:13:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/06 09:23:19 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/06 11:36:56 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_newdirection(t_game *g, int direction)
 	}
 }
 
-void	move(int d, t_game *g, t_player **pl)
+void	ft_move(int d, t_game *g, t_player **pl)
 {
 	t_player	*temp;
 	int			old_n_pl;

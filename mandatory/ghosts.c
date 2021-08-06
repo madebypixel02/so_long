@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 16:59:34 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/06 09:43:06 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/06 11:38:23 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,26 +74,46 @@ void	ft_put_ghosts(t_game *g)
 	}
 }
 
-t_player	*ft_getnearestpac(t_game *g, t_player *ghost)
+void	ft_update_ghosts(t_game *g, t_player **pl)
 {
-	int 		mindistance;
-	int			distance;
-	t_player	*pacman;
+	t_player	*ghost;
 	t_player	*closest;
+	int			dir;
 
-	pacman = g->pl;
-	closest = NULL;
-	mindistance = 0;
-	while (pacman)
+	ft_update_legal(g);
+	ghost = g->gh;
+	while (ghost)
 	{
-		distance = ft_euclideandistance(ft_newvector(ghost->pos.x, ghost->pos.y), \
-						ft_newvector(pacman->pos.x, pacman->pos.y));
-		if (!mindistance || distance < mindistance)
-		{
-			closest = pacman;
-			mindistance = distance;
-		}
-		pacman = pacman->next;
+		closest = ft_getnearestpac(g, ghost);
+		dir = ft_choose_dir(ghost, closest);
+		ft_move_ghost(dir, g, ghost, pl);
+		ghost = ghost->next;
 	}
-	return (closest);
+}
+
+void	ft_move_ghost(int d, t_game *g, t_player *gh, t_player **pl)
+{
+	mlx_put_image_to_window(g->id, g->w_id, g->sprites.black, \
+		gh->pos.x * SIZE, gh->pos.y * SIZE);
+	if (g->map[gh->pos.y][gh->pos.x] == 'C')
+	{
+		mlx_put_image_to_window(g->id, g->w_id, g->sprites.pacfood, \
+			gh->pos.x * SIZE, gh->pos.y * SIZE);
+	}
+	if (d == N)
+		gh->pos.y--;
+	if (d == S)
+		gh->pos.y++;
+	if (d == E)
+		gh->pos.x++;
+	if (d == W)
+		gh->pos.x--;
+	gh->dir = d;
+	if (g->map[gh->pos.y][gh->pos.x] == 'P')
+	{
+		ft_memset(&g->map[gh->pos.y][gh->pos.x], '0', 1);
+		g->lay->n_pl--;
+		ft_delete_player(g, ft_newvector(gh->pos.x, gh->pos.y), &g->gh);
+	}
+	ft_put_ghosts(g);
 }

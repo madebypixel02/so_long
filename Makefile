@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/08/05 20:52:20 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/08/06 10:44:37 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,7 @@ KEYCODES =  -D $(ESC) -D $(Q) -D $(R) -D $(W) -D $(A) -D $(S) -D $(D) -D $(UP) -
 
 SOURCE_M = map.c player.c check.c game.c sprites.c	\
 		   utils.c anim.c render.c playerlist.c		\
-		   ghosts.c pacman.c
+		   ghosts.c pacman.c chase.c legal.c
 
 SOURCE_GNL = get_next_line.c get_next_line_utils.c
 

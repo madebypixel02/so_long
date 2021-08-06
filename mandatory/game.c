@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:55:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/05 20:49:01 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/06 10:14:16 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,22 @@ int	key_hook(int key, t_game *g)
 	if ((key == KEY_UP || key == KEY_W) && g->pl && g->pl->dir != N)
 	{
 		ft_newdirection(g, N);
-		move(N, g, &g->pl);
+		ft_move(N, g, &g->pl);
 	}
 	if ((key == KEY_DOWN || key == KEY_S) && g->pl && g->pl->dir != S)
 	{
 		ft_newdirection(g, S);
-		move(S, g, &g->pl);
+		ft_move(S, g, &g->pl);
 	}
 	if ((key == KEY_RIGHT || key == KEY_D) && g->pl && g->pl->dir != E)
 	{
 		ft_newdirection(g, E);
-		move(E, g, &g->pl);
+		ft_move(E, g, &g->pl);
 	}
 	if ((key == KEY_LEFT || key == KEY_A) && g->pl && g->pl->dir != W)
 	{
 		ft_newdirection(g, W);
-		move(W, g, &g->pl);
+		ft_move(W, g, &g->pl);
 	}
 	return (0);
 }
@@ -102,10 +102,13 @@ t_game	ft_newgame(char **map, t_lay *lay)
 
 void	ft_check_game(t_game *g)
 {
+	if (!(g->n_frames % GAME_RATE) && g->pl->dir != ST && !g->pac_dying)
+	{
+		ft_move(g->pl->dir, g, &g->pl);
+		ft_update_ghosts(g, &g->pl);
+	}
 	if (g->pac_dying && !(g->n_frames % ANIM_RATE))
 		ft_anim_pacdeath(g);
-	if (!(g->n_frames % GAME_RATE) && g->pl->dir != ST)
-		move(g->pl->dir, g, &g->pl);
 	if (!g->lay->n_collect && !g->lay->n_pl && !g->pac_dying)
 	{
 		printf("%sCONGRATULATIONS, YOU WIN!%s\n\n", GREEN, DEFAULT);

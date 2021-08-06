@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/06 09:34:13 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/06 11:20:48 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <mlx.h>
 # include <stdio.h>
 
-# define GAME_RATE 15000
-# define ANIM_RATE 4000
+# define GAME_RATE 3000
+# define ANIM_RATE 800
 # define SIZE 32
 # define COLORS "RGBOYKP"
 
@@ -58,6 +58,15 @@ typedef struct s_sprite
 	t_list		*pac_moving;
 }				t_sprite;
 
+/*  */
+typedef struct s_legal_actions
+{
+	int	north;
+	int	south;
+	int	east;
+	int	west;
+}				t_legal_actions;
+
 /* Main Player struct with position and direction (linked list) */
 typedef struct s_player
 {
@@ -66,6 +75,7 @@ typedef struct s_player
 	int				moving;
 	int				dying;
 	t_pl_sprite		sprites;
+	t_legal_actions	legal;
 	struct s_player	*next;
 }				t_player;
 
@@ -139,7 +149,7 @@ int			ft_delete_player(t_game *g, t_vector old, t_player **pl);
 void		ft_print_plrs(t_game *g);
 
 /* Checks 2D map and updates player's position if possible */
-void		move(int d, t_game *g, t_player **pl);
+void		ft_move(int d, t_game *g, t_player **pl);
 
 /* Helper tool for move function */
 int			ft_swap_tile(t_vector old, t_vector nw, t_game *g, t_player **pl);
@@ -191,5 +201,23 @@ void		ft_checkmvtogh(t_game *g, int d, t_player *pl);
 
 /*  */
 t_player	*ft_getnearestpac(t_game *g, t_player *ghost);
+
+/*  */
+void		ft_update_ghosts(t_game *g, t_player **pl);
+
+/*  */
+void		ft_move_ghost(int d, t_game *g, t_player *ghost, t_player **pl);
+
+/*  */
+int			ft_choose_dir(t_player *ghost, t_player *pacman);
+
+/*  */
+void		ft_update_legal(t_game *g);
+
+/*  */
+void		ft_restrict_legal(t_player *ghost);
+
+/*  */
+int			ft_legal_len(t_player *player);
 
 #endif
