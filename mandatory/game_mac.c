@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 21:38:10 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/06 21:39:01 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/06 23:30:12 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	ft_newgame(t_game *g, char **m, t_lay *lay)
 
 void	ft_check_game(t_game *g)
 {
-	if (g->lay_bak.n_collect / 4 + 1 == g->lay->n_collect)
+	if (g->lay_bak.n_collect / 4 + 1 >= g->lay->n_collect)
 	{
 		if (!g->panic_mode)
 			g->g_rate -= g->g_rate / 4;
