@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/06 14:30:52 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/06 15:25:52 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <mlx.h>
 # include <stdio.h>
 
-# define GAME_RATE 3000
+# define GAME_RATE 2300
 # define ANIM_RATE 700
 # define SIZE 32
 # define COLORS "RBGOYKP"
@@ -96,6 +96,7 @@ typedef struct s_game
 	int			n_frames;
 	int			n_moves;
 	int			redraw;
+	int			n_collect_bak;
 	int			g_rate;
 	t_player	*pl;
 	t_player	*gh;

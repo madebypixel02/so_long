@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:55:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/06 14:27:59 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/06 15:24:46 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ t_game	ft_newgame(char **map, t_lay *lay)
 	ft_load_pacmans(&g);
 	g.pac_dying = 0;
 	g.panic_mode = 0;
+	g.n_collect_bak = g.lay->n_collect;
 	g.g_rate = GAME_RATE;
 	g.redraw = 1;
 	return (g);
@@ -105,10 +106,10 @@ t_game	ft_newgame(char **map, t_lay *lay)
 
 void	ft_check_game(t_game *g)
 {
-	if (!g->lay->n_collect)
+	if (g->n_collect_bak / 4 + 1 == g->lay->n_collect)
 	{
 		if (!g->panic_mode)
-			g->g_rate -= g->g_rate / 4;
+			g->g_rate -= g->g_rate / 3;
 		g->panic_mode = 1;
 	}
 	if (!(g->n_frames % g->g_rate) && g->pl->dir != ST && !g->pac_dying)

@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/08/06 12:23:53 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/08/06 15:26:25 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,6 +72,10 @@ LIBFT = libft/libft.a
 NAME = so_long
 KEYCODES =  -D $(ESC) -D $(Q) -D $(R) -D $(W) -D $(A) -D $(S) -D $(D) -D $(UP) -D $(DOWN) -D $(LEFT) -D $(RIGHT)
 
+SRC_MAPS = min.ber test.ber medium.ber google.ber complete.ber classic.ber
+
+MAPS = $(addprefix tests/, $(SRC_MAPS))
+
 SOURCE_M = map.c player.c check.c game.c sprites.c	\
 		   utils.c anim.c render.c playerlist.c		\
 		   ghosts.c pacman.c chase.c legal.c
@@ -127,6 +131,13 @@ test: all
 	@$(ECHO)
 	@$(LEAKS)./$(NAME) $(MAP)
 
+play: all
+	@for map in $(MAPS) ; do \
+		$(ECHO) ; \
+		$(ECHO) "Command: $(GRAY)$(LEAKS)./$(NAME) $$map$(DEFAULT)" ; \
+		$(LEAKS) ./$(NAME) $$map ; \
+	done
+
 clean:
 	@$(ECHO) "$(BLUE)Cleaning up object files in so_long...$(DEFAULT)"
 	@make clean -C libft
@@ -154,4 +165,4 @@ git:
 	git commit
 	git push
 
-.PHONY: all clean fclean bonus compile_libft norminette test git re
+.PHONY: all clean fclean bonus compile_libft norminette test play git re
