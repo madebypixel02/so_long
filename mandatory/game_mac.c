@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aperez-b <aperez-b@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/08 00:03:40 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/08 00:03:46 by aperez-b         ###   ########.fr       */
+/*   Created: 2021/08/07 22:05:05 by aperez-b          #+#    #+#             */
+/*   Updated: 2021/08/08 00:13:47 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,11 @@ void	ft_check_game(t_game *g)
 			g->g_rate -= g->g_rate / 4;
 		g->panic_mode = 1;
 	}
+<<<<<<< HEAD
 	if (!(g->n_frames % g->g_rate) && g->next_dir && !g->pac_dying)
+=======
+	if (!(g->n_frames % g->g_rate) && !g->pac_dying)
+>>>>>>> 452e367ad3dbb2c99fd4b6f1f0f58aa6870151bf
 		ft_next_dir(g);
 	if (!(g->n_frames % (g->g_rate + g->g_rate / 20)) \
 			&& g->pl->dir != ST && !g->pac_dying)
