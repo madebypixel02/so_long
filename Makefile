@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/08/06 21:42:19 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/08/07 23:48:46 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,8 +37,8 @@ Q = KEY_Q=12
 UNAME = $(shell uname -s)
 ECHO = echo
 CDEBUG = -g3 -fsanitize=address
-GRATE = GAME_RATE=2000
-ARATE = ANIM_RATE=700
+GRATE = GAME_RATE=4000
+ARATE = ANIM_RATE=1000
 GAME = game_mac.c
 LMLX = -lmlx -framework OpenGL -framework AppKit
 LMLX_PATH=/usr/lib

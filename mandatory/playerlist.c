@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 10:33:55 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/05 11:55:17 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/07 23:06:42 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,25 +32,25 @@ void	ft_free_playerlist(t_game *g)
 	}
 }
 
-int	ft_deletefirst_plr(t_player **pl)
+int	ft_deletefirst_plr(t_game *g)
 {
 	t_player	*head;
 
-	head = *pl;
+	head = g->pl;
 	if (head->next)
-		*pl = head->next;
+		g->pl = head->next;
 	else
-		*pl = NULL;
+		g->pl = NULL;
 	free(head);
 	head = NULL;
 	return (1);
 }
 
-int	ft_deletelast_plr(t_player **pl)
+int	ft_deletelast_plr(t_game *g)
 {
 	t_player	*head;
 
-	head = *pl;
+	head = g->pl;
 	while (head->next->next)
 		head = head->next;
 	free(head->next);

@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 10:43:50 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/07 14:46:21 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/07 23:41:01 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,19 @@ int	ft_legal_len(t_player *player)
 	count += player->legal.east;
 	count += player->legal.west;
 	return (count);
+}
+
+int	ft_in_legal(t_player *player, int dir)
+{
+	if (dir == N && player->legal.north)
+		return (1);
+	if (dir == S && player->legal.south)
+		return (1);
+	if (dir == E && player->legal.east)
+		return (1);
+	if (dir == W && player->legal.west)
+		return (1);
+	if (dir == ST)
+		return (1);
+	return (0);
 }

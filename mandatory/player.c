@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 20:35:25 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/06 12:32:08 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/07 23:06:32 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ void	ft_plradd_back(t_player **lst, t_player *newnode)
 		*lst = newnode;
 }
 
-int	ft_delete_player(t_game *g, t_vector old, t_player **pl)
+int	ft_delete_player(t_game *g, t_vector old)
 {
 	t_player	*temp;
 	t_player	*prev;
 
-	temp = *pl;
+	temp = g->pl;
 	prev = NULL;
 	while (temp)
 	{
@@ -59,9 +59,9 @@ int	ft_delete_player(t_game *g, t_vector old, t_player **pl)
 			ft_free_singlepl(g, temp);
 			temp->dying = 1;
 			if (!prev)
-				return (ft_deletefirst_plr(pl));
+				return (ft_deletefirst_plr(g));
 			if (prev && !temp->next)
-				return (ft_deletelast_plr(pl));
+				return (ft_deletelast_plr(g));
 			prev->next = temp->next;
 			free(temp);
 			temp = NULL;
@@ -73,7 +73,7 @@ int	ft_delete_player(t_game *g, t_vector old, t_player **pl)
 	return (1);
 }
 
-void	ft_checkmvtogh(t_game *g, int d, t_player *pl)
+int	ft_checkmvtogh(t_game *g, int d, t_player *pl)
 {
 	t_player	*gh;
 
@@ -92,4 +92,5 @@ void	ft_checkmvtogh(t_game *g, int d, t_player *pl)
 			g->pac_dying = 1;
 		gh = gh->next;
 	}
+	return (g->pac_dying);
 }

@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 16:59:34 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/07 14:53:25 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/07 23:51:43 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,11 +120,13 @@ void	ft_move_ghost(int d, t_game *g, t_player *gh, t_player **pl)
 		gh->pos.x--;
 	gh->dir = d;
 	if (g->map[gh->pos.y][gh->pos.x] == 'P')
+	{
+		gh->pos = old;
 		g->pac_dying = 1;
-	else
-		mlx_put_image_to_window(g->id, g->w_id, g->sprites.black, \
-			old.x * SIZE, old.y * SIZE);
-	if (g->map[gh->pos.y][gh->pos.x] == 'C')
+	}
+	mlx_put_image_to_window(g->id, g->w_id, g->sprites.black, \
+		old.x * SIZE, old.y * SIZE);
+	if (g->map[old.y][old.x] == 'C')
 		mlx_put_image_to_window(g->id, g->w_id, g->sprites.pacfood, \
 			old.x * SIZE, old.y * SIZE);
 }
