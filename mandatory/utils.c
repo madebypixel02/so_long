@@ -6,11 +6,12 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 17:13:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/06 21:34:07 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/07 23:35:58 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/game.h"
+#include <unistd.h>
 
 void	ft_newdirection(t_game *g, int direction)
 {
@@ -21,40 +22,31 @@ void	ft_newdirection(t_game *g, int direction)
 	ft_update_score(g);
 	while (temp)
 	{
-		temp->dir = direction;
+		g->next_dir = direction;
 		temp = temp->next;
 	}
 }
 
-void	ft_move(int d, t_game *g, t_player **pl)
+void	ft_move(int d, t_game *g, t_player *temp)
 {
-	t_player	*temp;
-	int			old_n_pl;
-
-	temp = *pl;
-	old_n_pl = g->lay->n_pl;
-	while (temp && !g->pac_dying)
+	if (temp && !ft_checkmvtogh(g, d, temp))
 	{
-		ft_checkmvtogh(g, d, temp);
 		if (d == N && ft_strchr("0CEG", g->map[temp->pos.y - 1][temp->pos.x]))
 			ft_swap_tile(ft_newvector(temp->pos.x, temp->pos.y), \
-				ft_newvector(temp->pos.x, temp->pos.y - 1), g, pl);
+				ft_newvector(temp->pos.x, temp->pos.y - 1), g);
 		if (d == S && ft_strchr("0CEG", g->map[temp->pos.y + 1][temp->pos.x]))
 			ft_swap_tile(ft_newvector(temp->pos.x, temp->pos.y), \
-				ft_newvector(temp->pos.x, temp->pos.y + 1), g, pl);
+				ft_newvector(temp->pos.x, temp->pos.y + 1), g);
 		if (d == E && ft_strchr("0CEG", g->map[temp->pos.y][temp->pos.x + 1]))
 			ft_swap_tile(ft_newvector(temp->pos.x, temp->pos.y), \
-				ft_newvector(temp->pos.x + 1, temp->pos.y), g, pl);
+				ft_newvector(temp->pos.x + 1, temp->pos.y), g);
 		if (d == W && ft_strchr("0CEG", g->map[temp->pos.y][temp->pos.x - 1]))
 			ft_swap_tile(ft_newvector(temp->pos.x, temp->pos.y), \
-				ft_newvector(temp->pos.x - 1, temp->pos.y), g, pl);
-		if (old_n_pl != g->lay->n_pl)
-			break ;
-		temp = temp->next;
+				ft_newvector(temp->pos.x - 1, temp->pos.y), g);
 	}
 }
 
-int	ft_swap_tile(t_vector old, t_vector nw, t_game *g, t_player **pl)
+int	ft_swap_tile(t_vector old, t_vector nw, t_game *g)
 {
 	t_player	*player;
 	int			hide;
@@ -67,7 +59,7 @@ int	ft_swap_tile(t_vector old, t_vector nw, t_game *g, t_player **pl)
 	{
 		hide = 1;
 		g->lay->n_pl--;
-		ft_delete_player(g, old, pl);
+		ft_delete_player(g, old);
 	}
 	else if (g->map[nw.y][nw.x] == 'E')
 		return (1);

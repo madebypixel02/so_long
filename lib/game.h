@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/07 14:41:27 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/07 22:44:27 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ typedef struct s_game
 	int			width;
 	int			height;
 	t_lay		*lay;
+	int			next_dir;
 	t_lay		lay_bak;
 	char		**map;
 	char		**map_bak;
@@ -142,22 +143,22 @@ void		ft_playerlist(char **map, t_game *g);
 void		ft_free_playerlist(t_game *g);
 
 /* Deletes first element of linked list of players */
-int			ft_deletefirst_plr(t_player **pl);
+int			ft_deletefirst_plr(t_game *g);
 
 /* Deletes last player from linked list */
-int			ft_deletelast_plr(t_player **pl);
+int			ft_deletelast_plr(t_game *g);
 
 /* Deletes the player in a specific position from list */
-int			ft_delete_player(t_game *g, t_vector old, t_player **pl);
+int			ft_delete_player(t_game *g, t_vector old);
 
 /* Prints current list of players and ghost */
 void		ft_print_plrs(t_game *g);
 
 /* Checks 2D map and updates player's position if possible */
-void		ft_move(int d, t_game *g, t_player **pl);
+void		ft_move(int d, t_game *g, t_player *temp);
 
 /* Helper tool for move function */
-int			ft_swap_tile(t_vector old, t_vector nw, t_game *g, t_player **pl);
+int			ft_swap_tile(t_vector old, t_vector nw, t_game *g);
 
 /* Re-Draws Pacmans and the floor if necessary to new position */
 void		ft_redraw(t_vector old, t_vector nw, t_game *g, int hide);
@@ -202,7 +203,7 @@ void		ft_free_singlepl(t_game *g, t_player *pl);
 void		ft_update_score(t_game *g);
 
 /* Checks if Pacman is about to move to a ghost, initiates dath sequence */
-void		ft_checkmvtogh(t_game *g, int d, t_player *pl);
+int			ft_checkmvtogh(t_game *g, int d, t_player *pl);
 
 /*  */
 t_player	*ft_getnearestpac(t_game *g, t_player *ghost);
@@ -230,5 +231,11 @@ int			ft_legal_len(t_player *player);
 
 /*  */
 int			ft_reset(t_game *g);
+
+/*  */
+int			ft_in_legal(t_player *player, int dir);
+
+/*  */
+void		ft_next_dir(t_game *g);
 
 #endif

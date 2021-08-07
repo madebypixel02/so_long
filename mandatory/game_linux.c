@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 21:38:26 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/07 14:52:22 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/08 00:08:57 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,14 @@ int	key_hook(int key, t_game *g)
 		end_game(g);
 	if (key == KEY_R && !g->pac_dying)
 		ft_reset(g);
-	if ((key == KEY_UP || key == KEY_W) && g->pl && g->pl->dir != N)
-	{
+	if ((key == KEY_UP || key == KEY_W) && g->next_dir != N)
 		ft_newdirection(g, N);
-		ft_move(N, g, &g->pl);
-	}
-	if ((key == KEY_DOWN || key == KEY_S) && g->pl && g->pl->dir != S)
-	{
+	if ((key == KEY_DOWN || key == KEY_S) && g->next_dir != S)
 		ft_newdirection(g, S);
-		ft_move(S, g, &g->pl);
-	}
-	if ((key == KEY_RIGHT || key == KEY_D) && g->pl && g->pl->dir != E)
-	{
+	if ((key == KEY_RIGHT || key == KEY_D) && g->next_dir != E)
 		ft_newdirection(g, E);
-		ft_move(E, g, &g->pl);
-	}
-	if ((key == KEY_LEFT || key == KEY_A) && g->pl && g->pl->dir != W)
-	{
+	if ((key == KEY_LEFT || key == KEY_A) && g->next_dir != W)
 		ft_newdirection(g, W);
-		ft_move(W, g, &g->pl);
-	}
 	return (0);
 }
 
@@ -85,6 +73,7 @@ void	ft_newgame(t_game *g, char **m, t_lay *lay)
 	g->pl = NULL;
 	g->gh = NULL;
 	ft_playerlist(m, g);
+	g->next_dir = 0;
 	ft_load_ghosts(g);
 	ft_load_pacmans(g);
 	g->pac_dying = 0;
@@ -105,11 +94,11 @@ void	ft_check_game(t_game *g)
 			g->g_rate -= g->g_rate / 4;
 		g->panic_mode = 1;
 	}
-	if (!(g->n_frames % g->g_rate) && g->pl->dir != ST && !g->pac_dying)
-	{
-		ft_move(g->pl->dir, g, &g->pl);
+	if (!(g->n_frames % g->g_rate) && g->next_dir && !g->pac_dying)
+		ft_next_dir(g);
+	if (!(g->n_frames % (g->g_rate + g->g_rate / 20)) \
+			&& g->pl->dir != ST && !g->pac_dying)
 		ft_update_ghosts(g, &g->pl);
-	}
 	if (g->pac_dying && !(g->n_frames % ANIM_RATE))
 		ft_anim_pacdeath(g);
 	if (!g->lay->n_collect && !g->lay->n_pl && !g->pac_dying)
