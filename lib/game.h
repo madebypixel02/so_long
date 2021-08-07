@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/06 21:04:51 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/07 14:41:27 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,13 +211,16 @@ t_player	*ft_getnearestpac(t_game *g, t_player *ghost);
 void		ft_update_ghosts(t_game *g, t_player **pl);
 
 /*  */
+int			ft_findghost(t_player *pl, t_vector pos);
+
+/*  */
 void		ft_move_ghost(int d, t_game *g, t_player *ghost, t_player **pl);
 
 /*  */
-int			ft_choose_dir(t_player *ghost, t_player *pacman);
+int			ft_choose_dir(t_game *g, t_player *gh, t_player *pac);
 
 /*  */
-void		ft_update_legal(t_game *g);
+void		ft_update_legal(t_game *g, t_player *gh);
 
 /*  */
 void		ft_restrict_legal(t_player *ghost);

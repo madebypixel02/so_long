@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 16:59:34 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/06 17:29:36 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/07 14:45:54 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,11 @@ void	ft_update_ghosts(t_game *g, t_player **pl)
 	t_player	*closest;
 	int			dir;
 
-	ft_update_legal(g);
 	ghost = g->gh;
 	while (ghost)
 	{
 		closest = ft_getnearestpac(g, ghost);
-		dir = ft_choose_dir(ghost, closest);
+		dir = ft_choose_dir(g, ghost, closest);
 		ft_move_ghost(dir, g, ghost, pl);
 		ghost = ghost->next;
 	}
@@ -106,10 +105,11 @@ void	ft_update_ghosts(t_game *g, t_player **pl)
 
 void	ft_move_ghost(int d, t_game *g, t_player *gh, t_player **pl)
 {
+	t_vector	old;
+
+	old = ft_newvector(gh->pos.x, gh->pos.y);
 	ft_memset(&g->map[gh->pos.y][gh->pos.x], \
 					'0', g->map[gh->pos.y][gh->pos.x] == 'G');
-	mlx_put_image_to_window(g->id, g->w_id, g->sprites.black, \
-		gh->pos.x * SIZE, gh->pos.y * SIZE);
 	if (g->map[gh->pos.y][gh->pos.x] == 'C')
 	{
 		mlx_put_image_to_window(g->id, g->w_id, g->sprites.pacfood, \
@@ -126,4 +126,7 @@ void	ft_move_ghost(int d, t_game *g, t_player *gh, t_player **pl)
 	gh->dir = d;
 	if (g->map[gh->pos.y][gh->pos.x] == 'P')
 		g->pac_dying = 1;
+	else
+		mlx_put_image_to_window(g->id, g->w_id, g->sprites.black, \
+			old.x * SIZE, old.y * SIZE);
 }
