@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 21:38:26 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/06 23:29:58 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/07 14:52:22 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,8 @@ void	ft_check_game(t_game *g)
 	}
 	if (!(g->n_frames % g->g_rate) && g->pl->dir != ST && !g->pac_dying)
 	{
-		ft_update_ghosts(g, &g->pl);
 		ft_move(g->pl->dir, g, &g->pl);
+		ft_update_ghosts(g, &g->pl);
 	}
 	if (g->pac_dying && !(g->n_frames % ANIM_RATE))
 		ft_anim_pacdeath(g);

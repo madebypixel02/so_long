@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 16:59:34 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/07 14:45:54 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/07 14:53:25 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,12 +109,7 @@ void	ft_move_ghost(int d, t_game *g, t_player *gh, t_player **pl)
 
 	old = ft_newvector(gh->pos.x, gh->pos.y);
 	ft_memset(&g->map[gh->pos.y][gh->pos.x], \
-					'0', g->map[gh->pos.y][gh->pos.x] == 'G');
-	if (g->map[gh->pos.y][gh->pos.x] == 'C')
-	{
-		mlx_put_image_to_window(g->id, g->w_id, g->sprites.pacfood, \
-			gh->pos.x * SIZE, gh->pos.y * SIZE);
-	}
+		'0', g->map[gh->pos.y][gh->pos.x] == 'G');
 	if (d == N)
 		gh->pos.y--;
 	if (d == S)
@@ -128,5 +123,8 @@ void	ft_move_ghost(int d, t_game *g, t_player *gh, t_player **pl)
 		g->pac_dying = 1;
 	else
 		mlx_put_image_to_window(g->id, g->w_id, g->sprites.black, \
+			old.x * SIZE, old.y * SIZE);
+	if (g->map[gh->pos.y][gh->pos.x] == 'C')
+		mlx_put_image_to_window(g->id, g->w_id, g->sprites.pacfood, \
 			old.x * SIZE, old.y * SIZE);
 }
