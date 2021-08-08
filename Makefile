@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/08/08 01:48:49 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/08/08 09:31:59 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ Q = KEY_Q=12
 UNAME = $(shell uname -s)
 ECHO = echo
 CDEBUG = -g3 -fsanitize=address
-GRATE = GAME_RATE=4000
+GRATE = GAME_RATE=2000
 ARATE = ANIM_RATE=1000
 GAME = game_mac.c
 LMLX = -lmlx -framework OpenGL -framework AppKit
@@ -48,8 +48,8 @@ ifeq ($(UNAME), Linux)
 	LEAKS = #valgrind --leak-check=full --show-leak-kinds=all -s -q 
 	LMLX = -L$(LMLX_PATH) -lmlx -lXext -lX11
 	IMLX = -I$(IMLX_PATH)
-	GRATE = GAME_RATE=10000
-	ARATE = ANIM_RATE=4500
+	GRATE = GAME_RATE=8000
+	ARATE = ANIM_RATE=4000
 	GAME = game_linux.c
 	# Key Codes for Linux
 	ESC = KEY_ESC=65307
