@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 01:06:29 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/08 09:35:27 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/08 09:44:35 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_update_score(t_game *g)
 		digit = score % 10;
 		score /= 10;
 		mlx_put_image_to_window(g->id, g->w_id, g->sprites.score_font.black, \
-			g->width / 2 + 10 - 12 * i, g->height - 70);
+			g->width / 2 + 10 - 12 * i, g->height - 67);
 		ft_put_font(g, digit, i);
 		i++;
 	}
@@ -88,7 +88,7 @@ void	ft_put_font(t_game *g, int digit, int i)
 	if (digit == 9)
 		font = g->sprites.score_font.nine;
 	mlx_put_image_to_window(g->id, g->w_id, font, \
-		g->width / 2 + 10 - 12 * i, g->height - 70);
+		g->width / 2 + 10 - 12 * i, g->height - 67);
 }
 
 void	free_fonts(t_game *g)

@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 02:21:39 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/08 02:21:46 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/08 09:38:59 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	ft_newgame(t_game *g, char **m, t_lay *lay)
 	ft_load_pacmans(g);
 	g->pac_dying = 0;
 	g->panic_mode = 0;
-	g->g_rate = GAME_RATE - (30 * lay->n_row) - (30 * lay->n_col);
+	g->g_rate = GAME_RATE - (5 * lay->n_row) - (5 * lay->n_col);
 	g->redraw = 1;
 	mlx_loop_hook(g->id, ft_update, (void *)g);
 	mlx_hook(g->w_id, 17, 0, end_game, (void *)g);
