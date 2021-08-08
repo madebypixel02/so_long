@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 17:09:20 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/08 14:43:35 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/09 00:54:20 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ void	ft_redraw_pac(t_game *g)
 	pl = g->pl;
 	while (pl)
 	{
-		if (!g->pac_dying && pl->moving)
-			ft_put_pacman(g);
 		if (pl->win_pos.x < pl->pos.x * SIZE && pl->moving)
 			pl->win_pos.x++;
 		if (pl->win_pos.x > pl->pos.x * SIZE && pl->moving)
@@ -65,6 +63,7 @@ void	ft_redraw_pac(t_game *g)
 			pl->moving = 0;
 		pl = pl->next;
 	}
+	ft_put_pacman(g);
 }
 
 void	ft_redraw_gh(t_game *g)
@@ -74,7 +73,6 @@ void	ft_redraw_gh(t_game *g)
 	pl = g->gh;
 	while (pl)
 	{
-		ft_put_ghosts(g);
 		if (pl->win_pos.x < pl->pos.x * SIZE && pl->moving)
 			pl->win_pos.x++;
 		if (pl->win_pos.x > pl->pos.x * SIZE && pl->moving)
@@ -85,7 +83,27 @@ void	ft_redraw_gh(t_game *g)
 			pl->win_pos.y--;
 		if (pl->win_pos.x == pl->pos.x * SIZE && \
 				pl->win_pos.y == pl->pos.y * SIZE)
+		{
+			ft_redraw_pacfood(g, pl);
 			pl->moving = 0;
+		}
 		pl = pl->next;
 	}
+	ft_put_ghosts(g);
+}
+
+void	ft_redraw_pacfood(t_game *g, t_player *pl)
+{
+	if (pl->dir == N && g->map[pl->pos.y + 1][pl->pos.x] == 'C')
+		mlx_put_image_to_window(g->id, g->w_id, g->sprites.pacfood, \
+			pl->pos.x * SIZE, (pl->pos.y + 1) * SIZE);
+	if (pl->dir == S && g->map[pl->pos.y - 1][pl->pos.x] == 'C')
+		mlx_put_image_to_window(g->id, g->w_id, g->sprites.pacfood, \
+			pl->pos.x * SIZE, (pl->pos.y - 1) * SIZE);
+	if (pl->dir == E && g->map[pl->pos.y][pl->pos.x - 1] == 'C')
+		mlx_put_image_to_window(g->id, g->w_id, g->sprites.pacfood, \
+			(pl->pos.x - 1) * SIZE, pl->pos.y * SIZE);
+	if (pl->dir == W && g->map[pl->pos.y][pl->pos.x + 1] == 'C')
+		mlx_put_image_to_window(g->id, g->w_id, g->sprites.pacfood, \
+			(pl->pos.x + 1) * SIZE, pl->pos.y * SIZE);
 }

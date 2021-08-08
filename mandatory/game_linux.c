@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 21:38:26 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/08 14:50:46 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/09 01:03:04 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,18 +95,18 @@ void	ft_check_game(t_game *g)
 	if (g->lay_bak.n_collect / 4 + 1 >= g->lay->n_collect)
 	{
 		if (!g->panic_mode)
-			g->g_rate -= g->g_rate / 4;
+			g->g_rate -= g->g_rate / 3;
 		g->panic_mode = 1;
 	}
+	if (!(g->n_frames % (g->g_rate + g->g_rate / 3)))
+		ft_redraw_gh(g);
+	if (!(g->n_frames % g->g_rate) && !g->pac_dying)
+		ft_redraw_pac(g);
 	if (g->pl->dir != ST && !g->pac_dying)
 		ft_update_ghosts(g, &g->pl);
 	if (g->next_dir)
 		ft_next_dir(g);
-	if (!(g->n_frames % (g->g_rate + 20)))
-		ft_redraw_gh(g);
-	if (!(g->n_frames % g->g_rate))
-		ft_redraw_pac(g);
-	if (!g->pl->moving && g->pac_dying && !(g->n_frames % ANIM_RATE))
+	if (g->pac_dying && !(g->n_frames % ANIM_RATE))
 		ft_anim_pacdeath(g);
 	if (!g->lay->n_collect && !g->lay->n_pl && !g->pac_dying)
 	{

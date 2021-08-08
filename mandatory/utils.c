@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 17:13:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/08 17:21:39 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/09 00:53:32 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,27 @@ void	ft_newdirection(t_game *g, int direction)
 
 void	ft_move(int d, t_game *g, t_player *temp)
 {
+	t_vector	nw;
+
 	if (temp && !ft_checkmvtogh(g, d, temp))
 	{
-		if (d == N && ft_strchr("0CEG", g->map[temp->pos.y - 1][temp->pos.x]))
-			ft_swap_tile(ft_newvector(temp->pos.x, temp->pos.y), \
-				ft_newvector(temp->pos.x, temp->pos.y - 1), g);
-		if (d == S && ft_strchr("0CEG", g->map[temp->pos.y + 1][temp->pos.x]))
-			ft_swap_tile(ft_newvector(temp->pos.x, temp->pos.y), \
-				ft_newvector(temp->pos.x, temp->pos.y + 1), g);
-		if (d == E && ft_strchr("0CEG", g->map[temp->pos.y][temp->pos.x + 1]))
-			ft_swap_tile(ft_newvector(temp->pos.x, temp->pos.y), \
-				ft_newvector(temp->pos.x + 1, temp->pos.y), g);
-		if (d == W && ft_strchr("0CEG", g->map[temp->pos.y][temp->pos.x - 1]))
-			ft_swap_tile(ft_newvector(temp->pos.x, temp->pos.y), \
-				ft_newvector(temp->pos.x - 1, temp->pos.y), g);
+		if (d == N && ft_strchr("0CE", g->map[temp->pos.y - 1][temp->pos.x]))
+			nw = ft_newvector(temp->pos.x, temp->pos.y - 1);
+		else if (d == S && ft_strchr("0CE", \
+				g->map[temp->pos.y + 1][temp->pos.x]))
+			nw = ft_newvector(temp->pos.x, temp->pos.y + 1);
+		else if (d == E && ft_strchr("0CE", \
+				g->map[temp->pos.y][temp->pos.x + 1]))
+			nw = ft_newvector(temp->pos.x + 1, temp->pos.y);
+		else if (d == W && ft_strchr("0CE", \
+				g->map[temp->pos.y][temp->pos.x - 1]))
+			nw = ft_newvector(temp->pos.x - 1, temp->pos.y);
+		else
+			nw = ft_newvector(0, 0);
+		if (g->map[nw.y][nw.x] == 'C')
+			g->lay->n_collect--;
+		if (nw.x && nw.y)
+			ft_swap_tile(ft_newvector(temp->pos.x, temp->pos.y), nw, g);
 	}
 }
 
@@ -54,16 +61,14 @@ int	ft_swap_tile(t_vector old, t_vector nw, t_game *g)
 
 	player = g->pl;
 	hide = 0;
-	if (g->map[nw.y][nw.x] == 'C')
-		g->lay->n_collect--;
-	if (g->map[nw.y][nw.x] == 'E' && !g->lay->n_collect)
+	if (g->map[nw.y][nw.x] == 'E')
 	{
-		hide = 1;
-		g->lay->n_pl--;
-		ft_delete_player(g, old);
+		if (g->lay->n_collect)
+			return (1);
+		mlx_put_image_to_window(g->id, g->w_id, player->sprites.black, \
+			old.x * SIZE, old.y * SIZE);
+		hide = ft_delete_player(g, old);
 	}
-	else if (g->map[nw.y][nw.x] == 'E')
-		return (1);
 	while (!hide && player)
 	{
 		if (player->pos.x == old.x && player->pos.y == old.y)
@@ -116,19 +121,4 @@ int	ft_reset(t_game *g)
 	printf("\n%sGAME HAS BEEN RESET!\n%s", YELLOW, DEFAULT);
 	ft_newgame(g, map, &lay);
 	return (1);
-}
-
-void		ft_delete_background(t_game *g)
-{
-	char	*pixels;
-	int		bits;
-	int		bits2;
-	t_player	*gh;
-
-	gh = g->pl;
-	pixels = NULL;
-	pixels = mlx_get_data_addr(gh->sprites.right, &bits, &bits2, &g->endian);
-	printf("%s", pixels);
-	exit(0);
-
 }

@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 18:03:12 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/08 17:53:59 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/08 23:37:05 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	ft_load_pacmans(t_game *g)
 				"sprites/Pac-Man/black.xpm", &i, &i);
 		pacman = pacman->next;
 	}
-	//ft_delete_background(g);
 }
 
 void	ft_put_pacman(t_game *g)
@@ -43,8 +42,6 @@ void	ft_put_pacman(t_game *g)
 	pacman = g->pl;
 	while (pacman)
 	{
-		/*mlx_put_image_to_window(g->id, g->w_id, pacman->sprites.black, \
-			pacman->win_pos.x, pacman->win_pos.y);*/
 		if (pacman->dir == N)
 			mlx_put_image_to_window(g->id, g->w_id, pacman->sprites.up, \
 				pacman->win_pos.x, pacman->win_pos.y);

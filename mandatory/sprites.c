@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 23:02:26 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/08 17:07:48 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/09 00:52:01 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ t_sprite	ft_initsprites(t_game *g)
 	int			size;
 
 	size = SIZE;
-	//g->sprites.black = mlx_xpm_file_to_image(g->id, \
-		//"sprites/Other/Walls/black.xpm", &size, &size);
 	g->sprites.wall = mlx_xpm_file_to_image(g->id, \
 		"sprites/Other/Walls/wall.xpm", &size, &size);
 	g->sprites.pacfood = mlx_xpm_file_to_image(g->id, \
@@ -38,7 +36,6 @@ t_sprite	ft_initsprites(t_game *g)
 
 int	free_sprites(t_game *g)
 {
-	//mlx_destroy_image(g->id, g->sprites.black);
 	mlx_destroy_image(g->id, g->sprites.wall);
 	mlx_destroy_image(g->id, g->sprites.pacfood);
 	mlx_destroy_image(g->id, g->sprites.portal);

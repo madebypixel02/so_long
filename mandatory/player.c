@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 20:35:25 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/08 12:23:44 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/09 00:33:08 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	ft_delete_player(t_game *g, t_vector old)
 
 	temp = g->pl;
 	prev = NULL;
+	g->lay->n_pl--;
 	while (temp)
 	{
 		if (temp->pos.x == old.x && temp->pos.y == old.y)
