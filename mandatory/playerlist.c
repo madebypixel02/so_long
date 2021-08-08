@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 10:33:55 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/07 23:06:42 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/08 12:23:21 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ void	ft_playerlist(char **map, t_game *g)
 		while (map[y][x])
 		{
 			if (map[y][x] == 'P')
-				ft_plradd_back(&g->pl, ft_plrnew(x, y));
+				ft_plradd_back(&g->pl, ft_plrnew(ft_newvector(x, y)));
 			if (map[y][x] == 'G')
-				ft_plradd_back(&g->gh, ft_plrnew(x, y));
+				ft_plradd_back(&g->gh, ft_plrnew(ft_newvector(x, y)));
 			x++;
 		}
 		y++;

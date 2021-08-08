@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 16:59:34 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/07 23:51:43 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/08 15:53:06 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	ft_load_ghosts(t_game *g)
 			"sprites/Ghosts/Panic/ghost_panic1.xpm", &size, &size);
 		ghost->sprites.panic2 = mlx_xpm_file_to_image(g->id, \
 			"sprites/Ghosts/Panic/ghost_panic2.xpm", &size, &size);
+		ghost->sprites.black = mlx_xpm_file_to_image(g->id, \
+			"sprites/Ghosts/black.xpm", &size, &size);
 		ghost = ghost->next;
 		i++;
 	}
@@ -66,22 +68,22 @@ void	ft_put_ghosts(t_game *g)
 	{
 		if (ghost->dir == N && !g->panic_mode)
 			mlx_put_image_to_window(g->id, g->w_id, ghost->sprites.up, \
-				ghost->pos.x * SIZE, ghost->pos.y * SIZE);
+				ghost->win_pos.x, ghost->win_pos.y);
 		if (ghost->dir == S && !g->panic_mode)
 			mlx_put_image_to_window(g->id, g->w_id, ghost->sprites.down, \
-				ghost->pos.x * SIZE, ghost->pos.y * SIZE);
+				ghost->win_pos.x, ghost->win_pos.y);
 		if ((ghost->dir == E || ghost->dir == ST) && !g->panic_mode)
 			mlx_put_image_to_window(g->id, g->w_id, ghost->sprites.right, \
-				ghost->pos.x * SIZE, ghost->pos.y * SIZE);
+				ghost->win_pos.x, ghost->win_pos.y);
 		if (ghost->dir == W && !g->panic_mode)
 			mlx_put_image_to_window(g->id, g->w_id, ghost->sprites.left, \
-				ghost->pos.x * SIZE, ghost->pos.y * SIZE);
-		else if (g->panic_mode && g->n_frames % ANIM_RATE < ANIM_RATE / 2)
+				ghost->win_pos.x, ghost->win_pos.y);
+		else if (g->panic_mode && g->n_frames % g->g_rate < g->g_rate / 2)
 			mlx_put_image_to_window(g->id, g->w_id, ghost->sprites.panic1, \
-				ghost->pos.x * SIZE, ghost->pos.y * SIZE);
+				ghost->win_pos.x, ghost->win_pos.y);
 		else if (g->panic_mode)
 			mlx_put_image_to_window(g->id, g->w_id, ghost->sprites.panic2, \
-				ghost->pos.x * SIZE, ghost->pos.y * SIZE);
+				ghost->win_pos.x, ghost->win_pos.y);
 		ghost = ghost->next;
 	}
 }
@@ -93,14 +95,14 @@ void	ft_update_ghosts(t_game *g, t_player **pl)
 	int			dir;
 
 	ghost = g->gh;
-	while (ghost)
+	while (ghost && !ghost->moving)
 	{
 		closest = ft_getnearestpac(g, ghost);
 		dir = ft_choose_dir(g, ghost, closest);
+		ghost->moving = 1;
 		ft_move_ghost(dir, g, ghost, pl);
 		ghost = ghost->next;
 	}
-	ft_put_ghosts(g);
 }
 
 void	ft_move_ghost(int d, t_game *g, t_player *gh, t_player **pl)
@@ -124,7 +126,7 @@ void	ft_move_ghost(int d, t_game *g, t_player *gh, t_player **pl)
 		gh->pos = old;
 		g->pac_dying = 1;
 	}
-	mlx_put_image_to_window(g->id, g->w_id, g->sprites.black, \
+	mlx_put_image_to_window(g->id, g->w_id, gh->sprites.black, \
 		old.x * SIZE, old.y * SIZE);
 	if (g->map[old.y][old.x] == 'C')
 		mlx_put_image_to_window(g->id, g->w_id, g->sprites.pacfood, \

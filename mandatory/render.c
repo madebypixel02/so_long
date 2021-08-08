@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 17:09:20 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/08 01:52:18 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/08 14:43:35 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	ft_update(t_game *g)
 	if (g->redraw)
 	{
 		ft_put_ghosts(g);
-		ft_put_extras(g);
+		mlx_put_image_to_window(g->id, g->w_id, g->sprites.logo, \
+		(g->width - 131) / 2, g->height - 42);
 		ft_update_score(g);
 		while (g->map[y])
 		{
@@ -42,19 +43,49 @@ int	ft_update(t_game *g)
 	return (0);
 }
 
-void	ft_put_extras(t_game *g)
+void	ft_redraw_pac(t_game *g)
 {
-	mlx_put_image_to_window(g->id, g->w_id, g->sprites.logo, \
-		(g->width - 131) / 2, g->height - 42);
+	t_player	*pl;
+
+	pl = g->pl;
+	while (pl)
+	{
+		if (!g->pac_dying && pl->moving)
+			ft_put_pacman(g);
+		if (pl->win_pos.x < pl->pos.x * SIZE && pl->moving)
+			pl->win_pos.x++;
+		if (pl->win_pos.x > pl->pos.x * SIZE && pl->moving)
+			pl->win_pos.x--;
+		if (pl->win_pos.y < pl->pos.y * SIZE && pl->moving)
+			pl->win_pos.y++;
+		if (pl->win_pos.y > pl->pos.y * SIZE && pl->moving)
+			pl->win_pos.y--;
+		if (pl->win_pos.x == pl->pos.x * SIZE && \
+				pl->win_pos.y == pl->pos.y * SIZE)
+			pl->moving = 0;
+		pl = pl->next;
+	}
 }
 
-void	ft_redraw(t_vector old, t_vector nw, t_game *g, int hide)
+void	ft_redraw_gh(t_game *g)
 {
-	mlx_put_image_to_window(g->id, g->w_id, g->sprites.black, \
-		old.x * SIZE, old.y * SIZE);
-	if (!hide)
-		mlx_put_image_to_window(g->id, g->w_id, g->sprites.black, \
-			nw.x * SIZE, nw.y * SIZE);
-	if (!g->pac_dying)
-		ft_put_pacman(g);
+	t_player	*pl;
+
+	pl = g->gh;
+	while (pl)
+	{
+		ft_put_ghosts(g);
+		if (pl->win_pos.x < pl->pos.x * SIZE && pl->moving)
+			pl->win_pos.x++;
+		if (pl->win_pos.x > pl->pos.x * SIZE && pl->moving)
+			pl->win_pos.x--;
+		if (pl->win_pos.y < pl->pos.y * SIZE && pl->moving)
+			pl->win_pos.y++;
+		if (pl->win_pos.y > pl->pos.y * SIZE && pl->moving)
+			pl->win_pos.y--;
+		if (pl->win_pos.x == pl->pos.x * SIZE && \
+				pl->win_pos.y == pl->pos.y * SIZE)
+			pl->moving = 0;
+		pl = pl->next;
+	}
 }

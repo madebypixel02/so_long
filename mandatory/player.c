@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 20:35:25 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/08 01:49:32 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/08 12:23:44 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-t_player	*ft_plrnew(int x, int y)
+t_player	*ft_plrnew(t_vector pos)
 {
 	t_player	*player;
 
 	player = malloc(sizeof(t_player));
 	if (!player)
 		return (NULL);
-	player->pos = ft_newvector(x, y);
+	player->pos = pos;
+	player->win_pos = ft_newvector(pos.x * SIZE, pos.y * SIZE);
+	player->moving = 0;
 	player->dir = ST;
 	player->next = NULL;
 	return (player);

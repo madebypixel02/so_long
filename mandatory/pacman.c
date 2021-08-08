@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 18:03:12 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/07 23:39:51 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/08 17:53:59 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,11 @@ void	ft_load_pacmans(t_game *g)
 				"sprites/Pac-Man/pac_semi_left.xpm", &i, &i);
 		pacman->sprites.right = mlx_xpm_file_to_image(g->id, \
 				"sprites/Pac-Man/pac_semi_right.xpm", &i, &i);
+		pacman->sprites.black = mlx_xpm_file_to_image(g->id, \
+				"sprites/Pac-Man/black.xpm", &i, &i);
 		pacman = pacman->next;
 	}
+	//ft_delete_background(g);
 }
 
 void	ft_put_pacman(t_game *g)
@@ -40,20 +43,20 @@ void	ft_put_pacman(t_game *g)
 	pacman = g->pl;
 	while (pacman)
 	{
-		mlx_put_image_to_window(g->id, g->w_id, g->sprites.black, \
-						pacman->pos.x * SIZE, pacman->pos.y * SIZE);
+		/*mlx_put_image_to_window(g->id, g->w_id, pacman->sprites.black, \
+			pacman->win_pos.x, pacman->win_pos.y);*/
 		if (pacman->dir == N)
 			mlx_put_image_to_window(g->id, g->w_id, pacman->sprites.up, \
-				pacman->pos.x * SIZE, pacman->pos.y * SIZE);
+				pacman->win_pos.x, pacman->win_pos.y);
 		if (pacman->dir == S)
 			mlx_put_image_to_window(g->id, g->w_id, pacman->sprites.down, \
-				pacman->pos.x * SIZE, pacman->pos.y * SIZE);
+				pacman->win_pos.x, pacman->win_pos.y);
 		if (pacman->dir == E || pacman->dir == ST)
 			mlx_put_image_to_window(g->id, g->w_id, pacman->sprites.right, \
-				pacman->pos.x * SIZE, pacman->pos.y * SIZE);
+				pacman->win_pos.x, pacman->win_pos.y);
 		if (pacman->dir == W)
 			mlx_put_image_to_window(g->id, g->w_id, pacman->sprites.left, \
-				pacman->pos.x * SIZE, pacman->pos.y * SIZE);
+				pacman->win_pos.x, pacman->win_pos.y);
 		pacman = pacman->next;
 	}
 }
@@ -67,12 +70,15 @@ void	ft_next_dir(t_game *g)
 	n_pl = g->lay->n_pl;
 	while (pac)
 	{
-		ft_update_legal(g, pac);
-		if (g->next_dir && ft_in_legal(pac, g->next_dir))
-			pac->dir = g->next_dir;
-		ft_move(pac->dir, g, pac);
-		if (n_pl != g->lay->n_pl)
-			break ;
+		if (!pac->moving)
+		{
+			ft_update_legal(g, pac);
+			if (g->next_dir && ft_in_legal(pac, g->next_dir))
+				pac->dir = g->next_dir;
+			ft_move(pac->dir, g, pac);
+			if (n_pl != g->lay->n_pl)
+				break ;
+		}
 		pac = pac->next;
 	}
 }

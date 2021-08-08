@@ -6,11 +6,12 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 17:13:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/08 02:29:53 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/08 17:21:39 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/game.h"
+#include <mlx.h>
 #include <unistd.h>
 
 void	ft_newdirection(t_game *g, int direction)
@@ -66,12 +67,14 @@ int	ft_swap_tile(t_vector old, t_vector nw, t_game *g)
 	while (!hide && player)
 	{
 		if (player->pos.x == old.x && player->pos.y == old.y)
+		{
 			player->pos = ft_newvector(nw.x, nw.y);
+			player->moving = 1;
+		}
 		player = player->next;
 	}
 	ft_memset(&g->map[nw.y][nw.x], g->map[old.y][old.x], !hide);
 	ft_memset(&g->map[old.y][old.x], '0', 1);
-	ft_redraw(ft_newvector(old.x, old.y), ft_newvector(nw.x, nw.y), g, hide);
 	return (1);
 }
 
@@ -113,4 +116,19 @@ int	ft_reset(t_game *g)
 	printf("\n%sGAME HAS BEEN RESET!\n%s", YELLOW, DEFAULT);
 	ft_newgame(g, map, &lay);
 	return (1);
+}
+
+void		ft_delete_background(t_game *g)
+{
+	char	*pixels;
+	int		bits;
+	int		bits2;
+	t_player	*gh;
+
+	gh = g->pl;
+	pixels = NULL;
+	pixels = mlx_get_data_addr(gh->sprites.right, &bits, &bits2, &g->endian);
+	printf("%s", pixels);
+	exit(0);
+
 }

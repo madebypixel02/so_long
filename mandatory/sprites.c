@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 23:02:26 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/08 01:54:07 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/08 17:07:48 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ t_sprite	ft_initsprites(t_game *g)
 	int			size;
 
 	size = SIZE;
-	g->sprites.black = mlx_xpm_file_to_image(g->id, \
-		"sprites/Other/Walls/black.xpm", &size, &size);
+	//g->sprites.black = mlx_xpm_file_to_image(g->id, \
+		//"sprites/Other/Walls/black.xpm", &size, &size);
 	g->sprites.wall = mlx_xpm_file_to_image(g->id, \
 		"sprites/Other/Walls/wall.xpm", &size, &size);
 	g->sprites.pacfood = mlx_xpm_file_to_image(g->id, \
@@ -38,7 +38,7 @@ t_sprite	ft_initsprites(t_game *g)
 
 int	free_sprites(t_game *g)
 {
-	mlx_destroy_image(g->id, g->sprites.black);
+	//mlx_destroy_image(g->id, g->sprites.black);
 	mlx_destroy_image(g->id, g->sprites.wall);
 	mlx_destroy_image(g->id, g->sprites.pacfood);
 	mlx_destroy_image(g->id, g->sprites.portal);
@@ -65,6 +65,7 @@ void	free_players(t_game *g)
 		mlx_destroy_image(g->id, ghost->sprites.right);
 		mlx_destroy_image(g->id, ghost->sprites.panic1);
 		mlx_destroy_image(g->id, ghost->sprites.panic2);
+		mlx_destroy_image(g->id, ghost->sprites.black);
 		ghost = ghost->next;
 	}
 	while (pacman)
@@ -73,6 +74,7 @@ void	free_players(t_game *g)
 		mlx_destroy_image(g->id, pacman->sprites.down);
 		mlx_destroy_image(g->id, pacman->sprites.left);
 		mlx_destroy_image(g->id, pacman->sprites.right);
+		mlx_destroy_image(g->id, pacman->sprites.black);
 		pacman = pacman->next;
 	}
 }
@@ -83,6 +85,7 @@ void	ft_free_singlepl(t_game *g, t_player *pl)
 	mlx_destroy_image(g->id, pl->sprites.down);
 	mlx_destroy_image(g->id, pl->sprites.left);
 	mlx_destroy_image(g->id, pl->sprites.right);
+	mlx_destroy_image(g->id, pl->sprites.black);
 }
 
 void	ft_put_map(t_game *g, int x, int y)

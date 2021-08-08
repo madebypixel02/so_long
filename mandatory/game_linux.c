@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 21:38:26 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/08 09:24:25 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/08 14:50:46 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	ft_newgame(t_game *g, char **m, t_lay *lay)
 	ft_load_pacmans(g);
 	g->pac_dying = 0;
 	g->panic_mode = 0;
-	g->g_rate = GAME_RATE - (5 * lay->n_row) - (5 * lay->n_col);
+	g->g_rate = GAME_RATE;
 	g->redraw = 1;
 	mlx_loop_hook(g->id, ft_update, (void *)g);
 	mlx_hook(g->w_id, 17, 0, end_game, (void *)g);
@@ -98,12 +98,15 @@ void	ft_check_game(t_game *g)
 			g->g_rate -= g->g_rate / 4;
 		g->panic_mode = 1;
 	}
-	if (!(g->n_frames % g->g_rate) && g->next_dir && !g->pac_dying)
-		ft_next_dir(g);
-	if (!(g->n_frames % (g->g_rate + g->g_rate / 20)) \
-			&& g->pl->dir != ST && !g->pac_dying)
+	if (g->pl->dir != ST && !g->pac_dying)
 		ft_update_ghosts(g, &g->pl);
-	if (g->pac_dying && !(g->n_frames % ANIM_RATE))
+	if (g->next_dir)
+		ft_next_dir(g);
+	if (!(g->n_frames % (g->g_rate + 20)))
+		ft_redraw_gh(g);
+	if (!(g->n_frames % g->g_rate))
+		ft_redraw_pac(g);
+	if (!g->pl->moving && g->pac_dying && !(g->n_frames % ANIM_RATE))
 		ft_anim_pacdeath(g);
 	if (!g->lay->n_collect && !g->lay->n_pl && !g->pac_dying)
 	{

@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/08 01:59:19 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/08 17:03:46 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ typedef struct s_pl_sprite
 	void	*right;
 	void	*panic1;
 	void	*panic2;
+	void	*black;
+	char	*pixels;
 }				t_pl_sprite;
 
 /* MLX image pointers */
@@ -65,8 +67,8 @@ typedef struct s_sprite
 	void		**wall;
 	void		*pacfood;
 	void		*portal;
-	void		*black;
 	void		*pacman;
+	void		*pixels;
 	t_list		*pac_dying_bak;
 	t_list		*pac_dying;
 	t_font		score_font;
@@ -85,7 +87,9 @@ typedef struct s_legal_actions
 typedef struct s_player
 {
 	t_vector		pos;
+	t_vector		win_pos;
 	int				dir;
+	int				moving;
 	t_pl_sprite		sprites;
 	t_legal_actions	legal;
 	struct s_player	*next;
@@ -100,6 +104,7 @@ typedef struct s_game
 	int			next_dir;
 	t_lay		lay_bak;
 	char		**map;
+	int			endian;
 	char		**map_bak;
 	t_sprite	sprites;
 	int			pac_dying;
@@ -143,7 +148,7 @@ void		ft_check_game(t_game *g);
 void		ft_newdirection(t_game *g, int direction);
 
 /* Creates new player in a given position */
-t_player	*ft_plrnew(int x, int y);
+t_player	*ft_plrnew(t_vector pos);
 
 /* ft_lstadd_back for player struct */
 void		ft_plradd_back(t_player **lst, t_player *newnode);
@@ -173,7 +178,9 @@ void		ft_move(int d, t_game *g, t_player *temp);
 int			ft_swap_tile(t_vector old, t_vector nw, t_game *g);
 
 /* Re-Draws Pacmans and the floor if necessary to new position */
-void		ft_redraw(t_vector old, t_vector nw, t_game *g, int hide);
+//void		ft_redraw(t_vector old, t_vector nw, t_game *g, int hide);
+void		ft_redraw_pac(t_game *g);
+void		ft_redraw_gh(t_game *g);
 
 /* Draws walls, collectibles, and initial positions for players/enemies */
 void		ft_put_map(t_game *g, int x, int y);
@@ -204,9 +211,6 @@ void		ft_load_ghosts(t_game *g);
 
 /* Initiates sprites for every pacman */
 void		ft_load_pacmans(t_game *g);
-
-/* Draws Score, Moves, and pacman logo */
-void		ft_put_extras(t_game *g);
 
 /* Frees all nodes in animation list */
 void		free_animation(t_game *g);
@@ -258,5 +262,8 @@ int			ft_in_legal(t_player *player, int dir);
 
 /*  */
 void		ft_next_dir(t_game *g);
+
+/*  */
+void		ft_delete_background(t_game *g);
 
 #endif
