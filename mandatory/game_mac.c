@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 02:21:39 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/08 09:38:59 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/08 09:56:29 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	end_game(t_game *g)
 	mlx_clear_window(g->id, g->w_id);
 	mlx_destroy_window(g->id, g->w_id);
 	free(g->id);
+	system("leaks so_long");
 	exit(0);
 	return (0);
 }
