@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 23:02:26 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/06 13:16:48 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/08 01:54:07 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ t_sprite	ft_initsprites(t_game *g)
 	size = SIZE;
 	g->sprites.black = mlx_xpm_file_to_image(g->id, \
 		"sprites/Other/Walls/black.xpm", &size, &size);
-	g->sprites.black_font = mlx_xpm_file_to_image(g->id, \
-		"sprites/Other/Fonts/black.xpm", &size, &size);
 	g->sprites.wall = mlx_xpm_file_to_image(g->id, \
 		"sprites/Other/Walls/wall.xpm", &size, &size);
 	g->sprites.pacfood = mlx_xpm_file_to_image(g->id, \
@@ -33,6 +31,7 @@ t_sprite	ft_initsprites(t_game *g)
 	g->sprites.pacman = mlx_xpm_file_to_image(g->id, \
 		"sprites/Pac-Man/pac_closed.xpm", &size, &size);
 	g->sprites.pac_dying = ft_load_pacdeath(g);
+	g->sprites.score_font = ft_load_score_font(g);
 	g->sprites.pac_dying_bak = g->sprites.pac_dying;
 	return (g->sprites);
 }
@@ -40,13 +39,13 @@ t_sprite	ft_initsprites(t_game *g)
 int	free_sprites(t_game *g)
 {
 	mlx_destroy_image(g->id, g->sprites.black);
-	mlx_destroy_image(g->id, g->sprites.black_font);
 	mlx_destroy_image(g->id, g->sprites.wall);
 	mlx_destroy_image(g->id, g->sprites.pacfood);
 	mlx_destroy_image(g->id, g->sprites.portal);
 	mlx_destroy_image(g->id, g->sprites.logo);
 	mlx_destroy_image(g->id, g->sprites.pacman);
 	free_players(g);
+	free_fonts(g);
 	free_animation(g);
 	return (0);
 }

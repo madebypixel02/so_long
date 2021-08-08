@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aperez-b <aperez-b@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/07 22:05:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/08 00:16:47 by aperez-b         ###   ########.fr       */
+/*   Created: 2021/08/08 02:21:39 by aperez-b          #+#    #+#             */
+/*   Updated: 2021/08/08 02:21:46 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,17 @@ int	key_hook(int key, t_game *g)
 		end_game(g);
 	if (key == KEY_R && !g->pac_dying)
 		ft_reset(g);
-	if ((key == KEY_UP || key == KEY_W))
+	if ((key == KEY_UP || key == KEY_W) && g->next_dir != N && \
+		!g->pac_dying)
 		ft_newdirection(g, N);
-	if ((key == KEY_DOWN || key == KEY_S))
+	if ((key == KEY_DOWN || key == KEY_S) && g->next_dir != S && \
+		!g->pac_dying)
 		ft_newdirection(g, S);
-	if ((key == KEY_RIGHT || key == KEY_D))
+	if ((key == KEY_RIGHT || key == KEY_D) && g->next_dir != E && \
+		!g->pac_dying)
 		ft_newdirection(g, E);
-	if ((key == KEY_LEFT || key == KEY_A))
+	if ((key == KEY_LEFT || key == KEY_A) && g->next_dir != W && \
+		!g->pac_dying)
 		ft_newdirection(g, W);
 	return (0);
 }

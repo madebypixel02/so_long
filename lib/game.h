@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/07 22:44:27 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/08 01:59:19 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,21 @@ enum e_direction
 	W = -2
 };
 
+typedef struct s_font
+{
+	void	*zero;
+	void	*one;
+	void	*two;
+	void	*three;
+	void	*four;
+	void	*five;
+	void	*six;
+	void	*seven;
+	void	*eight;
+	void	*nine;
+	void	*black;
+}				t_font;
+
 typedef struct s_pl_sprite
 {
 	void	*up;
@@ -51,11 +66,10 @@ typedef struct s_sprite
 	void		*pacfood;
 	void		*portal;
 	void		*black;
-	void		*black_font;
 	void		*pacman;
 	t_list		*pac_dying_bak;
 	t_list		*pac_dying;
-	t_list		*pac_moving;
+	t_font		score_font;
 }				t_sprite;
 
 /*  */
@@ -72,8 +86,6 @@ typedef struct s_player
 {
 	t_vector		pos;
 	int				dir;
-	int				moving;
-	int				dying;
 	t_pl_sprite		sprites;
 	t_legal_actions	legal;
 	struct s_player	*next;
@@ -172,11 +184,17 @@ void		ft_put_ghosts(t_game *g);
 /* Prints every pacman at its current state */
 void		ft_put_pacman(t_game *g);
 
+/*  */
+void		ft_put_font(t_game *g, int digit, int i);
+
 /* Iterates to animate pacman's death */
 void		ft_anim_pacdeath(t_game *g);
 
 /* Loads necessary sprites (mlx) for pacman's death */
 t_list		*ft_load_pacdeath(t_game *g);
+
+/*  */
+t_font		ft_load_score_font(t_game *g);
 
 /* Selects color for a ghost depending on the number of ghosts */
 void		*ft_chooseghcolor(t_game *g, int i, int dir);
@@ -198,6 +216,9 @@ void		free_players(t_game *g);
 
 /* Frees up, down, left, right for given player */
 void		ft_free_singlepl(t_game *g, t_player *pl);
+
+/*  */
+void		free_fonts(t_game *g);
 
 /* Updates the score that appears on screen */
 void		ft_update_score(t_game *g);

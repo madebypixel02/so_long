@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 20:35:25 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/07 23:06:32 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/08 01:49:32 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ t_player	*ft_plrnew(int x, int y)
 		return (NULL);
 	player->pos = ft_newvector(x, y);
 	player->dir = ST;
-	player->dying = 0;
-	player->moving = 0;
 	player->next = NULL;
 	return (player);
 }
@@ -57,7 +55,6 @@ int	ft_delete_player(t_game *g, t_vector old)
 		if (temp->pos.x == old.x && temp->pos.y == old.y)
 		{
 			ft_free_singlepl(g, temp);
-			temp->dying = 1;
 			if (!prev)
 				return (ft_deletefirst_plr(g));
 			if (prev && !temp->next)

@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/08/07 23:48:46 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/08/08 01:48:49 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -99,7 +99,7 @@ MAPS2 = $(addprefix tests/other-maps/, $(SRC_MAPS2))
 
 SOURCE_M = map.c player.c check.c $(GAME) sprites.c	\
 		   utils.c anim.c render.c playerlist.c		\
-		   ghosts.c pacman.c chase.c legal.c
+		   ghosts.c pacman.c chase.c legal.c score.c
 
 SOURCE_GNL = get_next_line.c get_next_line_utils.c
 
