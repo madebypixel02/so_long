@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 17:13:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/08 01:52:09 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/08 02:29:53 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ int	ft_reset(t_game *g)
 	free_sprites(g);
 	ft_free_playerlist(g);
 	mlx_clear_window(g->id, g->w_id);
+	printf("\n%sGAME HAS BEEN RESET!\n%s", YELLOW, DEFAULT);
 	ft_newgame(g, map, &lay);
 	return (1);
 }
