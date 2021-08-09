@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 21:38:26 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/09 01:03:04 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/09 01:17:37 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	ft_newgame(t_game *g, char **m, t_lay *lay)
 	ft_load_pacmans(g);
 	g->pac_dying = 0;
 	g->panic_mode = 0;
-	g->g_rate = GAME_RATE;
+	g->g_rate = GAME_RATE - (10 * lay->n_pl) - (10 * lay->n_pl);
 	g->redraw = 1;
 	mlx_loop_hook(g->id, ft_update, (void *)g);
 	mlx_hook(g->w_id, 17, 0, end_game, (void *)g);
@@ -95,10 +95,10 @@ void	ft_check_game(t_game *g)
 	if (g->lay_bak.n_collect / 4 + 1 >= g->lay->n_collect)
 	{
 		if (!g->panic_mode)
-			g->g_rate -= g->g_rate / 3;
+			g->g_rate /= 2;
 		g->panic_mode = 1;
 	}
-	if (!(g->n_frames % (g->g_rate + g->g_rate / 3)))
+	if (!(g->n_frames % (g->g_rate + g->g_rate / 10)))
 		ft_redraw_gh(g);
 	if (!(g->n_frames % g->g_rate) && !g->pac_dying)
 		ft_redraw_pac(g);
