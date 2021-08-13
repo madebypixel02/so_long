@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 16:59:34 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/13 18:32:19 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/13 18:59:00 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,10 @@ void	ft_put_ghosts(t_game *g)
 			ft_anim_east(g, ghost);
 		if (ghost->dir == W && !g->panic_mode)
 			ft_anim_west(g, ghost);
-		if (g->panic_mode)
+		if (g->panic_mode && g->n_frames % (5 * ANIM_RATE) < (3 * ANIM_RATE / 2))
+			mlx_put_image_to_window(g->id, g->w_id, ghost->sprites.panic1, \
+				ghost->win_pos.x, ghost->win_pos.y);
+		else if (g->panic_mode)
 			mlx_put_image_to_window(g->id, g->w_id, ghost->sprites.panic2, \
 				ghost->win_pos.x, ghost->win_pos.y);
 		ghost = ghost->next;
