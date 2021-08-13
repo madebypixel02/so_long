@@ -6,32 +6,35 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 16:59:34 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/09 00:17:25 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/13 18:32:19 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/game.h"
 #include <mlx.h>
 
-void	*ft_chooseghcolor(t_game *g, int i, int dir)
+t_list	*ft_chooseghcolor(t_game *g, int i, int dir)
 {
-	void	*sprite;
+	t_list	*anim;
 	char	*s;
+	int		j;
 
+	j = 0;
+	anim = NULL;
 	s = NULL;
-	if (dir == N)
-		s = ft_substr("sprites/Ghosts/R/ghost_up.xpm", 0, 29);
-	else if (dir == S)
-		s = ft_substr("sprites/Ghosts/R/ghost_down.xpm", 0, 31);
-	else if (dir == E)
-		s = ft_substr("sprites/Ghosts/R/ghost_right.xpm", 0, 32);
-	else if (dir == W)
-		s = ft_substr("sprites/Ghosts/R/ghost_left.xpm", 0, 31);
+	s = ft_substr("sprites/Ghosts/R/", 0, 17);
 	if (i > 0)
 		ft_memset(&s[15], COLORS[i % 7], 1);
-	sprite = mlx_xpm_file_to_image(g->id, s, &dir, &dir);
+	if (dir == N)
+		anim = ft_load_north(g, s, j);
+	if (dir == S)
+		anim = ft_load_south(g, s, j);
+	if (dir == E)
+		anim = ft_load_east(g, s, j);
+	if (dir == W)
+		anim = ft_load_west(g, s, j);
 	free(s);
-	return (sprite);
+	return (anim);
 }
 
 void	ft_load_ghosts(t_game *g)
@@ -45,9 +48,13 @@ void	ft_load_ghosts(t_game *g)
 	while (ghost)
 	{
 		ghost->sprites.up = ft_chooseghcolor(g, i, N);
+		ghost->sprites.up_bak = ghost->sprites.up;
 		ghost->sprites.down = ft_chooseghcolor(g, i, S);
+		ghost->sprites.down_bak = ghost->sprites.down;
 		ghost->sprites.right = ft_chooseghcolor(g, i, E);
+		ghost->sprites.right_bak = ghost->sprites.right;
 		ghost->sprites.left = ft_chooseghcolor(g, i, W);
+		ghost->sprites.left_bak = ghost->sprites.left;
 		ghost->sprites.panic1 = mlx_xpm_file_to_image(g->id, \
 			"sprites/Ghosts/Panic/ghost_panic1.xpm", &size, &size);
 		ghost->sprites.panic2 = mlx_xpm_file_to_image(g->id, \
@@ -67,20 +74,13 @@ void	ft_put_ghosts(t_game *g)
 	while (ghost)
 	{
 		if (ghost->dir == N && !g->panic_mode)
-			mlx_put_image_to_window(g->id, g->w_id, ghost->sprites.up, \
-				ghost->win_pos.x, ghost->win_pos.y);
+			ft_anim_north(g, ghost);
 		if (ghost->dir == S && !g->panic_mode)
-			mlx_put_image_to_window(g->id, g->w_id, ghost->sprites.down, \
-				ghost->win_pos.x, ghost->win_pos.y);
+			ft_anim_south(g, ghost);
 		if ((ghost->dir == E || ghost->dir == ST) && !g->panic_mode)
-			mlx_put_image_to_window(g->id, g->w_id, ghost->sprites.right, \
-				ghost->win_pos.x, ghost->win_pos.y);
+			ft_anim_east(g, ghost);
 		if (ghost->dir == W && !g->panic_mode)
-			mlx_put_image_to_window(g->id, g->w_id, ghost->sprites.left, \
-				ghost->win_pos.x, ghost->win_pos.y);
-		if (g->panic_mode && g->n_frames % g->g_rate < g->g_rate / 2)
-			mlx_put_image_to_window(g->id, g->w_id, ghost->sprites.panic1, \
-				ghost->win_pos.x, ghost->win_pos.y);
+			ft_anim_west(g, ghost);
 		if (g->panic_mode)
 			mlx_put_image_to_window(g->id, g->w_id, ghost->sprites.panic2, \
 				ghost->win_pos.x, ghost->win_pos.y);

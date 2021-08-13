@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 17:13:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/09 00:53:32 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/13 14:23:05 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@ void	ft_newdirection(t_game *g, int direction)
 	t_player	*temp;
 
 	temp = g->pl;
-	g->n_moves++;
-	ft_update_score(g);
+	if (g->n_moves < 9999)
+	{
+		g->n_moves++;
+		ft_update_score(g);
+	}
 	while (temp)
 	{
 		g->next_dir = direction;

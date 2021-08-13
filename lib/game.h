@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/08 23:37:21 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/13 18:28:35 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,17 @@ typedef struct s_font
 
 typedef struct s_pl_sprite
 {
-	void	*up;
-	void	*down;
-	void	*left;
-	void	*right;
+	t_list	*up;
+	t_list	*up_bak;
+	t_list	*down;
+	t_list	*down_bak;
+	t_list	*left;
+	t_list	*left_bak;
+	t_list	*right;
+	t_list	*right_bak;
 	void	*panic1;
 	void	*panic2;
 	void	*black;
-	char	*pixels;
 }				t_pl_sprite;
 
 /* MLX image pointers */
@@ -205,7 +208,7 @@ t_list		*ft_load_pacdeath(t_game *g);
 t_font		ft_load_score_font(t_game *g);
 
 /* Selects color for a ghost depending on the number of ghosts */
-void		*ft_chooseghcolor(t_game *g, int i, int dir);
+t_list		*ft_chooseghcolor(t_game *g, int i, int dir);
 
 /* Loads necessary sprites for ghosts */
 void		ft_load_ghosts(t_game *g);
@@ -214,7 +217,7 @@ void		ft_load_ghosts(t_game *g);
 void		ft_load_pacmans(t_game *g);
 
 /* Frees all nodes in animation list */
-void		free_animation(t_game *g);
+void		free_animation(t_game *g, t_list *start);
 
 /* Free every ghosts' sprites */
 void		free_players(t_game *g);
@@ -263,5 +266,29 @@ int			ft_in_legal(t_player *player, int dir);
 
 /*  */
 void		ft_next_dir(t_game *g);
+
+/*  */
+t_list		*ft_load_north(t_game *g, char *path, int i);
+
+/*  */
+t_list		*ft_load_south(t_game *g, char *path, int i);
+
+/*  */
+t_list		*ft_load_east(t_game *g, char *path, int i);
+
+/*  */
+t_list		*ft_load_west(t_game *g, char *path, int i);
+
+/*  */
+void		ft_anim_north(t_game *g, t_player *pl);
+
+/*  */
+void		ft_anim_south(t_game *g, t_player *pl);
+
+/*  */
+void		ft_anim_east(t_game *g, t_player *pl);
+
+/*  */
+void		ft_anim_west(t_game *g, t_player *pl);
 
 #endif

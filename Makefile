@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/08/09 01:00:31 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/08/13 18:16:31 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,19 +37,19 @@ Q = KEY_Q=12
 UNAME = $(shell uname -s)
 ECHO = echo
 CDEBUG = #-g3 -fsanitize=address
-GRATE = GAME_RATE=40
-ARATE = ANIM_RATE=400
+GRATE = GAME_RATE=100
+ARATE = ANIM_RATE=600
 GAME = game_mac.c
 LMLX = -lmlx -framework OpenGL -framework AppKit
 LMLX_PATH=/usr/lib
 IMLX_PATH=/usr/include
 ifeq ($(UNAME), Linux)
 	ECHO = echo -e
-	LEAKS =  #valgrind --leak-check=full --show-leak-kinds=all -s -q 
+	LEAKS =  valgrind --leak-check=full --show-leak-kinds=all -s -q 
 	LMLX = -L$(LMLX_PATH) -lmlx -lXext -lX11
 	IMLX = -I$(IMLX_PATH)
-	GRATE = GAME_RATE=200
-	ARATE = ANIM_RATE=1500
+	#GRATE = GAME_RATE=300
+	#ARATE = ANIM_RATE=2000
 	GAME = game_linux.c
 	# Key Codes for Linux
 	ESC = KEY_ESC=65307
@@ -99,7 +99,8 @@ MAPS2 = $(addprefix tests/other-maps/, $(SRC_MAPS2))
 
 SOURCE_M = map.c player.c check.c $(GAME) sprites.c	\
 		   utils.c anim.c render.c playerlist.c		\
-		   ghosts.c pacman.c chase.c legal.c score.c
+		   ghosts.c pacman.c chase.c legal.c		\
+		   score.c load_dir.c anim_dir.c
 
 SOURCE_GNL = get_next_line.c get_next_line_utils.c
 

@@ -6,12 +6,13 @@
 /*   By: aperez-b <aperez-b@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 18:03:12 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/08 23:37:05 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/13 18:31:08 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/game.h"
 #include <mlx.h>
+#include <unistd.h>
 
 void	ft_load_pacmans(t_game *g)
 {
@@ -21,16 +22,16 @@ void	ft_load_pacmans(t_game *g)
 	pacman = g->pl;
 	while (pacman)
 	{
-		pacman->sprites.up = mlx_xpm_file_to_image(g->id, \
-				"sprites/Pac-Man/pac_semi_up.xpm", &i, &i);
-		pacman->sprites.down = mlx_xpm_file_to_image(g->id, \
-				"sprites/Pac-Man/pac_semi_down.xpm", &i, &i);
-		pacman->sprites.left = mlx_xpm_file_to_image(g->id, \
-				"sprites/Pac-Man/pac_semi_left.xpm", &i, &i);
-		pacman->sprites.right = mlx_xpm_file_to_image(g->id, \
-				"sprites/Pac-Man/pac_semi_right.xpm", &i, &i);
+		pacman->sprites.up = ft_load_north(g, NULL, i);
+		pacman->sprites.up_bak = pacman->sprites.up;
+		pacman->sprites.down = ft_load_south(g, NULL, i);
+		pacman->sprites.down_bak = pacman->sprites.down;
+		pacman->sprites.left = ft_load_west(g, NULL, i);
+		pacman->sprites.left_bak = pacman->sprites.left;
+		pacman->sprites.right = ft_load_east(g, NULL, i);
+		pacman->sprites.right_bak = pacman->sprites.right;
 		pacman->sprites.black = mlx_xpm_file_to_image(g->id, \
-				"sprites/Pac-Man/black.xpm", &i, &i);
+			"sprites/Pac-Man/black.xpm", &i, &i);
 		pacman = pacman->next;
 	}
 }
@@ -43,17 +44,13 @@ void	ft_put_pacman(t_game *g)
 	while (pacman)
 	{
 		if (pacman->dir == N)
-			mlx_put_image_to_window(g->id, g->w_id, pacman->sprites.up, \
-				pacman->win_pos.x, pacman->win_pos.y);
+			ft_anim_north(g, pacman);
 		if (pacman->dir == S)
-			mlx_put_image_to_window(g->id, g->w_id, pacman->sprites.down, \
-				pacman->win_pos.x, pacman->win_pos.y);
-		if (pacman->dir == E || pacman->dir == ST)
-			mlx_put_image_to_window(g->id, g->w_id, pacman->sprites.right, \
-				pacman->win_pos.x, pacman->win_pos.y);
+			ft_anim_south(g, pacman);
+		if (pacman->dir == E)
+			ft_anim_east(g, pacman);
 		if (pacman->dir == W)
-			mlx_put_image_to_window(g->id, g->w_id, pacman->sprites.left, \
-				pacman->win_pos.x, pacman->win_pos.y);
+			ft_anim_west(g, pacman);
 		pacman = pacman->next;
 	}
 }

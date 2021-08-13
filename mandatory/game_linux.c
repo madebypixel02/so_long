@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 21:38:26 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/09 01:17:37 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/13 18:24:38 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ void	ft_newgame(t_game *g, char **m, t_lay *lay)
 	ft_load_pacmans(g);
 	g->pac_dying = 0;
 	g->panic_mode = 0;
-	g->g_rate = GAME_RATE - (10 * lay->n_pl) - (10 * lay->n_pl);
+	g->g_rate = GAME_RATE - (6 * lay->n_pl) - (3 * lay->n_gh);
+	g->g_rate += (0.08 * g->g_rate * !lay->n_gh);
 	g->redraw = 1;
 	mlx_loop_hook(g->id, ft_update, (void *)g);
 	mlx_hook(g->w_id, 17, 0, end_game, (void *)g);
@@ -92,13 +93,13 @@ void	ft_newgame(t_game *g, char **m, t_lay *lay)
 
 void	ft_check_game(t_game *g)
 {
-	if (g->lay_bak.n_collect / 4 + 1 >= g->lay->n_collect)
+	if (g->lay_bak.n_collect / 4 + 1 >= g->lay->n_collect && g->lay->n_gh)
 	{
 		if (!g->panic_mode)
-			g->g_rate /= 2;
+			g->g_rate -= g->g_rate / 3;
 		g->panic_mode = 1;
 	}
-	if (!(g->n_frames % (g->g_rate + g->g_rate / 10)))
+	if (!(g->n_frames % (g->g_rate + (g->g_rate / 13))))
 		ft_redraw_gh(g);
 	if (!(g->n_frames % g->g_rate) && !g->pac_dying)
 		ft_redraw_pac(g);

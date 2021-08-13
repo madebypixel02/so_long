@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 10:16:09 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/08 15:53:35 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/13 11:55:49 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,10 @@ t_list	*ft_load_pacdeath(t_game *g)
 	return (pacdeath);
 }
 
-void	free_animation(t_game *g)
+void	free_animation(t_game *g, t_list *start)
 {
-	t_list		*start;
 	t_list		*temp;
 
-	start = g->sprites.pac_dying_bak;
 	temp = NULL;
 	while (start)
 	{

@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 23:02:26 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/09 00:52:01 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/13 17:35:48 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	free_sprites(t_game *g)
 	mlx_destroy_image(g->id, g->sprites.pacman);
 	free_players(g);
 	free_fonts(g);
-	free_animation(g);
+	free_animation(g, g->sprites.pac_dying_bak);
 	return (0);
 }
 
@@ -56,10 +56,10 @@ void	free_players(t_game *g)
 	pacman = g->pl;
 	while (ghost)
 	{
-		mlx_destroy_image(g->id, ghost->sprites.up);
-		mlx_destroy_image(g->id, ghost->sprites.down);
-		mlx_destroy_image(g->id, ghost->sprites.left);
-		mlx_destroy_image(g->id, ghost->sprites.right);
+		free_animation(g, ghost->sprites.up_bak);
+		free_animation(g, ghost->sprites.down_bak);
+		free_animation(g, ghost->sprites.left_bak);
+		free_animation(g, ghost->sprites.right_bak);
 		mlx_destroy_image(g->id, ghost->sprites.panic1);
 		mlx_destroy_image(g->id, ghost->sprites.panic2);
 		mlx_destroy_image(g->id, ghost->sprites.black);
@@ -67,10 +67,10 @@ void	free_players(t_game *g)
 	}
 	while (pacman)
 	{
-		mlx_destroy_image(g->id, pacman->sprites.up);
-		mlx_destroy_image(g->id, pacman->sprites.down);
-		mlx_destroy_image(g->id, pacman->sprites.left);
-		mlx_destroy_image(g->id, pacman->sprites.right);
+		free_animation(g, pacman->sprites.up_bak);
+		free_animation(g, pacman->sprites.down_bak);
+		free_animation(g, pacman->sprites.left_bak);
+		free_animation(g, pacman->sprites.right_bak);
 		mlx_destroy_image(g->id, pacman->sprites.black);
 		pacman = pacman->next;
 	}
@@ -78,10 +78,10 @@ void	free_players(t_game *g)
 
 void	ft_free_singlepl(t_game *g, t_player *pl)
 {
-	mlx_destroy_image(g->id, pl->sprites.up);
-	mlx_destroy_image(g->id, pl->sprites.down);
-	mlx_destroy_image(g->id, pl->sprites.left);
-	mlx_destroy_image(g->id, pl->sprites.right);
+	free_animation(g, pl->sprites.up_bak);
+	free_animation(g, pl->sprites.down_bak);
+	free_animation(g, pl->sprites.left_bak);
+	free_animation(g, pl->sprites.right_bak);
 	mlx_destroy_image(g->id, pl->sprites.black);
 }
 
