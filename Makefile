@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/08/13 19:01:44 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/08/13 23:53:00 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,8 +37,7 @@ Q = KEY_Q=12
 UNAME = $(shell uname -s)
 ECHO = echo
 CDEBUG = #-g3 -fsanitize=address
-GRATE = GAME_RATE=90
-ARATE = ANIM_RATE=600
+GRATE = GAME_RATE=80
 GAME = game_mac.c
 LMLX = -lmlx -framework OpenGL -framework AppKit
 LMLX_PATH=/usr/lib
@@ -48,8 +47,6 @@ ifeq ($(UNAME), Linux)
 	LEAKS =  valgrind --leak-check=full --show-leak-kinds=all -s -q 
 	LMLX = -L$(LMLX_PATH) -lmlx -lXext -lX11
 	IMLX = -I$(IMLX_PATH)
-	#GRATE = GAME_RATE=300
-	#ARATE = ANIM_RATE=2000
 	GAME = game_linux.c
 	# Key Codes for Linux
 	ESC = KEY_ESC=65307
@@ -79,7 +76,7 @@ NAME = so_long
 
 KEYCODES =  -D $(ESC) -D $(Q) -D $(R) -D $(W) -D $(A) -D $(S) -D $(D) -D $(UP) -D $(DOWN) -D $(LEFT) -D $(RIGHT)
 
-RATES = -D $(GRATE) -D $(ARATE)
+RATES = -D $(GRATE)
 
 SRC_MAPS1 = min.ber test.ber ghosts.ber multipac.ber medium.ber	\
 		   google.ber run.ber classic.ber

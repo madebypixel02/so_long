@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 18:03:12 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/13 18:31:08 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/13 22:47:52 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ void	ft_put_pacman(t_game *g)
 			ft_anim_east(g, pacman);
 		if (pacman->dir == W)
 			ft_anim_west(g, pacman);
+		if (pacman->dir == ST)
+			mlx_put_image_to_window(g->id, g->w_id, g->sprites.pacman, \
+				pacman->win_pos.x, pacman->win_pos.y);
 		pacman = pacman->next;
 	}
 }

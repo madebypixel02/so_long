@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 23:02:26 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/13 17:35:48 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/14 00:11:10 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,7 @@ void	free_players(t_game *g)
 		free_animation(g, ghost->sprites.down_bak);
 		free_animation(g, ghost->sprites.left_bak);
 		free_animation(g, ghost->sprites.right_bak);
-		mlx_destroy_image(g->id, ghost->sprites.panic1);
-		mlx_destroy_image(g->id, ghost->sprites.panic2);
+		free_animation(g, ghost->sprites.panic_bak);
 		mlx_destroy_image(g->id, ghost->sprites.black);
 		ghost = ghost->next;
 	}
@@ -95,8 +94,5 @@ void	ft_put_map(t_game *g, int x, int y)
 			x * SIZE, y * SIZE);
 	if (g->map[y][x] == 'C')
 		mlx_put_image_to_window(g->id, g->w_id, g->sprites.pacfood, \
-			x * SIZE, y * SIZE);
-	if (g->map[y][x] == 'P')
-		mlx_put_image_to_window(g->id, g->w_id, g->sprites.pacman, \
 			x * SIZE, y * SIZE);
 }

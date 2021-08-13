@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/13 18:28:35 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/13 23:55:53 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,9 @@ typedef struct s_pl_sprite
 	t_list	*left_bak;
 	t_list	*right;
 	t_list	*right_bak;
-	void	*panic1;
-	void	*panic2;
+	t_list	*panic;
+	t_list	*panic_bak;
+	int		anim_rate;
 	void	*black;
 }				t_pl_sprite;
 
@@ -280,6 +281,9 @@ t_list		*ft_load_east(t_game *g, char *path, int i);
 t_list		*ft_load_west(t_game *g, char *path, int i);
 
 /*  */
+t_list		*ft_load_panic(t_game *g, char *path, int i);
+
+/*  */
 void		ft_anim_north(t_game *g, t_player *pl);
 
 /*  */
@@ -290,5 +294,8 @@ void		ft_anim_east(t_game *g, t_player *pl);
 
 /*  */
 void		ft_anim_west(t_game *g, t_player *pl);
+
+/*  */
+void		ft_anim_panic(t_game *g, t_player *pl);
 
 #endif

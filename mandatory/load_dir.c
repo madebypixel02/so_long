@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/13 12:00:10 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/13 18:30:31 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/14 00:11:52 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,21 @@ t_list	*ft_load_west(t_game *g, char *path, int i)
 		"sprites/Pac-Man/pac_semi_left.xpm", &i, &i)));
 	ft_lstadd_back(&anim, ft_lstnew(mlx_xpm_file_to_image(g->id, \
 		"sprites/Pac-Man/pac_closed.xpm", &i, &i)));
+	return (anim);
+}
+
+t_list	*ft_load_panic(t_game *g, char *path, int i)
+{
+	t_list	*anim;
+
+	anim = NULL;
+	ft_lstadd_back(&anim, ft_lstnew(mlx_xpm_file_to_image(g->id, \
+		"sprites/Ghosts/Panic/ghost_panic1a.xpm", &i, &i)));
+	ft_lstadd_back(&anim, ft_lstnew(mlx_xpm_file_to_image(g->id, \
+		"sprites/Ghosts/Panic/ghost_panic1b.xpm", &i, &i)));
+	ft_lstadd_back(&anim, ft_lstnew(mlx_xpm_file_to_image(g->id, \
+		"sprites/Ghosts/Panic/ghost_panic2a.xpm", &i, &i)));
+	ft_lstadd_back(&anim, ft_lstnew(mlx_xpm_file_to_image(g->id, \
+		"sprites/Ghosts/Panic/ghost_panic2b.xpm", &i, &i)));
 	return (anim);
 }

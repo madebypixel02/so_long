@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 16:59:34 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/13 18:59:00 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/13 22:56:25 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,8 @@ void	ft_load_ghosts(t_game *g)
 		ghost->sprites.right_bak = ghost->sprites.right;
 		ghost->sprites.left = ft_chooseghcolor(g, i, W);
 		ghost->sprites.left_bak = ghost->sprites.left;
-		ghost->sprites.panic1 = mlx_xpm_file_to_image(g->id, \
-			"sprites/Ghosts/Panic/ghost_panic1.xpm", &size, &size);
-		ghost->sprites.panic2 = mlx_xpm_file_to_image(g->id, \
-			"sprites/Ghosts/Panic/ghost_panic2.xpm", &size, &size);
+		ghost->sprites.panic = ft_load_panic(g, NULL, i);
+		ghost->sprites.panic_bak = ghost->sprites.panic;
 		ghost->sprites.black = mlx_xpm_file_to_image(g->id, \
 			"sprites/Ghosts/black.xpm", &size, &size);
 		ghost = ghost->next;
@@ -81,12 +79,8 @@ void	ft_put_ghosts(t_game *g)
 			ft_anim_east(g, ghost);
 		if (ghost->dir == W && !g->panic_mode)
 			ft_anim_west(g, ghost);
-		if (g->panic_mode && g->n_frames % (5 * ANIM_RATE) < (3 * ANIM_RATE / 2))
-			mlx_put_image_to_window(g->id, g->w_id, ghost->sprites.panic1, \
-				ghost->win_pos.x, ghost->win_pos.y);
-		else if (g->panic_mode)
-			mlx_put_image_to_window(g->id, g->w_id, ghost->sprites.panic2, \
-				ghost->win_pos.x, ghost->win_pos.y);
+		if (g->panic_mode)
+			ft_anim_panic(g, ghost);
 		ghost = ghost->next;
 	}
 }
