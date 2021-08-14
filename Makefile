@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/08/14 12:25:58 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/08/14 19:08:36 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,7 +83,7 @@ RATES = -D $(GRATE)
 
 # Batch of basic playable maps
 SRC_MAPS1 = min.ber test.ber ghosts.ber multipac.ber medium.ber	\
-		   google.ber run.ber classic.ber
+		   google.ber island.ber run.ber classic.ber
 
 # Batch of experimental maps (from Machine-Learning-Pacman python project)
 SRC_MAPS2 = 20Hunt.ber bigHunt.ber capsuleClassic.ber			\
