@@ -71,13 +71,28 @@ The pacman game I designed has a few extras we weren't asked to implement, but I
 - Ghosts enter panic mode when there's less than a third of the pacdots remaining. During this time the players will be faster and ghosts will flash for the sake of distraction
 - The score is displayed in the classic pacman fonts, instead of the (ugly) builtin fonts from ``mlx_string_put()``
 - Arrow keys also move the player
+- Add decorating pacman logo centered at the bottom
 - Add support for both ``linux`` and ``MacOS``
 - Implement several players in a single map
 - Ability to save a direction for when it's available
-- Added over 30 test maps (most of them perfectly playable)
+- Added over 30 test maps (most of them playable)
 - Restrict ending or resetting the game while pacman is dying
 
-Gameplay
+## Gameplay
+
+See [Maps.md](https://github.com/madebypixel02/so_long/tree/master/tests/MAPS.md)
 
 Here are a few sample gameplays from my favorite maps:
 
+https://user-images.githubusercontent.com/40824677/129461633-30b05f9d-8ccf-4506-bd1e-be6342fda3b8.mp4
+
+https://user-images.githubusercontent.com/40824677/129461632-1841a1f1-1560-4466-aa7f-295646853712.mp4
+
+https://user-images.githubusercontent.com/40824677/129461631-b0209698-d96d-485a-9a3c-feab83b84ea7.mp4
+
+https://user-images.githubusercontent.com/40824677/129461630-76c3f590-ebdc-42ec-bff2-7929402f2de1.mp4
+
+## Other Maps
+There are 20+ maps (ported from [Machine-Learning-Pacman](https://github.com/madebypixel02/Machine-Learning-Pacman/tree/master/layouts)) to try your skill/luck.
+
+See [Other Maps](https://github.com/madebypixel02/so_long/tree/master/tests/MAPS.md#other-maps)
