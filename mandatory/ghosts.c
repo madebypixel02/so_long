@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 16:59:34 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/13 22:56:25 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/14 11:00:47 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,16 +71,19 @@ void	ft_put_ghosts(t_game *g)
 	ghost = g->gh;
 	while (ghost)
 	{
-		if (ghost->dir == N && !g->panic_mode)
+		if (ghost->dir == N && !g->panic_mode && ghost->moving)
 			ft_anim_north(g, ghost);
-		if (ghost->dir == S && !g->panic_mode)
+		if (ghost->dir == S && !g->panic_mode && ghost->moving)
 			ft_anim_south(g, ghost);
-		if ((ghost->dir == E || ghost->dir == ST) && !g->panic_mode)
+		if (((ghost->dir == E && ghost->moving) || \
+				ghost->dir == ST) && !g->panic_mode)
 			ft_anim_east(g, ghost);
-		if (ghost->dir == W && !g->panic_mode)
+		if (ghost->dir == W && !g->panic_mode && ghost->moving)
 			ft_anim_west(g, ghost);
 		if (g->panic_mode)
 			ft_anim_panic(g, ghost);
+		else if (!ghost->moving)
+			ft_put_stopped(g, ghost);
 		ghost = ghost->next;
 	}
 }

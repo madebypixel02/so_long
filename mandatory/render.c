@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 17:09:20 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/09 00:54:20 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/14 11:00:57 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,4 +106,20 @@ void	ft_redraw_pacfood(t_game *g, t_player *pl)
 	if (pl->dir == W && g->map[pl->pos.y][pl->pos.x + 1] == 'C')
 		mlx_put_image_to_window(g->id, g->w_id, g->sprites.pacfood, \
 			(pl->pos.x + 1) * SIZE, pl->pos.y * SIZE);
+}
+
+void	ft_put_stopped(t_game *g, t_player *pl)
+{
+	if (pl->dir == N)
+		mlx_put_image_to_window(g->id, g->w_id, pl->sprites.up_bak->content, \
+			pl->pos.x * SIZE, pl->pos.y * SIZE);
+	if (pl->dir == S)
+		mlx_put_image_to_window(g->id, g->w_id, pl->sprites.down_bak->content, \
+			pl->pos.x * SIZE, pl->pos.y * SIZE);
+	if (pl->dir == E)
+		mlx_put_image_to_window(g->id, g->w_id, pl->sprites.right_bak->content, \
+			pl->pos.x * SIZE, pl->pos.y * SIZE);
+	if (pl->dir == W)
+		mlx_put_image_to_window(g->id, g->w_id, pl->sprites.left_bak->content, \
+			pl->pos.x * SIZE, pl->pos.y * SIZE);
 }

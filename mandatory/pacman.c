@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pacman.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperez-b <aperez-b@student.42madrid.c      +#+  +:+       +#+        */
+/*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/05 18:03:12 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/13 22:47:52 by aperez-b         ###   ########.fr       */
+/*   Created: 2021/08/14 11:04:12 by aperez-b          #+#    #+#             */
+/*   Updated: 2021/08/14 11:04:15 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,19 @@ void	ft_put_pacman(t_game *g)
 	pacman = g->pl;
 	while (pacman)
 	{
-		if (pacman->dir == N)
+		if (pacman->dir == N && pacman->moving)
 			ft_anim_north(g, pacman);
-		if (pacman->dir == S)
+		if (pacman->dir == S && pacman->moving)
 			ft_anim_south(g, pacman);
-		if (pacman->dir == E)
+		if (pacman->dir == E && pacman->moving)
 			ft_anim_east(g, pacman);
-		if (pacman->dir == W)
+		if (pacman->dir == W && pacman->moving)
 			ft_anim_west(g, pacman);
 		if (pacman->dir == ST)
 			mlx_put_image_to_window(g->id, g->w_id, g->sprites.pacman, \
 				pacman->win_pos.x, pacman->win_pos.y);
+		else if (!pacman->moving)
+			ft_put_stopped(g, pacman);
 		pacman = pacman->next;
 	}
 }

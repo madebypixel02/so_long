@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/13 23:55:53 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/14 11:15:41 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <stdio.h>
 
 # define SIZE 32
-# define COLORS "RBGOYKP"
+# define COLORS "RBKOGYP"
 
 /* Enum for North, South, East, West as ints */
 enum e_direction
@@ -297,5 +297,8 @@ void		ft_anim_west(t_game *g, t_player *pl);
 
 /*  */
 void		ft_anim_panic(t_game *g, t_player *pl);
+
+/*  */
+void		ft_put_stopped(t_game *g, t_player *pl);
 
 #endif
