@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/14 11:15:41 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/14 12:20:47 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,13 @@
 # include <mlx.h>
 # include <stdio.h>
 
+/* Sprite Size */
 # define SIZE 32
+
+/* Color order for ghosts: (R)ed, (B)lue, Pin(K), (O)range, (G)reen, (Y)ellow, (P)urple */
 # define COLORS "RBKOGYP"
 
-/* Enum for North, South, East, West as ints */
+/* Enum for (ST)op, (N)orth, (S)outh, (E)ast, (W)est as ints */
 enum e_direction
 {
 	ST = 0,
@@ -33,6 +36,7 @@ enum e_direction
 	W = -2
 };
 
+/* Struct to store the sprites for every digit */
 typedef struct s_font
 {
 	void	*zero;
@@ -48,6 +52,7 @@ typedef struct s_font
 	void	*black;
 }				t_font;
 
+/* Struct containing list of sprites for a given player */
 typedef struct s_pl_sprite
 {
 	t_list	*up;
@@ -64,7 +69,7 @@ typedef struct s_pl_sprite
 	void	*black;
 }				t_pl_sprite;
 
-/* MLX image pointers */
+/* MLX image pointers for the map */
 typedef struct s_sprite
 {
 	void		*logo;
@@ -78,7 +83,7 @@ typedef struct s_sprite
 	t_font		score_font;
 }				t_sprite;
 
-/*  */
+/* Small list showing if a player can go north, south, east or west */
 typedef struct s_legal_actions
 {
 	int	north;
@@ -104,24 +109,23 @@ typedef struct s_game
 {
 	int			width;
 	int			height;
-	t_lay		*lay;
-	int			next_dir;
-	t_lay		lay_bak;
-	char		**map;
-	int			endian;
-	char		**map_bak;
-	t_sprite	sprites;
-	int			pac_dying;
-	int			panic_mode;
 	void		*id;
 	void		*w_id;
+	t_lay		*lay;
+	t_lay		lay_bak;
+	t_sprite	sprites;
+	t_player	*pl;
+	t_player	*gh;
+	int			next_dir;
+	char		**map;
+	char		**map_bak;
+	int			n_collect_bak;
+	int			pac_dying;
+	int			panic_mode;
 	int			n_frames;
 	int			n_moves;
 	int			redraw;
-	int			n_collect_bak;
 	int			g_rate;
-	t_player	*pl;
-	t_player	*gh;
 }				t_game;
 
 /* Initiates game object and starts looking for input */
@@ -181,10 +185,13 @@ void		ft_move(int d, t_game *g, t_player *temp);
 /* Helper tool for move function */
 int			ft_swap_tile(t_vector old, t_vector nw, t_game *g);
 
-/* Re-Draws Pacmans and the floor if necessary to new position */
-//void		ft_redraw(t_vector old, t_vector nw, t_game *g, int hide);
+/* Redraws All pacmans to a new position and/or direction */
 void		ft_redraw_pac(t_game *g);
+
+/* Redraws All ghosts to a new position and/or direction */
 void		ft_redraw_gh(t_game *g);
+
+/* Redraws a pacdot in a given position (in case a ghost goes over a pacdot) */
 void		ft_redraw_pacfood(t_game *g, t_player *pl);
 
 /* Draws walls, collectibles, and initial positions for players/enemies */
@@ -196,7 +203,7 @@ void		ft_put_ghosts(t_game *g);
 /* Prints every pacman at its current state */
 void		ft_put_pacman(t_game *g);
 
-/*  */
+/* Draws the current moves with the retro pacman font */
 void		ft_put_font(t_game *g, int digit, int i);
 
 /* Iterates to animate pacman's death */
@@ -205,7 +212,7 @@ void		ft_anim_pacdeath(t_game *g);
 /* Loads necessary sprites (mlx) for pacman's death */
 t_list		*ft_load_pacdeath(t_game *g);
 
-/*  */
+/* Loads necessary sprites (mlx) to draw the score */
 t_font		ft_load_score_font(t_game *g);
 
 /* Selects color for a ghost depending on the number of ghosts */
@@ -226,7 +233,7 @@ void		free_players(t_game *g);
 /* Frees up, down, left, right for given player */
 void		ft_free_singlepl(t_game *g, t_player *pl);
 
-/*  */
+/* Frees font-related sprites */
 void		free_fonts(t_game *g);
 
 /* Updates the score that appears on screen */
@@ -235,70 +242,70 @@ void		ft_update_score(t_game *g);
 /* Checks if Pacman is about to move to a ghost, initiates dath sequence */
 int			ft_checkmvtogh(t_game *g, int d, t_player *pl);
 
-/*  */
+/* Uses a rough estimate of the euclidean distance to retrieve the closest pacman from a given ghost */
 t_player	*ft_getnearestpac(t_game *g, t_player *ghost);
 
-/*  */
+/* Updates every ghosts' position to try and catch a pacman */
 void		ft_update_ghosts(t_game *g, t_player **pl);
 
-/*  */
+/* Checks if there's a ghost in the given position */
 int			ft_findghost(t_player *pl, t_vector pos);
 
-/*  */
+/* Change ghosts' direction if possible */
 void		ft_move_ghost(int d, t_game *g, t_player *ghost, t_player **pl);
 
-/*  */
+/* Simple algorithm to find the optimal direction to take in order to get a pacman */
 int			ft_choose_dir(t_game *g, t_player *gh, t_player *pac);
 
-/*  */
+/* Checks if there's a ghost, exit or wall to update a ghost's legal actions */
 void		ft_update_legal(t_game *g, t_player *gh);
 
-/*  */
+/* Restricts legal actions (if north is available restrict south, if east available restrict west, and so on) */
 void		ft_restrict_legal(t_player *ghost);
 
-/*  */
+/* Counts the number of available actions for a given player */
 int			ft_legal_len(t_player *player);
 
-/*  */
+/* Resets and frees everything needed to start a new game */
 int			ft_reset(t_game *g);
 
-/*  */
+/* Checks if a direction is in the legal actions for a player */
 int			ft_in_legal(t_player *player, int dir);
 
-/*  */
+/* Updates the target direction for every pacman and tries to change their direction to the target direction */
 void		ft_next_dir(t_game *g);
 
-/*  */
+/* Loads necessary sprites to move north */
 t_list		*ft_load_north(t_game *g, char *path, int i);
 
-/*  */
+/* Loads necessary sprites to move south */
 t_list		*ft_load_south(t_game *g, char *path, int i);
 
-/*  */
+/* Loads necessary sprites to move east */
 t_list		*ft_load_east(t_game *g, char *path, int i);
 
-/*  */
+/* Loads necessary sprites to move west */
 t_list		*ft_load_west(t_game *g, char *path, int i);
 
-/*  */
+/* Loads necessary sprites to animate panic mode for ghosts */
 t_list		*ft_load_panic(t_game *g, char *path, int i);
 
-/*  */
+/* Changes sprites to animate moving north */
 void		ft_anim_north(t_game *g, t_player *pl);
 
-/*  */
+/* Changes sprites to animate moving north */
 void		ft_anim_south(t_game *g, t_player *pl);
 
-/*  */
+/* Changes sprites to animate moving north */
 void		ft_anim_east(t_game *g, t_player *pl);
 
-/*  */
+/* Changes sprites to animate moving north */
 void		ft_anim_west(t_game *g, t_player *pl);
 
-/*  */
+/* Changes sprites to animate moving north */
 void		ft_anim_panic(t_game *g, t_player *pl);
 
-/*  */
+/* Puts the default sprite for a given direction when a player isn't moving */
 void		ft_put_stopped(t_game *g, t_player *pl);
 
 #endif

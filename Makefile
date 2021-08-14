@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/08/13 23:53:00 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/08/14 12:25:58 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,19 +35,21 @@ R = KEY_R=15
 Q = KEY_Q=12
 
 UNAME = $(shell uname -s)
+
+# Properties for MacOS
 ECHO = echo
 CDEBUG = #-g3 -fsanitize=address
 GRATE = GAME_RATE=80
 GAME = game_mac.c
 LMLX = -lmlx -framework OpenGL -framework AppKit
-LMLX_PATH=/usr/lib
-IMLX_PATH=/usr/include
 ifeq ($(UNAME), Linux)
+	#Properties for Linux
 	ECHO = echo -e
 	LEAKS =  valgrind --leak-check=full --show-leak-kinds=all -s -q 
-	LMLX = -L$(LMLX_PATH) -lmlx -lXext -lX11
-	IMLX = -I$(IMLX_PATH)
+	LMLX = -lmlx -lXext -lX11
 	GAME = game_linux.c
+	CDEBUG =
+
 	# Key Codes for Linux
 	ESC = KEY_ESC=65307
 	W = KEY_W=119
@@ -60,10 +62,9 @@ ifeq ($(UNAME), Linux)
 	RIGHT = KEY_RIGHT=65363
 	R = KEY_R=114
 	Q = KEY_Q=113
-
-	CDEBUG =
 endif
 
+# Make variables
 CFLAGS = #-Wall -Wextra -Werror
 RM = rm -f
 CC = gcc
@@ -74,13 +75,17 @@ DIR_OBJ = lib
 LIBFT = libft/libft.a
 NAME = so_long
 
+# Keycodes defined during compilation
 KEYCODES =  -D $(ESC) -D $(Q) -D $(R) -D $(W) -D $(A) -D $(S) -D $(D) -D $(UP) -D $(DOWN) -D $(LEFT) -D $(RIGHT)
 
+# Game speeds defined during compilation
 RATES = -D $(GRATE)
 
+# Batch of basic playable maps
 SRC_MAPS1 = min.ber test.ber ghosts.ber multipac.ber medium.ber	\
 		   google.ber run.ber classic.ber
 
+# Batch of experimental maps (from Machine-Learning-Pacman python project)
 SRC_MAPS2 = 20Hunt.ber bigHunt.ber capsuleClassic.ber			\
 			classic.ber contestClassic.ber labAA1.ber			\
 			labAA2.ber labAA3.ber labAA4.ber labAA5.ber			\
@@ -118,7 +123,7 @@ OBJ_B = $(addprefix $(DIR_OBJ)/, $(SOURCE_B:.c=.o))
 all: $(NAME)
 
 $(NAME): $(OBJ_M) $(OBJ_GNL) compile_libft
-	@$(CC) $(CFLAGS) $(CDEBUG) $(OBJ_M) $(OBJ_GNL) $(LIBFT) $(IMLX) $(LMLX) -o $@
+	@$(CC) $(CFLAGS) $(CDEBUG) $(OBJ_M) $(OBJ_GNL) $(LIBFT) $(LMLX) -o $@
 
 $(OBJ_M): $(SRC_M)
 	@$(ECHO) "$(RED)Mandatory objects outdated in so_long! Compiling again...$(DEFAULT)"
