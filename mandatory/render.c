@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 17:09:20 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/14 11:00:57 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/14 13:06:51 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	ft_redraw_gh(t_game *g)
 				pl->win_pos.y == pl->pos.y * SIZE)
 		{
 			ft_redraw_pacfood(g, pl);
+			ft_redraw_exit(g, pl);
 			pl->moving = 0;
 		}
 		pl = pl->next;
@@ -105,6 +106,22 @@ void	ft_redraw_pacfood(t_game *g, t_player *pl)
 			(pl->pos.x - 1) * SIZE, pl->pos.y * SIZE);
 	if (pl->dir == W && g->map[pl->pos.y][pl->pos.x + 1] == 'C')
 		mlx_put_image_to_window(g->id, g->w_id, g->sprites.pacfood, \
+			(pl->pos.x + 1) * SIZE, pl->pos.y * SIZE);
+}
+
+void	ft_redraw_exit(t_game *g, t_player *pl)
+{
+	if (pl->dir == N && g->map[pl->pos.y + 1][pl->pos.x] == 'E')
+		mlx_put_image_to_window(g->id, g->w_id, g->sprites.portal, \
+			pl->pos.x * SIZE, (pl->pos.y + 1) * SIZE);
+	if (pl->dir == S && g->map[pl->pos.y - 1][pl->pos.x] == 'E')
+		mlx_put_image_to_window(g->id, g->w_id, g->sprites.portal, \
+			pl->pos.x * SIZE, (pl->pos.y - 1) * SIZE);
+	if (pl->dir == E && g->map[pl->pos.y][pl->pos.x - 1] == 'E')
+		mlx_put_image_to_window(g->id, g->w_id, g->sprites.portal, \
+			(pl->pos.x - 1) * SIZE, pl->pos.y * SIZE);
+	if (pl->dir == W && g->map[pl->pos.y][pl->pos.x + 1] == 'E')
+		mlx_put_image_to_window(g->id, g->w_id, g->sprites.portal, \
 			(pl->pos.x + 1) * SIZE, pl->pos.y * SIZE);
 }
 

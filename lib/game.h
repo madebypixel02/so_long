@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/14 12:33:21 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/14 13:06:42 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,6 +194,9 @@ void		ft_redraw_gh(t_game *g);
 
 /* Redraws a pacdot in a given position (in case a ghost goes over a pacdot) */
 void		ft_redraw_pacfood(t_game *g, t_player *pl);
+
+/* Redraws an exit in a given position (in case a ghost goes over an exit) */
+void		ft_redraw_exit(t_game *g, t_player *pl);
 
 /* Draws walls, collectibles, and initial positions for players/enemies */
 void		ft_put_map(t_game *g, int x, int y);

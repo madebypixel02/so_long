@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 10:43:50 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/07 23:41:01 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/14 13:07:51 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 void	ft_update_legal(t_game *g, t_player *gh)
 {
-	gh->legal.north = !ft_strchr("1EG", \
+	gh->legal.north = !ft_strchr("1G", \
 	     g->map[gh->pos.y - 1][gh->pos.x]) \
 	     && !ft_findghost(g->gh, ft_newvector(gh->pos.x, gh->pos.y - 1));
-	gh->legal.south = !ft_strchr("1EG", \
+	gh->legal.south = !ft_strchr("1G", \
 	     g->map[gh->pos.y + 1][gh->pos.x]) \
 	     && !ft_findghost(g->gh, ft_newvector(gh->pos.x, gh->pos.y + 1));
-	gh->legal.east = !ft_strchr("1EG", \
+	gh->legal.east = !ft_strchr("1G", \
 	     g->map[gh->pos.y][gh->pos.x + 1]) \
 	     && !ft_findghost(g->gh, ft_newvector(gh->pos.x + 1, gh->pos.y));
-	gh->legal.west = !ft_strchr("1EG", \
+	gh->legal.west = !ft_strchr("1G", \
 		 g->map[gh->pos.y][gh->pos.x - 1]) \
 		 && !ft_findghost(g->gh, ft_newvector(gh->pos.x - 1, gh->pos.y));
 }
