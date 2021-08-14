@@ -80,7 +80,7 @@ The pacman game I designed has a few extras we weren't asked to implement, but I
 
 ## Gameplay
 
-See [Maps.md](https://github.com/madebypixel02/so_long/tree/master/tests/MAPS.md)
+See [Maps.md](https://github.com/madebypixel02/so_long/tree/master/tests/)
 
 Here are a few sample gameplays from my favorite maps:
 
