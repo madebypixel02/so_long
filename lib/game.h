@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/14 13:06:42 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/14 17:26:15 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ void		init_game(char **map, t_lay lay);
 void		ft_newgame(t_game *g, char **m, t_lay *lay);
 
 /* Stops execution and frees allocated memory */
-int			end_game(t_game *g);
+int			end_game(t_game *g, char *msg);
 
 /* Main loop that prints map and updates all events in the game */
 int			ft_update(t_game *g);
@@ -260,6 +260,12 @@ void		ft_move_ghost(int d, t_game *g, t_player *ghost, t_player **pl);
 
 /* Simple algorithm to find the optimal direction to take to get a pacman */
 int			ft_choose_dir(t_game *g, t_player *gh, t_player *pac);
+
+/* When there are multiple options, get the shortest to a pacman */
+int			ft_advanced_dir(t_player *gh, t_player *pac, int *distances);
+
+/* Aux function for east and west options */
+int			ft_advanced_dir2(int *distances);
 
 /* Checks if there's a ghost, exit or wall to update a ghost's legal actions */
 void		ft_update_legal(t_game *g, t_player *gh);

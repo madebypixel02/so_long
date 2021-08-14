@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 19:36:06 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/03 17:49:48 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/14 16:29:32 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,8 @@ void	ft_readlayout(int fd, t_err *map_err, t_lay *lay, char **map_str);
 
 /* Checks a given line to handle errors on it */
 void	ft_checklayout(char *line, t_err *map_err, t_lay *lay, int old_len);
+
+/* Prints a custom error message and exits the program */
+int		error_msg_params(char *msg, char **map_str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 10:23:45 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/07 14:41:12 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/14 17:46:20 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,21 @@ t_player	*ft_getnearestpac(t_game *g, t_player *ghost)
 
 int	ft_choose_dir(t_game *g, t_player *gh, t_player *pac)
 {
-	int	len;
+	int		len;
+	int		move;
+	int		*distances;
 
 	ft_update_legal(g, gh);
 	ft_restrict_legal(gh);
 	len = ft_legal_len(gh);
 	if (len > 1)
 	{
-		if (gh->pos.y > pac->pos.y && gh->legal.north)
-			return (N);
-		if (gh->pos.y < pac->pos.y && gh->legal.south)
-			return (S);
-		if (gh->pos.x < pac->pos.x && gh->legal.east)
-			return (E);
-		if (gh->pos.x > pac->pos.x && gh->legal.west)
-			return (W);
+		distances = malloc(5 * sizeof(int));
+		if (!distances)
+			return (end_game(g, "Memory Allocation Error!"));
+		move = ft_advanced_dir(gh, pac, distances);
+		free(distances);
+		return (move);
 	}
 	if (gh->legal.north)
 		return (N);
@@ -61,6 +61,63 @@ int	ft_choose_dir(t_game *g, t_player *gh, t_player *pac)
 	if (gh->legal.east)
 		return (E);
 	if (gh->legal.west)
+		return (W);
+	return (ST);
+}
+
+int	ft_advanced_dir(t_player *gh, t_player *pac, int *distances)
+{
+	int	i;
+
+	i = 0;
+	if (gh->legal.north)
+		distances[i++] = ft_euclideandistance(ft_newvector(gh->pos.x, \
+			gh->pos.y - 1), ft_newvector(pac->pos.x, pac->pos.y));
+	else
+		distances[i++] = -2;
+	if (gh->legal.south)
+		distances[i++] = ft_euclideandistance(ft_newvector(gh->pos.x, \
+			gh->pos.y + 1), ft_newvector(pac->pos.x, pac->pos.y));
+	else
+		distances[i++] = -2;
+	if (gh->legal.east)
+		distances[i++] = ft_euclideandistance(ft_newvector(gh->pos.x + 1, \
+			gh->pos.y), ft_newvector(pac->pos.x, pac->pos.y));
+	else
+		distances[i++] = -2;
+	if (gh->legal.west)
+		distances[i++] = ft_euclideandistance(ft_newvector(gh->pos.x - 1, \
+			gh->pos.y), ft_newvector(pac->pos.x, pac->pos.y));
+	else
+		distances[i++] = -2;
+	distances[i] = -1;
+	return (ft_advanced_dir2(distances));
+}
+
+int	ft_advanced_dir2(int *distances)
+{
+	int	min;
+	int	i;
+	int	j;
+
+	i = -1;
+	j = 0;
+	min = -1;
+	while (distances[++i] != -1)
+	{
+		if (distances[i] >= 0 && (min == -1 || distances[i] < min))
+		{
+			min = distances[i];
+			j = i;
+		}
+	}
+	if (j == 0)
+		return (N);
+	if (j == 1)
+		return (S);
+	if (j == 2)
+		return (E);
+	if (j == 3)
 		return (W);
 	return (ST);
 }

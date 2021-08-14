@@ -6,13 +6,13 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 18:45:11 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/03 16:44:21 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/14 17:42:02 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/check.h"
 
-void	error_msg_params(char *msg, char **map_str);
+int	error_msg_params(char *msg, char **map_str);
 
 t_lay	ft_newlayout(void)
 {
@@ -56,9 +56,6 @@ char	**check_map(int fd, t_lay *lay)
 	map = ft_split(map_str, '\n');
 	free(map_str);
 	if (!map)
-	{
 		error_msg_params("Memory allocation error!", NULL);
-		return (NULL);
-	}
 	return (map);
 }

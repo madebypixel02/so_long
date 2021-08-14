@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 16:59:34 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/14 11:00:47 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/14 17:45:51 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,9 @@ void	ft_update_ghosts(t_game *g, t_player **pl)
 
 void	ft_move_ghost(int d, t_game *g, t_player *gh, t_player **pl)
 {
+	t_vector	old;
+
+	old = ft_newvector(gh->pos.x, gh->pos.y);
 	ft_memset(&g->map[gh->pos.y][gh->pos.x], \
 		'0', g->map[gh->pos.y][gh->pos.x] == 'G');
 	if (d == N)
@@ -119,5 +122,8 @@ void	ft_move_ghost(int d, t_game *g, t_player *gh, t_player **pl)
 		gh->pos.x--;
 	gh->dir = d;
 	if (g->map[gh->pos.y][gh->pos.x] == 'P')
+	{
 		g->pac_dying = 1;
+		gh->pos = old;
+	}
 }

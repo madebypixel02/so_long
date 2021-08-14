@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 16:48:15 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/03 16:51:41 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/14 16:30:04 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 #include "../lib/colors.h"
 #include <stdio.h>
 
-void	error_msg_params(char *msg, char **map_str)
+int	error_msg_params(char *msg, char **map_str)
 {
 	if (map_str)
 		free(*map_str);
 	printf("Error\n%s%s%s\n", RED, msg, DEFAULT);
 	exit(0);
+	return (0);
 }
 
 t_err	ft_newmap_error(void)

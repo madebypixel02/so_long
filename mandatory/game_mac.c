@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/14 11:07:30 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/14 11:07:33 by aperez-b         ###   ########.fr       */
+/*   Created: 2021/08/14 17:49:17 by aperez-b          #+#    #+#             */
+/*   Updated: 2021/08/14 17:49:19 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int	key_hook(int key, t_game *g)
 {
 	if ((key == KEY_Q || key == KEY_ESC) && !g->pac_dying)
-		end_game(g);
+		end_game(g, "You quit the game early!");
 	if (key == KEY_R && !g->pac_dying)
 		ft_reset(g);
 	if ((key == KEY_UP || key == KEY_W) && g->next_dir != N && \
@@ -34,8 +34,10 @@ int	key_hook(int key, t_game *g)
 	return (0);
 }
 
-int	end_game(t_game *g)
+int	end_game(t_game *g, char *msg)
 {
+	if (msg)
+		printf("%s%s%s\n\n", RED, msg, DEFAULT);
 	if (g->map)
 		ft_free_matrix(&g->map);
 	if (g->map_bak)
@@ -46,7 +48,6 @@ int	end_game(t_game *g)
 		BLUE, g->n_moves, DEFAULT);
 	mlx_clear_window(g->id, g->w_id);
 	mlx_destroy_window(g->id, g->w_id);
-	mlx_destroy_display(g->id);
 	free(g->id);
 	exit(0);
 	return (0);
@@ -111,6 +112,6 @@ void	ft_check_game(t_game *g)
 	if (!g->lay->n_collect && !g->lay->n_pl && !g->pac_dying)
 	{
 		printf("%sCONGRATULATIONS, YOU WIN!%s\n\n", GREEN, DEFAULT);
-		end_game(g);
+		end_game(g, NULL);
 	}
 }
