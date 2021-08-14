@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/14 12:20:47 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/14 12:33:21 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
 /* Sprite Size */
 # define SIZE 32
 
-/* Color order for ghosts: (R)ed, (B)lue, Pin(K), (O)range, (G)reen, (Y)ellow, (P)urple */
+/* Ghost color order:
+ * (R)ed, (B)lue, Pin(K), (O)range, (G)reen, (Y)ellow, (P)urple */
 # define COLORS "RBKOGYP"
 
 /* Enum for (ST)op, (N)orth, (S)outh, (E)ast, (W)est as ints */
@@ -242,7 +243,7 @@ void		ft_update_score(t_game *g);
 /* Checks if Pacman is about to move to a ghost, initiates dath sequence */
 int			ft_checkmvtogh(t_game *g, int d, t_player *pl);
 
-/* Uses a rough estimate of the euclidean distance to retrieve the closest pacman from a given ghost */
+/* Uses euclidean distance to retrieve the closest pacman from a given ghost */
 t_player	*ft_getnearestpac(t_game *g, t_player *ghost);
 
 /* Updates every ghosts' position to try and catch a pacman */
@@ -254,13 +255,13 @@ int			ft_findghost(t_player *pl, t_vector pos);
 /* Change ghosts' direction if possible */
 void		ft_move_ghost(int d, t_game *g, t_player *ghost, t_player **pl);
 
-/* Simple algorithm to find the optimal direction to take in order to get a pacman */
+/* Simple algorithm to find the optimal direction to take to get a pacman */
 int			ft_choose_dir(t_game *g, t_player *gh, t_player *pac);
 
 /* Checks if there's a ghost, exit or wall to update a ghost's legal actions */
 void		ft_update_legal(t_game *g, t_player *gh);
 
-/* Restricts legal actions (if north is available restrict south, if east available restrict west, and so on) */
+/* If north available restrict south, if east available restrict west, etc */
 void		ft_restrict_legal(t_player *ghost);
 
 /* Counts the number of available actions for a given player */
@@ -272,7 +273,7 @@ int			ft_reset(t_game *g);
 /* Checks if a direction is in the legal actions for a player */
 int			ft_in_legal(t_player *player, int dir);
 
-/* Updates the target direction for every pacman and tries to change their direction to the target direction */
+/* Changes pacmans' directions to target direction if possible */
 void		ft_next_dir(t_game *g);
 
 /* Loads necessary sprites to move north */

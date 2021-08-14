@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 17:30:20 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/07/22 17:50:01 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/14 12:28:26 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 # define COLORS_H
 
+/* Color codes for printf  */
 # define DEFAULT "\033[0;39m"
 # define GRAY "\033[0;90m"
 # define RED "\033[0;91m"
