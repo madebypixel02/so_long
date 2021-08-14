@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/14 17:26:15 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/15 00:50:03 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ void		init_game(char **map, t_lay lay);
 void		ft_newgame(t_game *g, char **m, t_lay *lay);
 
 /* Stops execution and frees allocated memory */
-int			end_game(t_game *g, char *msg);
+int			end_game(t_game *g);
 
 /* Main loop that prints map and updates all events in the game */
 int			ft_update(t_game *g);
