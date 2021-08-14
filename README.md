@@ -96,3 +96,45 @@ https://user-images.githubusercontent.com/40824677/129461630-76c3f590-ebdc-42ec-
 There are 20+ maps (ported from [Machine-Learning-Pacman](https://github.com/madebypixel02/Machine-Learning-Pacman/tree/master/layouts)) to try your skill/luck.
 
 See [Other Maps](https://github.com/madebypixel02/so_long/tree/master/tests/MAPS.md#other-maps)
+
+## Installation
+
+### Cloning the repositories
+```shell
+git clone https://github.com/madebypixel02/so_long.git
+cd so_long
+git clone https://github.com/madebypixel02/libft.git
+git clone https://github.com/madebypixel02/get_next_line.git
+```
+
+### Installing the MLX library
+
+If you're not using a MacOS device from 42, you'll need to install the libraries manually. Please refer to the [official github](https://github.com/42Paris/minilibx-linux) to compile. Once you have the needed files, I suggest you add it to your system libraries (requires root access):
+
+```shell
+sudo cp mlx.h /usr/include
+sudo cp libmlx.a /usr/lib
+```
+
+### Usage
+
+```
+make                        compiles so_long executable
+make test MAP={path_to_map} compiles and executes so_long with the specified map
+make play                   compiles and executes a small set of maps sequentially
+make play2                  compiles and executes a much larger set of maps sequentially
+make git                    adds and commits everything, then pushes to upstream branch
+make norminette             runs norminette for all files in the project that need to pass it
+```
+
+## Technical Issues
+
+Throughout the project, there have been a few roadblocks that needed to be worked around, here's some of them:
+
+- Timing: getting the timing for animations and other stuff right was quite challenging. I ended up just using the number of loop repetitions from ``mlx_loop_hook`` and fiddling with different rates, which also varied a lot between MacOS and Linux.
+- Sprites: The minilibx in Linux doesn't handle transparency in sprites the same way MacOS' minilibx does. On Linux the sprites will just have black pixels in the transparent area. I found ways to work this around but it was too much of a hussle.
+- Leaks: Minilibx has some leaks that are only detected by ``valgrind``. Using the function ``mlx_destroy_display`` solves that leak, but apparently that function isn't a part of the minilibx in MacOS. For this reason I decided to split the file where that function was called, so that the file compiled in Linux had that extra line for valgrind to be happy.
+- Keycodes: yet another difference between MacOS and Linux. The keycodes (``WASD``, ``ESC``, etc) are completely different. I defined those variables straight from the makefile to correct this issue.
+
+## Summary
+This has been my favorite project so far, coding my own pacman clone was so much fun, regargless how flawed it might be :)
