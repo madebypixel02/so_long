@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 11:06:26 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/15 00:51:49 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/15 15:46:00 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	key_hook(int key, t_game *g)
 {
 	if ((key == KEY_Q || key == KEY_ESC) && !g->pac_dying)
 	{
-		printf("%sYou quit the game early!%s\n", RED, DEFAULT);
+		printf("\n%sYou quit the game early!%s\n\n", RED, DEFAULT);
 		end_game(g);
 	}
 	if (key == KEY_R && !g->pac_dying)

@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 10:16:09 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/15 00:52:51 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/15 15:46:21 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_anim_pacdeath(t_game *g)
 	g->sprites.pac_dying = g->sprites.pac_dying->next;
 	if (!g->sprites.pac_dying)
 	{
-		printf("%sGAME OVER\nBetter luck next time!%s\n", RED, DEFAULT);
+		printf("\n%sGAME OVER\nBetter luck next time!%s\n\n", RED, DEFAULT);
 		end_game(g);
 	}
 }

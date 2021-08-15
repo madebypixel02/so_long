@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/15 01:31:14 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/15 01:31:22 by aperez-b         ###   ########.fr       */
+/*   Created: 2021/08/15 15:47:13 by aperez-b          #+#    #+#             */
+/*   Updated: 2021/08/15 15:47:14 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	key_hook(int key, t_game *g)
 {
 	if ((key == KEY_Q || key == KEY_ESC) && !g->pac_dying)
 	{
-		printf("%sYou quit the game early!%s\n", RED, DEFAULT);
+		printf("\n%sYou quit the game early!%s\n\n", RED, DEFAULT);
 		end_game(g);
 	}
 	if (key == KEY_R && !g->pac_dying)
