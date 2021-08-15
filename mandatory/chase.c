@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 10:23:45 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/15 11:11:01 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/15 11:13:54 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ t_player	*ft_getnearestpac(t_game *g, t_player *ghost)
 int	ft_choose_dir(t_game *g, t_player *gh, t_player *pac)
 {
 	int		len;
-	int		move;
 	int		*distances;
 
 	ft_update_legal(g, gh);
@@ -53,8 +52,7 @@ int	ft_choose_dir(t_game *g, t_player *gh, t_player *pac)
 			printf("%sMemory Allocation Error!%s\n", RED, DEFAULT);
 			return (end_game(g));
 		}
-		move = ft_advanced_dir(gh, pac, distances);
-		return (move);
+		return (ft_advanced_dir(gh, pac, distances));
 	}
 	if (gh->legal.north)
 		return (N);
@@ -62,7 +60,9 @@ int	ft_choose_dir(t_game *g, t_player *gh, t_player *pac)
 		return (S);
 	if (gh->legal.east)
 		return (E);
-	return (gh->legal.west);
+	if (gh->legal.west)
+		return (W);
+	return (ST);
 }
 
 int	ft_advanced_dir(t_player *gh, t_player *pac, int *distances)
