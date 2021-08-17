@@ -66,8 +66,6 @@ typedef struct s_pl_sprite
 	t_list	*right_bak;
 	t_list	*panic;
 	t_list	*panic_bak;
-	int		anim_rate;
-	void	*black;
 }				t_pl_sprite;
 
 /* MLX image pointers for the map */
@@ -79,6 +77,7 @@ typedef struct s_sprite
 	void		*portal;
 	void		*pacman;
 	void		*pixels;
+	void		*black;
 	t_list		*pac_dying_bak;
 	t_list		*pac_dying;
 	t_font		score_font;

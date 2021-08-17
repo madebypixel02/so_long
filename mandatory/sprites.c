@@ -28,6 +28,8 @@ t_sprite	ft_initsprites(t_game *g)
 		"sprites/Other/Logo/logo.xpm", &size, &size);
 	g->sprites.pacman = mlx_xpm_file_to_image(g->id, \
 		"sprites/Pac-Man/pac_closed.xpm", &size, &size);
+	g->sprites.black = mlx_xpm_file_to_image(g->id, \
+		"sprites/Other/Walls/black.xpm", &size, &size);
 	g->sprites.pac_dying = ft_load_pacdeath(g);
 	g->sprites.score_font = ft_load_score_font(g);
 	g->sprites.pac_dying_bak = g->sprites.pac_dying;
@@ -41,6 +43,7 @@ int	free_sprites(t_game *g)
 	mlx_destroy_image(g->id, g->sprites.portal);
 	mlx_destroy_image(g->id, g->sprites.logo);
 	mlx_destroy_image(g->id, g->sprites.pacman);
+	mlx_destroy_image(g->id, g->sprites.black);
 	free_players(g);
 	free_fonts(g);
 	free_animation(g, g->sprites.pac_dying_bak);
@@ -61,7 +64,6 @@ void	free_players(t_game *g)
 		free_animation(g, ghost->sprites.left_bak);
 		free_animation(g, ghost->sprites.right_bak);
 		free_animation(g, ghost->sprites.panic_bak);
-		mlx_destroy_image(g->id, ghost->sprites.black);
 		ghost = ghost->next;
 	}
 	while (pacman)
@@ -70,7 +72,6 @@ void	free_players(t_game *g)
 		free_animation(g, pacman->sprites.down_bak);
 		free_animation(g, pacman->sprites.left_bak);
 		free_animation(g, pacman->sprites.right_bak);
-		mlx_destroy_image(g->id, pacman->sprites.black);
 		pacman = pacman->next;
 	}
 }
@@ -81,7 +82,6 @@ void	ft_free_singlepl(t_game *g, t_player *pl)
 	free_animation(g, pl->sprites.down_bak);
 	free_animation(g, pl->sprites.left_bak);
 	free_animation(g, pl->sprites.right_bak);
-	mlx_destroy_image(g->id, pl->sprites.black);
 }
 
 void	ft_put_map(t_game *g, int x, int y)

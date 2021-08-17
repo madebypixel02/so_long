@@ -39,17 +39,15 @@ int	key_hook(int key, t_game *g)
 
 int	end_game(t_game *g)
 {
-	if (g->map)
-		ft_free_matrix(&g->map);
-	if (g->map_bak)
-		ft_free_matrix(&g->map_bak);
 	free_sprites(g);
 	ft_free_playerlist(g);
-	printf("%sGame Finished!\n%sTotal Moves: %d\n\n%s", GREEN, \
-		BLUE, g->n_moves, DEFAULT);
+	ft_free_matrix(&g->map);
+	ft_free_matrix(&g->map_bak);
 	mlx_clear_window(g->id, g->w_id);
 	mlx_destroy_window(g->id, g->w_id);
-	free(g->id);
+	printf("%sGame Finished!\n%sTotal Moves: %d\n\n%s", GREEN, \
+		BLUE, g->n_moves, DEFAULT);
+	system("leaks so_long");
 	exit(0);
 	return (0);
 }

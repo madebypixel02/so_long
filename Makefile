@@ -39,7 +39,7 @@ UNAME = $(shell uname -s)
 # Properties for MacOS
 ECHO = echo
 CDEBUG = #-g3 -fsanitize=address
-GRATE = GAME_RATE=80
+GRATE = GAME_RATE=20
 GAME = game_mac.c
 LMLX = -lmlx -framework OpenGL -framework AppKit
 ifeq ($(UNAME), Linux)
@@ -48,6 +48,7 @@ ifeq ($(UNAME), Linux)
 	LEAKS =  valgrind --leak-check=full --show-leak-kinds=all -s -q 
 	LMLX = -lmlx -lXext -lX11
 	GAME = game_linux.c
+	GRATE = GAME_RATE=80
 	CDEBUG =
 
 	# Key Codes for Linux

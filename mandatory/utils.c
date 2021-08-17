@@ -68,7 +68,7 @@ int	ft_swap_tile(t_vector old, t_vector nw, t_game *g)
 	{
 		if (g->lay->n_collect)
 			return (1);
-		mlx_put_image_to_window(g->id, g->w_id, player->sprites.black, \
+		mlx_put_image_to_window(g->id, g->w_id, g->sprites.black, \
 			old.x * SIZE, old.y * SIZE);
 		hide = ft_delete_player(g, old);
 	}

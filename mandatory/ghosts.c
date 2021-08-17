@@ -57,8 +57,6 @@ void	ft_load_ghosts(t_game *g)
 		ghost->sprites.left_bak = ghost->sprites.left;
 		ghost->sprites.panic = ft_load_panic(g, NULL, i);
 		ghost->sprites.panic_bak = ghost->sprites.panic;
-		ghost->sprites.black = mlx_xpm_file_to_image(g->id, \
-			"sprites/Ghosts/black.xpm", &size, &size);
 		ghost = ghost->next;
 		i++;
 	}
@@ -71,6 +69,8 @@ void	ft_put_ghosts(t_game *g)
 	ghost = g->gh;
 	while (ghost)
 	{
+		mlx_put_image_to_window(g->id, g->w_id, g->sprites.black, \
+			ghost->win_pos.x, ghost->win_pos.y);
 		if (ghost->dir == N && !g->panic_mode && ghost->moving)
 			ft_anim_north(g, ghost);
 		if (ghost->dir == S && !g->panic_mode && ghost->moving)

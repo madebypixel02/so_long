@@ -19,6 +19,7 @@ void	ft_load_pacmans(t_game *g)
 	t_player	*pacman;
 	int			i;
 
+	i = 0;
 	pacman = g->pl;
 	while (pacman)
 	{
@@ -30,8 +31,6 @@ void	ft_load_pacmans(t_game *g)
 		pacman->sprites.left_bak = pacman->sprites.left;
 		pacman->sprites.right = ft_load_east(g, NULL, i);
 		pacman->sprites.right_bak = pacman->sprites.right;
-		pacman->sprites.black = mlx_xpm_file_to_image(g->id, \
-			"sprites/Pac-Man/black.xpm", &i, &i);
 		pacman = pacman->next;
 	}
 }
@@ -43,6 +42,8 @@ void	ft_put_pacman(t_game *g)
 	pacman = g->pl;
 	while (pacman)
 	{
+		mlx_put_image_to_window(g->id, g->w_id, g->sprites.black, \
+			pacman->win_pos.x, pacman->win_pos.y);
 		if (pacman->dir == N && pacman->moving)
 			ft_anim_north(g, pacman);
 		if (pacman->dir == S && pacman->moving)

@@ -19,7 +19,7 @@ void	ft_anim_pacdeath(t_game *g)
 	temp_pl = g->pl;
 	while (temp_pl)
 	{
-		mlx_put_image_to_window(g->id, g->w_id, temp_pl->sprites.black, \
+		mlx_put_image_to_window(g->id, g->w_id, g->sprites.black, \
 			temp_pl->win_pos.x, temp_pl->win_pos.y);
 		mlx_put_image_to_window(g->id, g->w_id,
 			g->sprites.pac_dying->content, temp_pl->win_pos.x, \
