@@ -139,4 +139,4 @@ Throughout the project, there have been a few roadblocks that needed to be worke
 ## Summary
 This has been my favorite project so far, coding my own pacman clone was so much fun, regargless how flawed it might be :)
 
-August 14th, 2020
+August 14th, 2021
