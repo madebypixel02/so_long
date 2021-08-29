@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 11:06:01 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/14 11:06:03 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/29 19:39:01 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ t_list	*ft_load_west(t_game *g, char *path, int i)
 	return (anim);
 }
 
-t_list	*ft_load_panic(t_game *g, char *path, int i)
+t_list	*ft_load_panic(t_game *g, int i)
 {
 	t_list	*anim;
 

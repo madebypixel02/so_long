@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 11:06:26 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/15 15:46:00 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/29 19:41:44 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	ft_check_game(t_game *g)
 	if (!(g->n_frames % g->g_rate) && !g->pac_dying)
 		ft_redraw_pac(g);
 	if (g->pl->dir != ST && !g->pac_dying)
-		ft_update_ghosts(g, &g->pl);
+		ft_update_ghosts(g);
 	if (g->next_dir)
 		ft_next_dir(g);
 	if (g->pac_dying && !(g->n_frames % (10 * g->g_rate)))

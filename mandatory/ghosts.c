@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 16:59:34 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/14 17:45:51 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/29 19:40:57 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	ft_load_ghosts(t_game *g)
 {
 	t_player	*ghost;
 	int			i;
-	int			size;
 
 	i = 0;
 	ghost = g->gh;
@@ -55,7 +54,7 @@ void	ft_load_ghosts(t_game *g)
 		ghost->sprites.right_bak = ghost->sprites.right;
 		ghost->sprites.left = ft_chooseghcolor(g, i, W);
 		ghost->sprites.left_bak = ghost->sprites.left;
-		ghost->sprites.panic = ft_load_panic(g, NULL, i);
+		ghost->sprites.panic = ft_load_panic(g, i);
 		ghost->sprites.panic_bak = ghost->sprites.panic;
 		ghost = ghost->next;
 		i++;
@@ -88,7 +87,7 @@ void	ft_put_ghosts(t_game *g)
 	}
 }
 
-void	ft_update_ghosts(t_game *g, t_player **pl)
+void	ft_update_ghosts(t_game *g)
 {
 	t_player	*ghost;
 	t_player	*closest;
@@ -100,12 +99,12 @@ void	ft_update_ghosts(t_game *g, t_player **pl)
 		closest = ft_getnearestpac(g, ghost);
 		dir = ft_choose_dir(g, ghost, closest);
 		ghost->moving = 1;
-		ft_move_ghost(dir, g, ghost, pl);
+		ft_move_ghost(dir, g, ghost);
 		ghost = ghost->next;
 	}
 }
 
-void	ft_move_ghost(int d, t_game *g, t_player *gh, t_player **pl)
+void	ft_move_ghost(int d, t_game *g, t_player *gh)
 {
 	t_vector	old;
 

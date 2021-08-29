@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/15 00:50:03 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/29 19:41:16 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,13 +249,13 @@ int			ft_checkmvtogh(t_game *g, int d, t_player *pl);
 t_player	*ft_getnearestpac(t_game *g, t_player *ghost);
 
 /* Updates every ghosts' position to try and catch a pacman */
-void		ft_update_ghosts(t_game *g, t_player **pl);
+void		ft_update_ghosts(t_game *g);
 
 /* Checks if there's a ghost in the given position */
 int			ft_findghost(t_player *pl, t_vector pos);
 
 /* Change ghosts' direction if possible */
-void		ft_move_ghost(int d, t_game *g, t_player *ghost, t_player **pl);
+void		ft_move_ghost(int d, t_game *g, t_player *ghost);
 
 /* Simple algorithm to find the optimal direction to take to get a pacman */
 int			ft_choose_dir(t_game *g, t_player *gh, t_player *pac);
@@ -297,7 +297,7 @@ t_list		*ft_load_east(t_game *g, char *path, int i);
 t_list		*ft_load_west(t_game *g, char *path, int i);
 
 /* Loads necessary sprites to animate panic mode for ghosts */
-t_list		*ft_load_panic(t_game *g, char *path, int i);
+t_list		*ft_load_panic(t_game *g, int i);
 
 /* Changes sprites to animate moving north */
 void		ft_anim_north(t_game *g, t_player *pl);
