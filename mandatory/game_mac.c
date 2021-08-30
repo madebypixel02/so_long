@@ -6,12 +6,13 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 15:47:13 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/29 19:42:02 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/30 09:50:31 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/game.h"
 #include <mlx.h>
+#include <stdio.h>
 
 int	key_hook(int key, t_game *g)
 {
@@ -47,7 +48,6 @@ int	end_game(t_game *g)
 	mlx_destroy_window(g->id, g->w_id);
 	printf("%sGame Finished!\n%sTotal Moves: %d\n\n%s", GREEN, \
 		BLUE, g->n_moves, DEFAULT);
-	system("leaks so_long");
 	exit(0);
 	return (0);
 }
@@ -98,15 +98,15 @@ void	ft_check_game(t_game *g)
 			g->g_rate -= g->g_rate / 3;
 		g->panic_mode = 1;
 	}
-	if (!(g->n_frames % (g->g_rate + (g->g_rate / 13))))
+	if (!(g->n_frames % 2) || g->panic_mode)
 		ft_redraw_gh(g);
-	if (!(g->n_frames % g->g_rate) && !g->pac_dying)
+	if (!g->pac_dying)
 		ft_redraw_pac(g);
 	if (g->pl->dir != ST && !g->pac_dying)
 		ft_update_ghosts(g);
 	if (g->next_dir)
 		ft_next_dir(g);
-	if (g->pac_dying && !(g->n_frames % (10 * g->g_rate)))
+	if (g->pac_dying && !(g->n_frames % 9))
 		ft_anim_pacdeath(g);
 	if (!g->lay->n_collect && !g->lay->n_pl && !g->pac_dying)
 	{

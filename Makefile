@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/08/29 19:37:20 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/08/30 09:32:58 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ UNAME = $(shell uname -s)
 # Properties for MacOS
 ECHO = echo
 CDEBUG = #-g3 -fsanitize=address
-GRATE = GAME_RATE=20
+GRATE = GAME_RATE=17
 GAME = game_mac.c
 LMLX = -lmlx -framework OpenGL -framework AppKit
 ifeq ($(UNAME), Linux)
