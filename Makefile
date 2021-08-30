@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/08/30 09:32:58 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/08/30 15:27:37 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -107,19 +107,13 @@ SOURCE_M = map.c player.c check.c $(GAME) sprites.c	\
 
 SOURCE_GNL = get_next_line.c get_next_line_utils.c
 
-SOURCE_B = 
-
 SRC_M = $(addprefix $(DIR_M)/, $(SOURCE_M)) tests/main.c
 
 SRC_GNL = $(addprefix $(DIR_GNL)/, $(SOURCE_GNL))
 
-SRC_B = $(addprefix $(DIR_B)/, $(SOURCE_B))
-
 OBJ_M = $(addprefix $(DIR_OBJ)/, $(SOURCE_M:.c=.o)) lib/main.o
 
 OBJ_GNL = $(addprefix $(DIR_OBJ)/, $(SOURCE_GNL:.c=.o))
-
-OBJ_B = $(addprefix $(DIR_OBJ)/, $(SOURCE_B:.c=.o))
 
 all: $(NAME)
 
@@ -138,16 +132,12 @@ $(OBJ_GNL): $(SRC_GNL)
 	@mv -f $(SOURCE_GNL:.c=.o) $(DIR_OBJ)
 	@$(ECHO) "$(GREEN)get_next_line Compilation Complete!$(DEFAULT)"
 
-bonus: $(OBJ_B) $(LIBFT) $(OBJ_GNL)
-
-$(OBJ_B): $(SRC_B)
-	@$(ECHO) "$(RED)Bonus objects outdated in so_long! Compiling again...$(DEFAULT)"
-	@$(CC) $(CFLAGS) $(CDEBUG) -c $^
-	@mv -f $(SOURCE_B:.c=.o) $(DIR_OBJ)
+bonus: all
 	@$(ECHO) "$(MAGENTA)Bonus Compilation Complete in so_long!$(DEFAULT)"
 
 compile_libft:
 	@make all -C libft/
+
 
 test: all
 	@$(ECHO) "$(YELLOW)Performing test with custom main...$(DEFAULT)"
