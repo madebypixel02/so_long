@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 16:48:15 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/30 13:21:47 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/30 15:53:21 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	ft_readlayout(int fd, t_err *map_err, t_lay *lay, char **map_str)
 				error_msg_params("Map is empty!", NULL);
 			else
 				ft_checklayout(last_line, map_err, lay, 1);
+			free(last_line);
 			break ;
 		}
 		free(last_line);
