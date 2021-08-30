@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 16:48:15 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/14 16:30:04 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/08/30 13:16:59 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,44 +42,42 @@ void	ft_readlayout(int fd, t_err *map_err, t_lay *lay, char **map_str)
 {
 	char		*line;
 	char		*last_line;
-	int			old_len;
 
 	line = NULL;
 	last_line = NULL;
-	old_len = 0;
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
 		{
-			if (old_len == 0)
+			if (!lay->n_col)
 				error_msg_params("Map is empty!", NULL);
-			ft_checklayout(last_line, map_err, lay, 0);
-			free(last_line);
+			else
+				ft_checklayout(last_line, map_err, lay, 1);
 			break ;
 		}
 		free(last_line);
-		ft_checklayout(line, map_err, lay, old_len);
-		old_len = ft_strlen(line);
+		ft_checklayout(line, map_err, lay, !lay->n_row);
 		last_line = ft_substr(line, 0, ft_strlen(line));
 		*map_str = ft_strenlarge(*map_str, line);
 		lay->n_row++;
 	}
 }
 
-void	ft_checklayout(char *line, t_err *map_err, t_lay *lay, int old_len)
+void	ft_checklayout(char *line, t_err *map_err, t_lay *lay, int is_last)
 {
-	if (old_len && old_len != (int)ft_strlen(line))
+	if (!lay->n_col)
+		lay->n_col = ft_strlen(line) - 1;
+	if (lay->n_col && ((lay->n_col != (int)ft_strlen(line) - 1 && ft_strchr(line, '\n')) || \
+			(lay->n_col != (int)ft_strlen(line) && !ft_strchr(line, '\n'))))
 		map_err->inv_rowlen = 1;
-	if (line && (line[0] != '1' || line[ft_strlen(line) - 2] != '1' || \
-			(!old_len && ft_countchar(line, '1') != (int)ft_strlen(line) - 1)))
+	if (line[0] != '1' || line[lay->n_col - 1] != '1' || \
+			(ft_countchar(line, '1') != lay->n_col && is_last))
 		map_err->inv_borders = 1;
 	lay->n_exit += ft_countchar(line, 'E');
 	lay->n_pl += ft_countchar(line, 'P');
 	lay->n_gh += ft_countchar(line, 'G');
 	lay->n_collect += ft_countchar(line, 'C');
-	if (!lay->n_col)
-		lay->n_col = ft_strlen(line) - 1;
 	map_err->inv_n_exits = lay->n_exit < 1;
 	map_err->inv_n_players = lay->n_pl < 1;
 	map_err->inv_n_collect = lay->n_collect < 1;
