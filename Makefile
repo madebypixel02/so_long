@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/08/30 15:27:37 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/08/31 17:02:08 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -140,7 +140,7 @@ compile_libft:
 
 
 test: all
-	@$(ECHO) "$(YELLOW)Performing test with custom main...$(DEFAULT)"
+	@$(ECHO) "$(YELLOW)Performing test with custom map...$(DEFAULT)"
 	@$(ECHO)
 	@$(ECHO) "Command: $(GRAY)$(LEAKS)./$(NAME) $(MAP)$(DEFAULT)"
 	@$(ECHO)
