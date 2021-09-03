@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/29 19:41:16 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/09/03 17:57:16 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -302,16 +302,16 @@ t_list		*ft_load_panic(t_game *g, int i);
 /* Changes sprites to animate moving north */
 void		ft_anim_north(t_game *g, t_player *pl);
 
-/* Changes sprites to animate moving north */
+/* Changes sprites to animate moving south */
 void		ft_anim_south(t_game *g, t_player *pl);
 
-/* Changes sprites to animate moving north */
+/* Changes sprites to animate moving east */
 void		ft_anim_east(t_game *g, t_player *pl);
 
-/* Changes sprites to animate moving north */
+/* Changes sprites to animate moving west */
 void		ft_anim_west(t_game *g, t_player *pl);
 
-/* Changes sprites to animate moving north */
+/* Changes sprites to animate ghosts while in panic mode */
 void		ft_anim_panic(t_game *g, t_player *pl);
 
 /* Puts the default sprite for a given direction when a player isn't moving */
