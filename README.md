@@ -133,7 +133,7 @@ sudo reboot
 ```
 Note: A reboot is necessary to ensure that the ``Xquartz`` is working properly. You can test if it is by running a test example with the command ``xeyes``.
 
-#### Installing the manuals
+### Installing the manuals
 
 If you want quick access to the mlx manuals, it is recommended that you copy the files from the ``man`` folder in [minilibx-linux](https://github.com/42Paris/minilibx-linux) to your system manuals:
 
