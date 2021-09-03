@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 15:47:13 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/30 09:50:31 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/09/03 10:42:00 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	ft_check_game(t_game *g)
 			g->g_rate -= g->g_rate / 3;
 		g->panic_mode = 1;
 	}
-	if (!(g->n_frames % 2) || g->panic_mode)
+	if (!(g->n_frames % 2) || g->panic_mode || !(g->n_frames % 3))
 		ft_redraw_gh(g);
 	if (!g->pac_dying)
 		ft_redraw_pac(g);
