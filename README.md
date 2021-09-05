@@ -48,18 +48,18 @@ The ``mlx`` library has hooks, which essentially link certain events on the comp
 
 ### Part 3: game mechanics
 
-When ``esc``/``Q`` is pressed, the game ends. If the arrow keys or the ``W``. ``A``, ``S``, ``D`` keys are pressed, every pacman on the map changes its direction and tries to move in that direction. Also, every fraction of a second the pacmans will all try to keep movin in the same direction they're moving, to make the keys just change pacman's directions and they will move forward till they hit a wall.
-Ghosts behave similarly (they're the first bonus: enemies), but instead of responding the keypress, they use a basic algorithm to find the closest pacman and try to catch it. Whenever either pacman is caught by a ghost, the attribute ``pac_dying`` is set to 1 in the ``t_game`` struct and all pacmans will die with a short animation.
-Ghosts load in seven different colors, and each new ghost will have a different color. To do this, I had to load every sprite of every color with the mlx library and assign a new color to every new ghost with ``ghost_number % number_of_colors``.
+When ``esc``/``Q`` is pressed, the game ends. If the arrow keys or the ``W``. ``A``, ``S``, ``D`` keys are pressed, every pacman on the map changes its direction and tries to move in that direction. Also, every so often all pacmans will all try to move in the same direction they're headed. This way the arrow/WASD keys just change pacmans' directions to make them move forward till they hit a wall.
+Ghosts behave similarly (they're the first bonus: enemies), but instead of responding the keypress, they use a basic algorithm to find the closest pacman and try to catch it. Whenever a pacman is caught by a ghost, the attribute ``pac_dying`` is set to 1 in the ``t_game`` struct and all pacmans die with a short animation.
+Ghosts load in seven different colors, and each new ghost will have a different color. To do this, I had to load every sprite of every color with the mlx library and assign a new color to every new ghost with ``ghost_number % number_of_colors``, thus rotating through the list of colours when there are more ghosts than available colors.
 
 Lastly, if a pacman reaches an exit and there are no collectibles left, it will be deleted from the list of players. If all pacmans reach the exit, the game ends and the final score is displayed.
 
 
 ### Part 4: animations
 
-There are several animations throughout the game (it's the other bonus in the pronect), from pacman's moving mouth or ghosts' panic mode to pacman's death animation. They are all animated in a similar way: with linked lists. Every node in the list corresponds to an image of the animation. Every so often a function is called, which will move to the next image, and if the last one is found, start over (e.g. pacman's movement).
+There are several animations throughout the game (it's the other bonus in the project), from pacman's gobbling animation or ghosts' panic mode to pacman's death animation. They are all animated in a similar way: with linked lists. Every node in the list corresponds to an image of the animation. Every so often a function is called which will move to the next image, and if the last one is found, the node resets to the top of the linked list.
 
-Pacman and ghosts move on the map matrix, which is much smaller than the mlx window. For this reason and to make movement smooth I keep a position in the matrix (``pos``) and a position on the window (``win_pos``) for every pacman/ghost, and update the position on the window one pixel at a time untill ``pos * sprite_size == win_pos``.
+Pacman and ghosts move on the map matrix, which is much smaller than the mlx window. For this reason and to make movement smooth it is interesting to keep a position in the matrix (``pos``) and a position on the window (``win_pos``) for every pacman/ghost, and update the position on the window one pixel at a time untill ``pos * sprite_size == win_pos``.
 
 
 ## Extras
@@ -68,6 +68,7 @@ The pacman game I designed has a few extras we weren't asked to implement, but I
 
 - Add custom (simple) chasing algorithm using euclidean distances.
 - Ability to restart the game by pressing the ``R`` key
+- Ability to exit the game by pressing the ``Q`` key
 - Ghosts enter panic mode when there's less than a third of the pacdots remaining. During this time the players will be faster and ghosts will flash for the sake of distraction
 - The score is displayed in the classic pacman fonts, instead of the (ugly) builtin fonts from ``mlx_string_put()``
 - Arrow keys also move the player
@@ -80,7 +81,7 @@ The pacman game I designed has a few extras we weren't asked to implement, but I
 
 ## Gameplay
 
-See [Maps.md](https://github.com/madebypixel02/so_long/tree/master/tests/MAPS.md)
+There are a total of 30 maps available. See [MAPS.md](https://github.com/madebypixel02/so_long/tree/master/tests/MAPS.md)
 
 Here are a few sample gameplays from my favorite maps:
 
