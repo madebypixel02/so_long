@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/08/31 17:02:08 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/09/27 20:04:55 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,13 +68,17 @@ endif
 # Make variables
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
-CC = gcc
-DIR_M = mandatory
-DIR_GNL = get_next_line
-DIR_B = bonus
-DIR_OBJ = lib
-LIBFT = libft/libft.a
-NAME = so_long
+CC = gcc -MD
+SRC_DIR = src
+SRCB_DIR = srcb
+OBJ_DIR = obj
+BIN_DIR = bin
+OBJ_GNL_DIR = obj_gnl
+BIN = so_long
+NAME = $(BIN_DIR)/$(BIN)
+LIBFT = libft/bin/libft.a
+GNL_DIR = get_next_line
+
 
 # Keycodes defined during compilation
 KEYCODES =  -D $(ESC) -D $(Q) -D $(R) -D $(W) -D $(A) -D $(S) -D $(D) -D $(UP) -D $(DOWN) -D $(LEFT) -D $(RIGHT)
@@ -100,37 +104,31 @@ MAPS1 = $(addprefix tests/, $(SRC_MAPS1))
 
 MAPS2 = $(addprefix tests/other-maps/, $(SRC_MAPS2))
 
-SOURCE_M = map.c player.c check.c $(GAME) sprites.c	\
+SRC = map.c player.c check.c $(GAME) sprites.c	\
 		   utils.c anim.c render.c playerlist.c		\
 		   ghosts.c pacman.c chase.c legal.c		\
-		   score.c load_dir.c anim_dir.c
+		   score.c load_dir.c anim_dir.c main.c
 
-SOURCE_GNL = get_next_line.c get_next_line_utils.c
+SRC_GNL = get_next_line.c get_next_line_utils.c
 
-SRC_M = $(addprefix $(DIR_M)/, $(SOURCE_M)) tests/main.c
+OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
-SRC_GNL = $(addprefix $(DIR_GNL)/, $(SOURCE_GNL))
-
-OBJ_M = $(addprefix $(DIR_OBJ)/, $(SOURCE_M:.c=.o)) lib/main.o
-
-OBJ_GNL = $(addprefix $(DIR_OBJ)/, $(SOURCE_GNL:.c=.o))
+OBJ_GNL = $(addprefix $(OBJ_GNL_DIR)/, $(SRC_GNL:.c=.o))
 
 all: $(NAME)
 
-$(NAME): $(OBJ_M) $(OBJ_GNL) compile_libft
-	@$(CC) $(CFLAGS) $(CDEBUG) $(OBJ_M) $(OBJ_GNL) $(LIBFT) $(LMLX) -o $@
-
-$(OBJ_M): $(SRC_M)
-	@$(ECHO) "$(RED)Mandatory objects outdated in so_long! Compiling again...$(DEFAULT)"
-	@$(CC) $(CFLAGS) $(CDEBUG) $(KEYCODES) $(RATES) -c $^
-	@mv -f $(SOURCE_M:.c=.o) main.o $(DIR_OBJ)
-	@$(ECHO) "$(GREEN)Mandatory Compilation Complete in so_long!$(DEFAULT)"
-
-$(OBJ_GNL): $(SRC_GNL)
-	@$(ECHO) "$(RED)Objects outdated in get_next_line! Compiling again...$(DEFAULT)"
-	@$(CC) $(CFLAGS) $(CDEBUG) -c $^
-	@mv -f $(SOURCE_GNL:.c=.o) $(DIR_OBJ)
+$(NAME): create_dirs compile_libft $(OBJ_GNL) $(OBJ)
 	@$(ECHO) "$(GREEN)get_next_line Compilation Complete!$(DEFAULT)"
+	@$(CC) $(CFLAGS) $(CDEBUG) $(OBJ) $(OBJ_GNL) $(LIBFT) $(LMLX) -o $@
+	@$(ECHO) "$(GREEN)$(BIN) is up to date!$(DEFAULT)"
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@$(ECHO) "Compiling $(BLUE)$<$(DEFAULT)..."
+	@$(CC) $(CFLAGS) $(CDEBUG) $(KEYCODES) $(RATES) -c $< -o $@
+
+$(OBJ_GNL_DIR)/%.o: $(GNL_DIR)/%.c
+	@$(ECHO) "Compiling $(BLUE)$<$(DEFAULT)..."
+	@$(CC) $(CFLAGS) $(CDEBUG) $(KEYCODES) $(RATES) -c $< -o $@
 
 bonus: all
 	@$(ECHO) "$(MAGENTA)Bonus Compilation Complete in so_long!$(DEFAULT)"
@@ -138,6 +136,10 @@ bonus: all
 compile_libft:
 	@make all -C libft/
 
+create_dirs:
+	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_GNL_DIR)
+	@mkdir -p $(BIN_DIR)
 
 test: all
 	@$(ECHO) "$(YELLOW)Performing test with custom map...$(DEFAULT)"
@@ -161,22 +163,20 @@ play2: all
 	done
 
 clean:
-	@$(ECHO) "$(BLUE)Cleaning up object files in so_long...$(DEFAULT)"
+	@$(ECHO) "$(CYAN)Cleaning up object files in so_long...$(DEFAULT)"
 	@make clean -C libft
-	@$(RM) $(OBJ_M) $(OBJ_B) $(OBJ_GNL)
+	@$(RM) -r $(OBJ_DIR)
+	@$(RM) -r $(OBJ_GNL_DIR)
 
 fclean: clean
+	@$(RM) -r $(BIN_DIR)
 	@$(RM) $(LIBFT)
-	@$(RM) libft/$(LIBFT)
-	@$(RM) $(NAME)
 	@$(ECHO) "$(CYAN)Removed $(NAME)$(DEFAULT)"
 	@$(ECHO) "$(CYAN)Removed $(LIBFT)$(DEFAULT)"
 
 norminette:
 	@$(ECHO) "$(CYAN)\nChecking norm for so_long...$(DEFAULT)"
-	@norminette -R CheckForbiddenSourceHeader $(SRC_M) $(SRC_B) lib/
-	@$(ECHO) "$(CYAN)\nChecking norm for get_next_line...$(DEFAULT)"
-	@norminette -R CheckForbiddenSourceHeader $(SRC_GNL) $(DIR_GNL)/get_next_line.h
+	@norminette -R CheckForbiddenSourceHeader $(SRC_DIR) $(DIR_GNL) inc/
 	@make norminette -C libft/
 
 re: fclean all
@@ -187,4 +187,7 @@ git:
 	git commit
 	git push
 
-.PHONY: all clean fclean bonus compile_libft norminette test play git re
+-include $(OBJ_DIR)/*.d
+-include $(OBJ_GNL_DIR)/*.d
+
+.PHONY: all clean fclean bonus compile_libft norminette test play create_dirs git re

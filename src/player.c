@@ -6,14 +6,13 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 20:35:25 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/14 13:09:59 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/09/27 20:03:02 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/game.h"
+#include "../inc/game.h"
 #include <mlx.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 t_player	*ft_plrnew(t_vector pos)
 {

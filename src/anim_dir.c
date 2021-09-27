@@ -6,11 +6,11 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 11:05:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/14 11:05:44 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/09/27 20:03:36 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/game.h"
+#include "../inc/game.h"
 
 void	ft_anim_north(t_game *g, t_player *pl)
 {

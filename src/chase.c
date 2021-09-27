@@ -6,11 +6,11 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 10:23:45 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/15 11:13:54 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/09/27 19:59:54 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/game.h"
+#include "../inc/game.h"
 
 t_player	*ft_getnearestpac(t_game *g, t_player *ghost)
 {

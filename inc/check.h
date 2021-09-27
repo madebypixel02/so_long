@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 18:52:18 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/03 17:51:52 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/09/27 19:58:43 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # define CHECK_H
 
 # include <fcntl.h>
-# include "../libft/lib/libft.h"
+# include "../libft/inc/libft.h"
 # include "map.h"
 
 /* Basic checks to see if the correct file has been opened */

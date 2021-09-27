@@ -6,11 +6,11 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 16:59:34 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/29 19:40:57 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/09/27 20:00:49 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/game.h"
+#include "../inc/game.h"
 #include <mlx.h>
 
 t_list	*ft_chooseghcolor(t_game *g, int i, int dir)

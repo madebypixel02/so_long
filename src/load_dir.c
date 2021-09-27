@@ -6,11 +6,11 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 11:06:01 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/29 19:39:01 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/09/27 20:01:34 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/game.h"
+#include "../inc/game.h"
 
 t_list	*ft_load_north(t_game *g, char *path, int i)
 {

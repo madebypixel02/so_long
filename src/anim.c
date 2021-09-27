@@ -6,11 +6,11 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 10:16:09 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/15 15:46:21 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/09/27 19:59:46 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/game.h"
+#include "../inc/game.h"
 
 void	ft_anim_pacdeath(t_game *g)
 {

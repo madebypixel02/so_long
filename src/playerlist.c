@@ -6,11 +6,11 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 10:33:55 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/08 12:23:21 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/09/27 20:01:58 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/game.h"
+#include "../inc/game.h"
 
 void	ft_free_playerlist(t_game *g)
 {

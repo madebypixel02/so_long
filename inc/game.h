@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/09/03 17:57:16 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/09/27 19:58:26 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 # include "map.h"
 # include "colors.h"
-# include "../libft/lib/libft.h"
+# include "../libft/inc/libft.h"
 # include <mlx.h>
 # include <stdio.h>
 

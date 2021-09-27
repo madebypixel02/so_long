@@ -6,11 +6,11 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 11:04:35 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/14 11:04:38 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/09/27 20:00:15 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/game.h"
+#include "../inc/game.h"
 #include <mlx.h>
 #include <unistd.h>
 

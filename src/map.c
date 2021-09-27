@@ -6,13 +6,13 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 16:48:15 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/30 15:53:21 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/09/27 19:59:29 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/map.h"
-#include "../libft/lib/libft.h"
-#include "../lib/colors.h"
+#include "../inc/map.h"
+#include "../libft/inc/libft.h"
+#include "../inc/colors.h"
 #include <stdio.h>
 
 int	error_msg_params(char *msg, char **map_str)

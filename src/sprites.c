@@ -6,11 +6,11 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 23:02:26 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/14 00:11:10 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/09/27 20:01:17 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/game.h"
+#include "../inc/game.h"
 #include <mlx.h>
 
 t_sprite	ft_initsprites(t_game *g)

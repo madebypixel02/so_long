@@ -6,11 +6,11 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 10:43:50 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/14 13:07:51 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/09/27 20:00:04 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/game.h"
+#include "../inc/game.h"
 
 void	ft_update_legal(t_game *g, t_player *gh)
 {

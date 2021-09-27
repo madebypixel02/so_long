@@ -6,11 +6,11 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 18:45:11 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/08/14 17:42:02 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/09/27 20:03:21 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/check.h"
+#include "../inc/check.h"
 
 int	error_msg_params(char *msg, char **map_str);
 
