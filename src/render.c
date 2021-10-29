@@ -6,7 +6,7 @@
 /*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 17:09:20 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/09/27 20:01:50 by aperez-b         ###   ########.fr       */
+/*   Updated: 2021/10/29 08:36:51 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ void	ft_redraw_pac(t_game *g)
 	while (pl)
 	{
 		if (pl->win_pos.x < pl->pos.x * SIZE && pl->moving)
-			pl->win_pos.x++;
+			pl->win_pos.x += 2;
 		if (pl->win_pos.x > pl->pos.x * SIZE && pl->moving)
-			pl->win_pos.x--;
+			pl->win_pos.x -= 2;
 		if (pl->win_pos.y < pl->pos.y * SIZE && pl->moving)
-			pl->win_pos.y++;
+			pl->win_pos.y += 2;
 		if (pl->win_pos.y > pl->pos.y * SIZE && pl->moving)
-			pl->win_pos.y--;
+			pl->win_pos.y -= 2;
 		if (pl->win_pos.x == pl->pos.x * SIZE && \
 				pl->win_pos.y == pl->pos.y * SIZE)
 			pl->moving = 0;
@@ -45,13 +45,13 @@ void	ft_redraw_gh(t_game *g)
 	while (pl)
 	{
 		if (pl->win_pos.x < pl->pos.x * SIZE && pl->moving)
-			pl->win_pos.x++;
+			pl->win_pos.x += 2;
 		if (pl->win_pos.x > pl->pos.x * SIZE && pl->moving)
-			pl->win_pos.x--;
+			pl->win_pos.x -= 2;
 		if (pl->win_pos.y < pl->pos.y * SIZE && pl->moving)
-			pl->win_pos.y++;
+			pl->win_pos.y += 2;
 		if (pl->win_pos.y > pl->pos.y * SIZE && pl->moving)
-			pl->win_pos.y--;
+			pl->win_pos.y -= 2;
 		if (pl->win_pos.x == pl->pos.x * SIZE && \
 				pl->win_pos.y == pl->pos.y * SIZE)
 		{
