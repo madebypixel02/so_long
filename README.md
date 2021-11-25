@@ -85,13 +85,16 @@ There are a total of 30 maps available. See [MAPS.md](https://github.com/madebyp
 
 Here are a few sample gameplays from my favorite maps:
 
-![test.ber](https://user-images.githubusercontent.com/40824677/143444866-f17f7afa-67fb-4b9f-9eda-4d91633bd211.gif)
 
-![run.ber](https://user-images.githubusercontent.com/40824677/143444921-0581164b-bfd2-469e-b3ae-da3c287d40a4.gif)
 
-![island.ber](https://user-images.githubusercontent.com/40824677/143444947-10cfa7d0-3e91-49f0-a8d7-f5b5978e3e9b.gif)
+https://user-images.githubusercontent.com/40824677/143445307-83c3ff1f-7294-4238-9faa-dc0e0eabb314.mp4
 
-![classic.ber](https://user-images.githubusercontent.com/40824677/143444965-42c98a20-1c6f-4acc-bfab-2d7c60b42dd9.gif)
+https://user-images.githubusercontent.com/40824677/143445401-1ad6a78e-dd5e-431c-b3f3-eaa386fbf803.mp4
+
+https://user-images.githubusercontent.com/40824677/143445427-6c5f6597-c7cf-4f17-9c10-3aa52c9207a2.mp4
+
+https://user-images.githubusercontent.com/40824677/143445444-5beb9455-d436-4500-a872-ceb262f0904f.mp4
+
 
 ## Other Maps
 There are 20+ maps (ported from [Machine-Learning-Pacman](https://github.com/madebypixel02/Machine-Learning-Pacman/tree/master/layouts)) to try your skill/luck.
