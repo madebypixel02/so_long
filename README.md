@@ -85,13 +85,13 @@ There are a total of 30 maps available. See [MAPS.md](https://github.com/madebyp
 
 Here are a few sample gameplays from my favorite maps:
 
-![129461633-30b05f9d-8ccf-4506-bd1](https://user-images.githubusercontent.com/40824677/139252485-631c49f8-5de7-4eb2-9184-64697a44e593.gif)
+![test.ber](https://user-images.githubusercontent.com/40824677/143444866-f17f7afa-67fb-4b9f-9eda-4d91633bd211.gif)
 
-![129461632-1841a1f1-1560-4466-aa7](https://user-images.githubusercontent.com/40824677/139252544-5aa87f07-5e69-48d8-97ae-c6d062361448.gif)
+![run.ber](https://user-images.githubusercontent.com/40824677/143444921-0581164b-bfd2-469e-b3ae-da3c287d40a4.gif)
 
-![129461631-b0209698-d96d-485a-9a3](https://user-images.githubusercontent.com/40824677/139252600-05b5d7a8-3b15-4216-8d1b-13dfcff9cf29.gif)
+![island.ber](https://user-images.githubusercontent.com/40824677/143444947-10cfa7d0-3e91-49f0-a8d7-f5b5978e3e9b.gif)
 
-![129461630-76c3f590-ebdc-42ec-bff](https://user-images.githubusercontent.com/40824677/139252611-da76854b-887c-428a-b10b-559d30ea38fc.gif)
+![classic.ber](https://user-images.githubusercontent.com/40824677/143444965-42c98a20-1c6f-4acc-bfab-2d7c60b42dd9.gif)
 
 ## Other Maps
 There are 20+ maps (ported from [Machine-Learning-Pacman](https://github.com/madebypixel02/Machine-Learning-Pacman/tree/master/layouts)) to try your skill/luck.
