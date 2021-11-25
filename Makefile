@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/09/27 20:04:55 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/11/25 12:59:04 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ ECHO = echo
 CDEBUG = #-g3 -fsanitize=address
 GRATE = GAME_RATE=17
 GAME = game_mac.c
+RENDER = render_mac.c
 LMLX = -lmlx -framework OpenGL -framework AppKit
 ifeq ($(UNAME), Linux)
 	#Properties for Linux
@@ -48,6 +49,7 @@ ifeq ($(UNAME), Linux)
 	LEAKS =  valgrind --leak-check=full --show-leak-kinds=all -s -q 
 	LMLX = -lmlx -lXext -lX11
 	GAME = game_linux.c
+	RENDER = render_linux.c
 	GRATE = GAME_RATE=80
 	CDEBUG =
 
@@ -104,8 +106,8 @@ MAPS1 = $(addprefix tests/, $(SRC_MAPS1))
 
 MAPS2 = $(addprefix tests/other-maps/, $(SRC_MAPS2))
 
-SRC = map.c player.c check.c $(GAME) sprites.c	\
-		   utils.c anim.c render.c playerlist.c		\
+SRC = map.c player.c check.c $(GAME) sprites.c		\
+		   utils.c anim.c $(RENDER) playerlist.c	\
 		   ghosts.c pacman.c chase.c legal.c		\
 		   score.c load_dir.c anim_dir.c main.c
 
