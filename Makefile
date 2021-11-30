@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/11/25 12:59:04 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/11/30 15:36:35 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -120,7 +120,6 @@ OBJ_GNL = $(addprefix $(OBJ_GNL_DIR)/, $(SRC_GNL:.c=.o))
 all: $(NAME)
 
 $(NAME): create_dirs compile_libft $(OBJ_GNL) $(OBJ)
-	@$(ECHO) "$(GREEN)get_next_line Compilation Complete!$(DEFAULT)"
 	@$(CC) $(CFLAGS) $(CDEBUG) $(OBJ) $(OBJ_GNL) $(LIBFT) $(LMLX) -o $@
 	@$(ECHO) "$(GREEN)$(BIN) is up to date!$(DEFAULT)"
 
@@ -136,6 +135,12 @@ bonus: all
 	@$(ECHO) "$(MAGENTA)Bonus Compilation Complete in so_long!$(DEFAULT)"
 
 compile_libft:
+	@if [ ! -d "get_next_line" ]; then \
+		git clone https://github.com/madebypixel02/get_next_line.git; \
+	fi
+	@if [ ! -d "libft" ]; then \
+		git clone https://github.com/madebypixel02/libft.git; \
+	fi
 	@make all -C libft/
 
 create_dirs:
@@ -166,20 +171,28 @@ play2: all
 
 clean:
 	@$(ECHO) "$(CYAN)Cleaning up object files in so_long...$(DEFAULT)"
-	@make clean -C libft
+	@if [ -d "libft" ]; then \
+		make clean -C libft; \
+	fi
 	@$(RM) -r $(OBJ_DIR)
 	@$(RM) -r $(OBJ_GNL_DIR)
 
 fclean: clean
 	@$(RM) -r $(BIN_DIR)
-	@$(RM) $(LIBFT)
+	@if [ -d "libft" ]; then \
+		$(RM) $(LIBFT); \
+	fi
 	@$(ECHO) "$(CYAN)Removed $(NAME)$(DEFAULT)"
-	@$(ECHO) "$(CYAN)Removed $(LIBFT)$(DEFAULT)"
+	@if [ -d "libft" ]; then \
+		$(ECHO) "$(CYAN)Removed $(LIBFT)$(DEFAULT)"; \
+	fi
 
 norminette:
 	@$(ECHO) "$(CYAN)\nChecking norm for so_long...$(DEFAULT)"
 	@norminette -R CheckForbiddenSourceHeader $(SRC_DIR) $(DIR_GNL) inc/
-	@make norminette -C libft/
+	@if [ -d "libft" ]; then \
+		make norminette -C libft/; \
+	fi
 
 re: fclean all
 	@$(ECHO) "$(YELLOW)Cleaned and Rebuilt Everything for $(NAME)!$(DEFAULT)"

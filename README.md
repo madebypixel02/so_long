@@ -104,8 +104,7 @@ See [Other Maps](https://github.com/madebypixel02/so_long/tree/master/tests/MAPS
 ```shell
 git clone https://github.com/madebypixel02/so_long.git
 cd so_long
-git clone https://github.com/madebypixel02/libft.git
-git clone https://github.com/madebypixel02/get_next_line.git
+make
 ```
 
 ### Installing the MLX library
@@ -125,6 +124,7 @@ sudo cp libmlx.a /usr/lib
 * ``MacOS``
 
 To install the library, you will need to first install a package manager like homebrew (check [here](https://brew.sh/)) to then install the X11 package with ``brew install Xquartz``. After that you must extract the minilibx file called ``minilibx_opengl.tgz``. then install it to your system with the following commands (requires sudo as well):
+
 ```shell
 cd minilibx_opengl
 make
