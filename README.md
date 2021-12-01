@@ -85,15 +85,13 @@ There are a total of 30 maps available. See [MAPS.md](https://github.com/madebyp
 
 Here are a few sample gameplays from my favorite maps:
 
+![test](https://user-images.githubusercontent.com/40824677/144236348-16d25b18-083b-4b3d-8e68-1c5a750aadbd.gif)
 
+![run](https://user-images.githubusercontent.com/40824677/144236512-ef823d58-a669-422b-b28d-aa619cf38b09.gif)
 
-https://user-images.githubusercontent.com/40824677/143445307-83c3ff1f-7294-4238-9faa-dc0e0eabb314.mp4
+![island](https://user-images.githubusercontent.com/40824677/144236536-cf60d7de-06b6-40ef-99f8-6a5e459c7051.gif)
 
-https://user-images.githubusercontent.com/40824677/143445401-1ad6a78e-dd5e-431c-b3f3-eaa386fbf803.mp4
-
-https://user-images.githubusercontent.com/40824677/143445427-6c5f6597-c7cf-4f17-9c10-3aa52c9207a2.mp4
-
-https://user-images.githubusercontent.com/40824677/143445444-5beb9455-d436-4500-a872-ceb262f0904f.mp4
+![classic](https://user-images.githubusercontent.com/40824677/144236580-afefb02c-8d9e-4fb4-8003-fc2770fe45dc.gif)
 
 
 ## Other Maps
