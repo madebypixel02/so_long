@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/12/15 15:19:58 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/12/15 18:42:45 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,6 @@ SHELL=/bin/bash
 UNAME = $(shell uname -s)
 
 # Properties for MacOS
-ECHO = echo
 CDEBUG = #-g3 -fsanitize=address
 GRATE = GAME_RATE=17
 GAME = game_mac.c
@@ -46,7 +45,6 @@ RENDER = render_mac.c
 LMLX = -lmlx -framework OpenGL -framework AppKit
 ifeq ($(UNAME), Linux)
 	#Properties for Linux
-	ECHO = echo -e
 	LEAKS =  valgrind --leak-check=full --show-leak-kinds=all -s -q 
 	LMLX = -lmlx -lXext -lX11
 	GAME = game_linux.c
@@ -73,15 +71,14 @@ CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 CC = gcc -MD
 SRC_DIR = src
-SRCB_DIR = srcb
 OBJ_DIR = obj
 BIN_DIR = bin
 OBJ_GNL_DIR = obj_gnl
 BIN = so_long
 NAME = $(BIN_DIR)/$(BIN)
+PRINTF = LC_NUMERIC="en_US.UTF-8" printf
 LIBFT = libft/bin/libft.a
 GNL_DIR = get_next_line
-
 
 # Keycodes defined during compilation
 KEYCODES =  -D $(ESC) -D $(Q) -D $(R) -D $(W) -D $(A) -D $(S) -D $(D) -D $(UP) -D $(DOWN) -D $(LEFT) -D $(RIGHT)
@@ -118,22 +115,31 @@ OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
 OBJ_GNL = $(addprefix $(OBJ_GNL_DIR)/, $(SRC_GNL:.c=.o))
 
+# Progress vars
+SRC_COUNT_TOT := $(shell expr $(shell echo -n $(SRC) | wc -w) - $(shell ls -l $(OBJ_DIR) 2>&1 | grep ".o" | wc -l) + 1)
+SRC_COUNT := 0
+SRC_PCT = $(shell expr 100 \* $(SRC_COUNT) / $(SRC_COUNT_TOT))
+SRC_GNL_COUNT_TOT := $(shell expr $(shell echo -n $(SRC_GNL) | wc -w) - $(shell ls -l $(OBJ_GNL_DIR) 2>&1 | grep ".o" | wc -l) + 1)
+SRC_GNL_COUNT := 0
+SRC_GNL_PCT = $(shell expr 100 \* $(SRC_GNL_COUNT) / $(SRC_GNL_COUNT_TOT))
+
 all: $(NAME)
 
 $(NAME): create_dirs compile_libft $(OBJ_GNL) $(OBJ)
 	@$(CC) $(CFLAGS) $(CDEBUG) $(OBJ) $(OBJ_GNL) $(LIBFT) $(LMLX) -o $@
-	@$(ECHO) "$(GREEN)$(BIN) is up to date!$(DEFAULT)"
+	@$(PRINTF) "\r%100s\r$(GREEN)$(BIN) is up to date!$(DEFAULT)\n"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@$(ECHO) "Compiling $(BLUE)$<$(DEFAULT)..."
+	@$(eval SRC_COUNT = $(shell expr $(SRC_COUNT) + 1))
+	@$(PRINTF) "\r%100s\r[ %d/%d (%d%%) ] Compiling $(BLUE)$<$(DEFAULT)..." "" $(SRC_COUNT) $(SRC_COUNT_TOT) $(SRC_PCT)
 	@$(CC) $(CFLAGS) $(CDEBUG) $(KEYCODES) $(RATES) -c $< -o $@
 
 $(OBJ_GNL_DIR)/%.o: $(GNL_DIR)/%.c
-	@$(ECHO) "Compiling $(BLUE)$<$(DEFAULT)..."
+	@$(eval SRC_GNL_COUNT = $(shell expr $(SRC_GNL_COUNT) + 1))
+	@$(PRINTF) "\r%100s\r[ %d/%d (%d%%) ] Compiling $(BLUE)$<$(DEFAULT)..." "" $(SRC_GNL_COUNT) $(SRC_GNL_COUNT_TOT) $(SRC_GNL_PCT)
 	@$(CC) $(CFLAGS) $(CDEBUG) $(KEYCODES) $(RATES) -c $< -o $@
 
 bonus: all
-	@$(ECHO) "$(MAGENTA)Bonus Compilation Complete in so_long!$(DEFAULT)"
 
 compile_libft:
 	@if [ ! -d "get_next_line" ]; then \
@@ -150,28 +156,24 @@ create_dirs:
 	@mkdir -p $(BIN_DIR)
 
 test: all
-	@$(ECHO) "$(YELLOW)Performing test with custom map...$(DEFAULT)"
-	@$(ECHO)
-	@$(ECHO) "Command: $(GRAY)$(LEAKS)./$(NAME) $(MAP)$(DEFAULT)"
-	@$(ECHO)
+	@$(PRINTF) "$(YELLOW)Performing test with custom map...$(DEFAULT)\n\n"
+	@$(PRINTF) "Command: $(GRAY)$(LEAKS)./$(NAME) $(MAP)$(DEFAULT)\n\n"
 	@$(LEAKS)./$(NAME) $(MAP)
 
 play: all
 	@for map in $(MAPS1) ; do \
-		$(ECHO) ; \
-		$(ECHO) "Command: $(GRAY)$(LEAKS)./$(NAME) $$map$(DEFAULT)" ; \
+		$(PRINTF) "\nCommand: $(GRAY)$(LEAKS)./$(NAME) $$map$(DEFAULT)\n" ; \
 		$(LEAKS) ./$(NAME) $$map ; \
 	done
 
 play2: all
 	@for map in $(MAPS2) ; do \
-		$(ECHO) ; \
-		$(ECHO) "Command: $(GRAY)$(LEAKS)./$(NAME) $$map$(DEFAULT)" ; \
+		$(PRINTF) "\nCommand: $(GRAY)$(LEAKS)./$(NAME) $$map$(DEFAULT)\n" ; \
 		$(LEAKS) ./$(NAME) $$map ; \
 	done
 
 clean:
-	@$(ECHO) "$(CYAN)Cleaning up object files in so_long...$(DEFAULT)"
+	@$(PRINTF) "$(CYAN)Cleaning up object files in so_long...$(DEFAULT)\n"
 	@if [ -d "libft" ]; then \
 		make clean -C libft; \
 	fi
@@ -183,20 +185,20 @@ fclean: clean
 	@if [ -d "libft" ]; then \
 		$(RM) $(LIBFT); \
 	fi
-	@$(ECHO) "$(CYAN)Removed $(NAME)$(DEFAULT)"
+	@$(PRINTF) "$(CYAN)Removed $(NAME)$(DEFAULT)\n"
 	@if [ -d "libft" ]; then \
-		$(ECHO) "$(CYAN)Removed $(LIBFT)$(DEFAULT)"; \
+		$(PRINTF) "$(CYAN)Removed $(LIBFT)$(DEFAULT)\n"; \
 	fi
 
 norminette:
-	@$(ECHO) "$(CYAN)\nChecking norm for so_long...$(DEFAULT)"
+	@$(PRINTF) "$(CYAN)\nChecking norm for so_long...$(DEFAULT)\n"
 	@norminette -R CheckForbiddenSourceHeader $(SRC_DIR) $(DIR_GNL) inc/
 	@if [ -d "libft" ]; then \
 		make norminette -C libft/; \
 	fi
 
-re: fclean all
-	@$(ECHO) "$(YELLOW)Cleaned and Rebuilt Everything for $(NAME)!$(DEFAULT)"
+re: fclean
+	@make all
 
 git:
 	git add .
