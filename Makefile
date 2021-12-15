@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/11/30 15:36:35 by aperez-b         ###   ########.fr        #
+#    Updated: 2021/12/15 15:19:58 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ RIGHT = KEY_RIGHT=124
 R = KEY_R=15
 Q = KEY_Q=12
 
+SHELL=/bin/bash
 UNAME = $(shell uname -s)
 
 # Properties for MacOS
