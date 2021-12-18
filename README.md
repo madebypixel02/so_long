@@ -160,6 +160,7 @@ make play2                  compiles and executes a much larger set of maps sequ
 make git                    adds and commits everything, then pushes to upstream branch
 make norminette             runs norminette for all files in the project that need to pass it
 ```
+``Note`` we were not allowed to use multiple threads, thus it is pretty hard to time the speeds of the game. I found that using valgrind on ``linux`` helps slow the game down so it is more similar to the performance in MacOS. Depending on your computer's performance the speed of the game may vary. I hope to learn ways to improve that for future projects. For ``linux``, try always using valgrind as follows: ``valgrind ./so_long <map.ber>``
 
 ## Technical Issues
 
