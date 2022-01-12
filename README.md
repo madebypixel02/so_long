@@ -1,6 +1,10 @@
 # so_long
 *And thanks for all the fish!*
 
+<p align="center">
+  <img src=https://user-images.githubusercontent.com/40824677/149228578-cf688aea-1e68-4d94-ba29-763ed2c1758b.png />
+</p>
+
 ### Table of Contents
 
 * [Introduction](#introduction)
