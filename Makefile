@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2021/12/15 19:48:48 by aperez-b         ###   ########.fr        #
+#    Updated: 2022/01/25 16:12:36 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -179,7 +179,7 @@ play2: all
 	done
 
 clean:
-	@$(PRINTF) "$(CYAN)Cleaning up object files in so_long...$(DEFAULT)\n"
+	@$(PRINTF) "$(CYAN)Cleaning up object files in $(BIN)...$(DEFAULT)\n"
 	@if [ -d "libft" ]; then \
 		make clean -C libft; \
 	fi
@@ -197,11 +197,15 @@ fclean: clean
 	fi
 
 norminette:
-	@$(PRINTF) "$(CYAN)\nChecking norm for so_long...$(DEFAULT)\n"
-	@norminette -R CheckForbiddenSourceHeader $(SRC_DIR) $(DIR_GNL) inc/
 	@if [ -d "libft" ]; then \
 		make norminette -C libft/; \
 	fi
+	@if [ -d "get_next_line" ]; then \
+		$(PRINTF) "$(CYAN)\nChecking norm for get_next_line...$(DEFAULT)\n"; \
+		norminette -R CheckForbiddenSourceHeader $(GNL_DIR); \
+	fi
+	@$(PRINTF) "$(CYAN)\nChecking norm for $(BIN)...$(DEFAULT)\n"
+	@norminette -R CheckForbiddenSourceHeader $(SRC_DIR) inc/
 
 re: fclean
 	@make all
