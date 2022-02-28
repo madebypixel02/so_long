@@ -179,3 +179,9 @@ Throughout the project, there have been a few roadblocks that needed to be worke
 This has been my favorite project so far, coding my own pacman clone was so much fun, regargless how flawed it might be :)
 
 August 14th, 2021
+
+<p align="center">
+  <a href="https://github.com/madebypixel02/born2beroot">&#11013;</a>
+  <a href="https://github.com/madebypixel02/42-Madrid-Cursus">&#127968;</a>
+  <a href="https://github.com/madebypixel02/push_swap">&#10145;</a>
+</p>
