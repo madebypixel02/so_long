@@ -2,9 +2,9 @@
 
 *And thanks for all the fish! 🐟*
 
-<p align="center">
+<div align="center">
   <img src=https://user-images.githubusercontent.com/40824677/149228578-cf688aea-1e68-4d94-ba29-763ed2c1758b.png />
-</p>
+</div>
 
 ### Table of Contents
 
@@ -86,7 +86,7 @@ The pacman game I designed has a few extras we weren't asked to implement, but I
 
 ## Gameplay
 
-There are a total of 30 maps available. See [MAPS.md](https://github.com/madebypixel02/so_long/tree/master/tests/MAPS.md)
+There are a total of 30 maps available. See [MAPS.md](./tests/MAPS.md)
 
 Here are a few sample gameplays from my favorite maps:
 
@@ -100,9 +100,9 @@ Here are a few sample gameplays from my favorite maps:
 
 
 ## Other Maps
-There are 20+ maps (ported from [Machine-Learning-Pacman](https://github.com/madebypixel02/Machine-Learning-Pacman/tree/master/layouts)) to try your skill/luck.
+There are 20+ maps (ported from [Machine-Learning-Pacman](https://gitlab.com/madebypixel02/Machine-Learning-Pacman/tree/main/layouts)) to try your skill/luck.
 
-See [Other Maps](https://github.com/madebypixel02/so_long/tree/master/tests/MAPS.md#other-maps)
+See [Other Maps](./tests/MAPS.md#other-maps)
 
 ## Installation
 
@@ -180,9 +180,3 @@ Throughout the project, there have been a few roadblocks that needed to be worke
 This has been my favorite project so far, coding my own pacman clone was so much fun, regargless how flawed it might be :)
 
 August 14th, 2021
-
-<p align="center">
-  <a href="https://github.com/madebypixel02/born2beroot">&#11013;</a>
-  <a href="https://github.com/madebypixel02/42-Madrid-Cursus">&#127968;</a>
-  <a href="https://github.com/madebypixel02/push_swap">&#10145;</a>
-</p>
