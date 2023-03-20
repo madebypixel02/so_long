@@ -149,10 +149,10 @@ bonus: all
 
 compile_libft:
 	@if [ ! -d "get_next_line" ]; then \
-		git clone https://github.com/madebypixel02/get_next_line.git; \
+		git clone https://gitlab.com/madebypixel02/get_next_line.git; \
 	fi
 	@if [ ! -d "libft" ]; then \
-		git clone https://github.com/madebypixel02/libft.git; \
+		git clone https://gitlab.com/madebypixel02/libft.git; \
 	fi
 	@make all -C libft/
 
