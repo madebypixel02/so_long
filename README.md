@@ -40,7 +40,7 @@ For the graphics part of the project we used a library called ``minilibx``. It's
 
 ### Part 1: reading the map
 
-In this part of the code I checked that the given map was properly opened, that it had a ``.ber`` filetype, and then continued by reading the file one line at a time with [get_next_line](https://github.com/madebypixel02/get_next_line).
+In this part of the code I checked that the given map was properly opened, that it had a ``.ber`` filetype, and then continued by reading the file one line at a time with [get_next_line](https://gitlab.com/madebypixel02/get_next_line).
 Once that was done I filled a struct ``t_lay`` with some basic map attributes like number of players, exits, collectibles, number of rows and columns, etc. During the reading process I also created a string containing the entire map, whcih was later useful when creating a matrix with ``ft_split`` with ``\n`` as the separator.
 
 
@@ -108,7 +108,7 @@ See [Other Maps](./tests/MAPS.md#other-maps)
 
 ### Cloning the repositories
 ```shell
-git clone https://github.com/madebypixel02/so_long.git
+git clone https://gitlab.com/madebypixel02/so_long.git
 cd so_long
 make
 ```
