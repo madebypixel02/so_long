@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2023/04/05 14:19:22 by aperez-b         ###   ########.fr        #
+#    Updated: 2023/04/05 14:22:01 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -134,7 +134,7 @@ SRC_GNL_PCT = $(shell expr 100 \* $(SRC_GNL_COUNT) / $(SRC_GNL_COUNT_TOT))
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJ_GNL) $(OBJ) | $(BIN_DIR)
+$(NAME): $(LIBFT) $(OBJ_GNL) $(OBJ) | $(BIN_DIR) $(GNL_DIR)
 	@$(CC) $(CFLAGS) $(CDEBUG) $(OBJ) $(OBJ_GNL) $(LIBFT) $(LMLX) -o $@
 	@$(PRINTF) "\r%100s\r$(GREEN)$(BIN) is up to date!$(DEFAULT)\n"
 
