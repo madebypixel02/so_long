@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2022/01/25 16:12:36 by aperez-b         ###   ########.fr        #
+#    Updated: 2023/04/05 14:19:22 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,17 +67,20 @@ ifeq ($(UNAME), Linux)
 endif
 
 # Make variables
+PRINTF = printf
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 CC = gcc -MD
+AR = ar rcs
 SRC_DIR = src
 OBJ_DIR = obj
 BIN_DIR = bin
 OBJ_GNL_DIR = obj_gnl
 BIN = so_long
 NAME = $(BIN_DIR)/$(BIN)
-PRINTF = LC_NUMERIC="en_US.UTF-8" printf
 LIBFT = libft/bin/libft.a
+LIBFT_DIR = libft
+LIBFT_SRC = $(shell [ -d libft ] && ls libft/src*/*.c)
 GNL_DIR = get_next_line
 
 # Keycodes defined during compilation
@@ -131,35 +134,25 @@ SRC_GNL_PCT = $(shell expr 100 \* $(SRC_GNL_COUNT) / $(SRC_GNL_COUNT_TOT))
 
 all: $(NAME)
 
-$(NAME): create_dirs compile_libft $(OBJ_GNL) $(OBJ)
+$(NAME): $(LIBFT) $(OBJ_GNL) $(OBJ) | $(BIN_DIR)
 	@$(CC) $(CFLAGS) $(CDEBUG) $(OBJ) $(OBJ_GNL) $(LIBFT) $(LMLX) -o $@
 	@$(PRINTF) "\r%100s\r$(GREEN)$(BIN) is up to date!$(DEFAULT)\n"
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	@$(eval SRC_COUNT = $(shell expr $(SRC_COUNT) + 1))
 	@$(PRINTF) "\r%100s\r[ %d/%d (%d%%) ] Compiling $(BLUE)$<$(DEFAULT)..." "" $(SRC_COUNT) $(SRC_COUNT_TOT) $(SRC_PCT)
 	@$(CC) $(CFLAGS) $(CDEBUG) $(KEYCODES) $(RATES) -c $< -o $@
 
-$(OBJ_GNL_DIR)/%.o: $(GNL_DIR)/%.c
+$(OBJ_GNL_DIR)/%.o: $(GNL_DIR)/%.c | $(OBJ_GNL_DIR)
 	@$(eval SRC_GNL_COUNT = $(shell expr $(SRC_GNL_COUNT) + 1))
 	@$(PRINTF) "\r%100s\r[ %d/%d (%d%%) ] Compiling $(BLUE)$<$(DEFAULT)..." "" $(SRC_GNL_COUNT) $(SRC_GNL_COUNT_TOT) $(SRC_GNL_PCT)
 	@$(CC) $(CFLAGS) $(CDEBUG) $(KEYCODES) $(RATES) -c $< -o $@
 
 bonus: all
 
-compile_libft:
-	@if [ ! -d "get_next_line" ]; then \
-		git clone https://gitlab.com/madebypixel02/get_next_line.git; \
-	fi
-	@if [ ! -d "libft" ]; then \
-		git clone https://gitlab.com/madebypixel02/libft.git; \
-	fi
-	@make all -C libft/
-
-create_dirs:
-	@mkdir -p $(OBJ_DIR)
-	@mkdir -p $(OBJ_GNL_DIR)
-	@mkdir -p $(BIN_DIR)
+$(LIBFT): $(LIBFT_SRC) | $(LIBFT_DIR) $(BIN_DIR)
+	@make all -C libft
+	@$(AR) $(NAME) $(LIBFT)
 
 test: all
 	@$(PRINTF) "$(YELLOW)Performing test with custom map...$(DEFAULT)\n\n"
@@ -178,34 +171,39 @@ play2: all
 		$(LEAKS) ./$(NAME) $$map ; \
 	done
 
-clean:
+clean: | $(LIBFT_DIR)
 	@$(PRINTF) "$(CYAN)Cleaning up object files in $(BIN)...$(DEFAULT)\n"
-	@if [ -d "libft" ]; then \
-		make clean -C libft; \
-	fi
+	@make clean -C libft
 	@$(RM) -r $(OBJ_DIR)
 	@$(RM) -r $(OBJ_GNL_DIR)
 
-fclean: clean
+fclean: clean | $(LIBFT_DIR)
+	@$(RM) $(LIBFT)
+	@$(PRINTF) "$(CYAN)Removed $(LIBFT)$(DEFAULT)\n"
 	@$(RM) -r $(BIN_DIR)
-	@if [ -d "libft" ]; then \
-		$(RM) $(LIBFT); \
-	fi
 	@$(PRINTF) "$(CYAN)Removed $(NAME)$(DEFAULT)\n"
-	@if [ -d "libft" ]; then \
-		$(PRINTF) "$(CYAN)Removed $(LIBFT)$(DEFAULT)\n"; \
-	fi
 
-norminette:
-	@if [ -d "libft" ]; then \
-		make norminette -C libft/; \
-	fi
-	@if [ -d "get_next_line" ]; then \
-		$(PRINTF) "$(CYAN)\nChecking norm for get_next_line...$(DEFAULT)\n"; \
-		norminette -R CheckForbiddenSourceHeader $(GNL_DIR); \
-	fi
+norminette: | $(LIBFT_DIR) $(GNL_DIR)
+	@make norminette -C libft
+	@$(PRINTF) "$(CYAN)\nChecking norm for get_next_line...$(DEFAULT)\n"
+	@norminette -R CheckForbiddenSourceHeader $(GNL_DIR)
 	@$(PRINTF) "$(CYAN)\nChecking norm for $(BIN)...$(DEFAULT)\n"
 	@norminette -R CheckForbiddenSourceHeader $(SRC_DIR) inc/
+
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
+
+$(OBJ_GNL_DIR):
+	@mkdir -p $(OBJ_GNL_DIR)
+
+$(BIN_DIR):
+	@mkdir -p $(BIN_DIR)
+
+$(LIBFT_DIR):
+	@git clone https://gitlab.com/madebypixel02/libft.git
+
+$(GNL_DIR):
+	@git clone https://gitlab.com/madebypixel02/get_next_line.git
 
 re: fclean
 	@make all
@@ -218,4 +216,4 @@ git:
 -include $(OBJ_DIR)/*.d
 -include $(OBJ_GNL_DIR)/*.d
 
-.PHONY: all clean fclean bonus compile_libft norminette test play create_dirs git re
+.PHONY: all clean fclean bonus norminette test play git re
